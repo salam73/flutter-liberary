@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "243916951038",
+    "firebase_url": "https://salam1-3e980.firebaseio.com",
+    "project_id": "salam1-3e980",
+    "storage_bucket": "salam1-3e980.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243916951038:android:378f7a3d147024a40b44af",
+        "android_client_info": {
+          "package_name": "com.salam.fluttershare1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243916951038-lrg38m4qql7a17hg04h883iqpn7oihfk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.salam.fluttershare1",
+            "certificate_hash": "5fada7b428fece7cedfcc22dfef442657209342c"
+          }
+        },
+        {
+          "client_id": "243916951038-1g78p5icmcbbhfj2mqmkepcr97873s6j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh-nd6BG6sBpdtnxh0kGMMsfP6delFifY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243916951038-1g78p5icmcbbhfj2mqmkepcr97873s6j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "243916951038-p8mpcsu782feg1cmu9tjkrtt8bamo7ho.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.salam.collage"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243916951038:android:f12469c3e40a5d680b44af",
+        "android_client_info": {
+          "package_name": "com.salam.library"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "243916951038-1g78p5icmcbbhfj2mqmkepcr97873s6j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh-nd6BG6sBpdtnxh0kGMMsfP6delFifY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "243916951038-1g78p5icmcbbhfj2mqmkepcr97873s6j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "243916951038-p8mpcsu782feg1cmu9tjkrtt8bamo7ho.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.salam.collage"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
