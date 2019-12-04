@@ -1,3 +1,4 @@
+import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -72,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
             String fieldValue = (parts[1]);
               if (parts[0].contains("عنوان")) listOfTitle.add(parts[1]);
 
-            print('$fieldName ------- $fieldValue');
+           // print('$fieldName ------- $fieldValue');
           }
         }
       }
@@ -132,6 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       myList: listOfTitle,
                     ),
                   ),
+                  FetchData()
 
                 ],
               ),
