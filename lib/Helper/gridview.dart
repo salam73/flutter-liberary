@@ -18,7 +18,7 @@ class MyView extends StatelessWidget {
         // horizontal, this produces 2 rows.
         crossAxisCount: 2,
         // Generate 100 widgets that display their index in the List.
-        children: List.generate(20, (index) {
+        children: List.generate(6, (index) {
           return Container(
             color: Colors.deepPurple[300],
             child: Text(

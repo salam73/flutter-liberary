@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bookhouse2/screens/screentwo.dart';
 
 
 
@@ -20,23 +21,38 @@ class Salebook extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         reverse: true,
-        itemCount: data == null ? 0 : 3,
+        itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-              child: Card(
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(myList[index]),
-                    ),
-                    Image.network(
-                      data[index]['attachments']['data'][0]['media']
-                      ['image']['src'],
-                    ),
-                  ],
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ScreenTwo(
+                      dice:    data[index]['attachments']['data'][0]['description'],
+                      myList: myList,
+                      index: index,
+                      src: data[index]['attachments']['data'][0]['media']
+                      ['image']['src']),
                 ),
-              ));
+              );
+            },
+            child: Container(
+                child: Card(
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(myList[index]),
+                      ),
+                      Image.network(
+                        data[index]['attachments']['data'][0]['media']
+                        ['image']['src'],
+                      ),
+                    ],
+                  ),
+                )),
+          );
         },
       ),
     );

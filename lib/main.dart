@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       myList: listOfTitle,
                     ),
                   ),
-                 FetchData()
+                 //FetchData()
 
                 ],
               ),
@@ -145,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //books
             Newbook(data: data, myList: listOfTitle),
 
-            MyView(),
+           // MyView(),
 
             //best seller
             SeeAll(seeAllText: "الكتب الأكثر مبيعاً"),

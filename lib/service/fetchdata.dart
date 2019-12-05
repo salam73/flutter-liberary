@@ -13,8 +13,12 @@ class FetchData extends StatefulWidget {
 
 class _FetchDataState extends State<FetchData> {
   final String url =
-      "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%7D&access_token=EAAC5ryfjvqABAF7kzbPaa1RvgbhYNwuGneLZCIHGlF2rC1JWTGX7BWSkPhPtuDnlI9kJpsSmdG7eJfPHYOWFWJj4oYzwd28ABE6q0GWzNx4ZBRqXUW6MYZBmijDA2c9Ek4sTZBBSbWQLwJHCybcmxT8MDt2kU5isRpn6G5litDHu55wLAQahn4edfDIIlFwZD";
-  List data;
+
+
+  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%2Ccreated_time%7D&access_token="
+  "EAAC5ryfjvqABADJHhRT5oYAvDn7SJLp5jeIkuDRpQZBiFIJlHhmnFQThKI4CA9lLYjzHzvzfZB1ZAZAqUpyjtKAZBaEhWfS1aYX6kiRIyz3n2hfrdstq2t1PUwkZBEUoO9WdGpu6Cv3R8NJ0kvfA0vEFFIFnWZBzVLqQhVDYzu4teuD676gn0zRlB4VCaTvSRsZD";
+
+    List data;
   List data2;
   List<String> listOfTitle = List();
   List<String> ListOfItem = List();
@@ -48,7 +52,7 @@ class _FetchDataState extends State<FetchData> {
 
 // feed.data[1].attachments.data[0].subattachments.data[0].description
 // feed.data[1].attachments.data[0].subattachments.data[1].description
-
+//feed.data[0].created_time
 
     //feed.data[1].attachments.data[0].subattachments.data[0].description
 
@@ -76,6 +80,9 @@ class _FetchDataState extends State<FetchData> {
             // createUserInFireCloud(UserName: fieldValue);
           }
         }
+
+        ListOfItem.add(data[index]['created_time']);
+
         if (data[index]['attachments']['data'][0]['media'] != null) {
           ListOfItem.add(
               data[index]['attachments']['data'][0]['media']['image']['src']);
@@ -116,7 +123,9 @@ class _FetchDataState extends State<FetchData> {
       "pris": UserName[2],
       "pages": UserName[3],
       "Type": UserName[4],
-    "ImageUrl": UserName[5],
+      "Time": UserName[5],
+    "ImageUrl": UserName[6],
+
     });
   }
 
@@ -128,6 +137,7 @@ class _FetchDataState extends State<FetchData> {
       "pris": UserName[2],
       "pages": UserName[3],
       "Type": UserName[4],
+      "Time": UserName[5],
       "ImageUrl": ListImages,
       "Titles":ListTitles
     });

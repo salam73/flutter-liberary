@@ -30,27 +30,30 @@ class ScreenMultiBooks extends StatelessWidget {
             onTap: () {
 
             },
-            child: Card(
-              elevation: 9,
-              color: colors,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      data[index]['attachments']['data'][0]['description'],
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Card(
+                elevation: 9,
+                color: colors,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        data[index]['attachments']['data'][0]['description'],
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
                     ),
-                  ),
-                  Image.network(
-                    data[index]['attachments']['data'][0]['media']['image']
-                    ['src'],
-                  ),
-                ],
+                    Image.network(
+                      data[index]['attachments']['data'][0]['media']['image']
+                      ['src'],
+                    ),
+                  ],
+                ),
               ),
             ),
           );
