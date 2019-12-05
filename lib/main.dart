@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       myList: listOfTitle,
                     ),
                   ),
-                  FetchData()
+                 FetchData()
 
                 ],
               ),
