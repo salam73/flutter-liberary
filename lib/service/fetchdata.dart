@@ -15,10 +15,9 @@ class _FetchDataState extends State<FetchData> {
   final String url =
 
 
-  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%2Ccreated_time%7D&access_token="
-  "EAAC5ryfjvqABADJHhRT5oYAvDn7SJLp5jeIkuDRpQZBiFIJlHhmnFQThKI4CA9lLYjzHzvzfZB1ZAZAqUpyjtKAZBaEhWfS1aYX6kiRIyz3n2hfrdstq2t1PUwkZBEUoO9WdGpu6Cv3R8NJ0kvfA0vEFFIFnWZBzVLqQhVDYzu4teuD676gn0zRlB4VCaTvSRsZD";
+  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%2Ccreated_time%7D&access_token=EAAC5ryfjvqABAMy9RmSonHPYOTmShqvQHDEd4JP3XAfnbIc40GZChnnXE2RjBBpe7vj4YgDOiG2VipZAIeupO9ZADvaWmIXK3OmCwVv68N4o8q7a8rP6vYO9ytVoKqE5gIcw2NYQmUyREQldU1ViTZAJ26TsI4W8k9PyusagKkmkY4f6U7aj7FqN9BGIK2EZD";
 
-    List data;
+   List data;
   List data2;
   List<String> listOfTitle = List();
   List<String> ListOfItem = List();
@@ -139,7 +138,7 @@ class _FetchDataState extends State<FetchData> {
       "Type": UserName[4],
       "Time": UserName[5],
       "ImageUrl": ListImages,
-      "Titles":ListTitles
+      "ImagesTitles":ListTitles
     });
   }
 
