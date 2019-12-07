@@ -15,8 +15,7 @@ class _FetchDataState extends State<FetchData> {
   final String url =
 
 
-  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%2Ccreated_time%7D&access_token=EAAC5ryfjvqABAMy9RmSonHPYOTmShqvQHDEd4JP3XAfnbIc40GZChnnXE2RjBBpe7vj4YgDOiG2VipZAIeupO9ZADvaWmIXK3OmCwVv68N4o8q7a8rP6vYO9ytVoKqE5gIcw2NYQmUyREQldU1ViTZAJ26TsI4W8k9PyusagKkmkY4f6U7aj7FqN9BGIK2EZD";
-
+"https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%2Ccreated_time%7D&access_token=EAAC5ryfjvqABAJSKBF7JInBBcxRarKCJD470LAGLFe3K3OCZBwPb1PldRa9IhNFEzSSTR2fWzZA6ZAqrFPABLJtrSaDjceBQuyDdIN41mmuKhmGZAiQZB8JmhZCciDwDGX1fO09m8X3QjJBOc0ciS1JheZAyNsQ3TQKGvpjcy3tzsDAJ7z4kItXZBaBmsrH3NjIZD";
    List data;
   List data2;
   List<String> listOfTitle = List();

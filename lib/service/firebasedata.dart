@@ -40,8 +40,11 @@ class _FireBaseDataState extends State<FireBaseData> {
     print(doc["ImagesTitles"]);
     print(doc["Type"]);
 
-    print(doc["ImageUrl"]);
+    debugPrint(doc["ImageUrl"]);
+
     });
+
+
 
   }
 

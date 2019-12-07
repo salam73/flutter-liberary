@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            //FireBaseData(),
+            //FetchData(),
             //best seller
             SeeAll(seeAllText: "كتب جديدةً"),
 
