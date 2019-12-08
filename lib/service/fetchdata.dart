@@ -12,9 +12,12 @@ class FetchData extends StatefulWidget {
 }
 
 class _FetchDataState extends State<FetchData> {
+
+  static String accesstoken="EAAC5ryfjvqABAKWDJllIQKSVbw0BTSGJPehYGg8HlTB2JxPIQ1IwglsJknM9rz0dOZCrjRbpePLZBCvOiIV9V2ZAzznwLWuM8V2hOSGQYggGXnHbPcvNg2nlaL224MZAOhwjfM5vytlFUnz5aMxgZC7vLPPml8mQtXXxGiJZBCvgzuuFtqkSFCOqBILg5fIf5TpjtdTCJlmAZDZD";
   final String url =
 
-  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%2Ccreated_time%7D&access_token=EAAC5ryfjvqABAERJXTIiTOkKl9FICFU1ClNaTIrnImcNgzIKOLkIyU82UppZAcZCr8KzizvgbcqqZBVWTzrMj5xi4EsdHSnQakFU4HFZCKgUH9djrb5YkZB5p0RbcdvqaJAXm4ZBEE9JsxVpzQDHAhd2xp8mzWCjocOc8oJJoLkaSld0Spz4A1oAHFkGweCI8ZD";
+  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%2Ccreated_time%7D&access_token="
+      "${accesstoken}";
 
    List data;
   List data2;

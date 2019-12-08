@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>243916951038-i49e9jepcj8r38sauj2od8cokisldnth.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.243916951038-i49e9jepcj8r38sauj2od8cokisldnth</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>243916951038-lrg38m4qql7a17hg04h883iqpn7oihfk.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAfSSgiI7oAjEhPWD_8vk4vhDuWE-G7CI8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>243916951038</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>dk.salam.bookhouse2</string>
+	<key>PROJECT_ID</key>
+	<string>salam1-3e980</string>
+	<key>STORAGE_BUCKET</key>
+	<string>salam1-3e980.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:243916951038:ios:5f74ee057804fb4d0b44af</string>
+	<key>DATABASE_URL</key>
+	<string>https://salam1-3e980.firebaseio.com</string>
+</dict>
+</plist>

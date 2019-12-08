@@ -21,7 +21,8 @@ class _SearchState extends State<Search> {
     debugPrint(documentID);
   }
 
-   Widget noor()  {
+
+  Widget noor()   {
     usersRef.snapshots().forEach((m) {
       QuerySnapshot mySnapShot = m;
 
@@ -38,24 +39,42 @@ class _SearchState extends State<Search> {
 
         if (myList is List) {
           images.add(
-              Center(child: Text(myDocuments.data["title"], style: TextStyle(color: Colors.blue),)));
+              Center(child: Text(myDocuments.data["title"], style: TextStyle(color: Colors.blue, fontSize: 45),),),);
 
-          myList.asMap().forEach((index, m) {
+          /*myList.asMap().forEach((index, m) {
             print("imagesTitles=${m}");
 
             ListOfImage.add(
                 Column(
 
-              children: <Widget>[
-                Image.network(
-                  m.toString(),
-                  width: 120,
-                  height: 120,
-                ),
-                Text(myTitles[index], style: TextStyle(color: Colors.white),)
-              ],
-            ));
-          });
+                  children: <Widget>[
+                    Image.network(
+                      m.toString(),
+                      width: 120,
+                      height: 120,
+                    ),
+                    Text(
+                      myTitles[index], style: TextStyle(color: Colors.white),)
+                  ],
+                ));
+          }
+
+          );*/
+
+
+          ListOfImage.add(
+              Column(
+
+                children: <Widget>[
+                  Image.network(
+                    myList[0].toString(),
+                    width: 250,
+                    height: 250,
+                  ),
+                  Text(
+                    myTitles[0], style: TextStyle(color: Colors.white, fontSize: 30),)
+                ],
+              ));
 
           images.add(Container(
            color: Colors.blue,
@@ -105,55 +124,10 @@ class _SearchState extends State<Search> {
         appBar: AppBar(
           title: Text('Hello'),
         ),
-        body: //noor ()
-         StreamBuilder<QuerySnapshot>(
-          stream: usersRef.snapshots(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return Container(
-                alignment: Alignment.center,
-                child: Text('Waiting'),
-
-              );
-            }
+        body: noor()
 
 
-snapshot.data.documents.forEach((m){
-
-  print(m.data['ImageUrl'].toString());
-});
-
-
-            final List<Column> children = snapshot.data.documents
-                .map((doc) => Column(
-
-
-
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget> [
-
-
-                Image.network(doc['ImageUrl'][0].toString(), width: 50, height: 50,),
-                Image.network(doc['ImageUrl'][1].toString(), width: 50, height: 50,),
-
-
-
-                Text(doc.documentID),
-
-              // myList = doc.data["ImageUrl"];
-
-              ],
-            )).toList();
-
-
-
-            return Container(
-              child: ListView(
-                children: children,
-              ),
-            );
-          },
-        ));
+        );
 
 
   }

@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            //FetchData(),
+          //  FetchData(),
             //best seller
             SeeAll(seeAllText: "كتب جديدةً"),
 
@@ -145,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //best seller
             SeeAll(seeAllText: "الكتب الأكثر مبيعاً"),
 
-            //books
+            //booksΩ
             Popluarbook(data: data, myList: listOfTitle),
 
             Starsview(data: data, myList: listOfTitle),
