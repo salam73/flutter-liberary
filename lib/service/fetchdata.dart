@@ -22,9 +22,9 @@ class _FetchDataState extends State<FetchData> {
    List data;
   List data2;
   List<String> listOfTitle = List();
-  List<String> ListOfItem = List();
-  List<String> ListOfImages = List();
-  List<String> ListOfDescription = List();
+  List<String> listOfItem = List();
+  List<String> listOfImages = List();
+  List<String> listOfDescription = List();
 
   @override
   void initState() {
@@ -76,18 +76,18 @@ class _FetchDataState extends State<FetchData> {
             }
 
             print('$fieldName ------- $fieldValue');
-            ListOfItem.add(fieldValue);
+            listOfItem.add(fieldValue);
             //print('salam is a good boy');
             // createUserInFireCloud(UserName: fieldValue);
           }
         }
 
-        ListOfItem.add(data[index]['created_time']);
+        listOfItem.add(data[index]['created_time']);
 
         if (data[index]['attachments']['data'][0]['media'] != null) {
-          ListOfItem.add(
+          listOfItem.add(
               data[index]['attachments']['data'][0]['media']['image']['src']);
-          createUserInFireCloud(UserName: ListOfItem);
+          createUserInFireCloud(UserName: listOfItem);
         }
 
         if (data[index]['attachments']['data'][0]['subattachments'] != null) {
@@ -95,25 +95,25 @@ class _FetchDataState extends State<FetchData> {
               data[index]['attachments']['data'][0]['subattachments']['data'];
 
           data2.forEach((n) {
-            ListOfImages.add(n['media']['image']['src']);
+            listOfImages.add(n['media']['image']['src']);
             if(n['description']!=null)
-              ListOfDescription.add(n['description']);
+              listOfDescription.add(n['description']);
             else
-              ListOfDescription.add("");
+              listOfDescription.add("");
           });
 
 
 
 
           createUserInFireCloud2(
-              UserName: ListOfItem, ListImages: ListOfImages, ListTitles: ListOfDescription);
+              UserName: listOfItem, ListImages: listOfImages, ListTitles: listOfDescription);
         }
 
 
 
-        ListOfItem = [];
-        ListOfImages=[];
-        ListOfDescription=[];
+        listOfItem = [];
+        listOfImages=[];
+        listOfDescription=[];
         index++;
       }
     });

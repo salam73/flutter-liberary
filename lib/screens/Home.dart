@@ -61,11 +61,12 @@ class _HomeState extends State<Home> {
         activeColor: Theme.of(context).primaryColor,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.whatshot),
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.search),
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.whatshot),
+          ),
+
         ],
       ),
     );
