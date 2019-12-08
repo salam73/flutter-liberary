@@ -14,8 +14,8 @@ class FetchData extends StatefulWidget {
 class _FetchDataState extends State<FetchData> {
   final String url =
 
+  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%2Ccreated_time%7D&access_token=EAAC5ryfjvqABAERJXTIiTOkKl9FICFU1ClNaTIrnImcNgzIKOLkIyU82UppZAcZCr8KzizvgbcqqZBVWTzrMj5xi4EsdHSnQakFU4HFZCKgUH9djrb5YkZB5p0RbcdvqaJAXm4ZBEE9JsxVpzQDHAhd2xp8mzWCjocOc8oJJoLkaSld0Spz4A1oAHFkGweCI8ZD";
 
-"https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%2Ccreated_time%7D&access_token=EAAC5ryfjvqABAJSKBF7JInBBcxRarKCJD470LAGLFe3K3OCZBwPb1PldRa9IhNFEzSSTR2fWzZA6ZAqrFPABLJtrSaDjceBQuyDdIN41mmuKhmGZAiQZB8JmhZCciDwDGX1fO09m8X3QjJBOc0ciS1JheZAyNsQ3TQKGvpjcy3tzsDAJ7z4kItXZBaBmsrH3NjIZD";
    List data;
   List data2;
   List<String> listOfTitle = List();
@@ -95,6 +95,8 @@ class _FetchDataState extends State<FetchData> {
             ListOfImages.add(n['media']['image']['src']);
             if(n['description']!=null)
               ListOfDescription.add(n['description']);
+            else
+              ListOfDescription.add("");
           });
 
 
