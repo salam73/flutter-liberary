@@ -12,17 +12,15 @@ class FetchData extends StatefulWidget {
 }
 
 class _FetchDataState extends State<FetchData> {
-
-  static String accesstoken="EAAC5ryfjvqABANcZAfGrsSWcFpa3GiYOAZCi6q1zzDskXXCz6j0DkePwcql6PZBEoUkFhlxV6lGPZCV50RMSBUmAG0v3W26l3TaG3V19JGRG9wUpA11BcgjEIGxbrFecpKFyLPFvaZCnkePhv4yyirxTcqp1GYP9l3NewT6vZA94CCVpEvIlal6jxqTtZBy1ThnEDF0DSjMzgZDZD";
+  static String accesstoken =
+      "EAAC5ryfjvqABANcZAfGrsSWcFpa3GiYOAZCi6q1zzDskXXCz6j0DkePwcql6PZBEoUkFhlxV6lGPZCV50RMSBUmAG0v3W26l3TaG3V19JGRG9wUpA11BcgjEIGxbrFecpKFyLPFvaZCnkePhv4yyirxTcqp1GYP9l3NewT6vZA94CCVpEvIlal6jxqTtZBy1ThnEDF0DSjMzgZDZD";
   final String url =
 
 
-  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%7D&access_token=EAAC5ryfjvqABANx26ynxh8mESvWAXhv19Qx8skzXr2LVka50E7eO7y4eUVMDBbN1IEZCuQHIuznvJ7LcaBVGZC9jvnJFENhs5I7xEqILOtRzT6oD2k2KXiWQa44tcAooHZC2yJ6NOaHkY1vhaQm7AM30NhT05n7TZBTxBDv8DxokZBz5iIxcSwbBwwXsH2dEZD";
+  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%2Ccreated_time%7D&access_token=EAAC5ryfjvqABAEJaxbtxTtYv6eZAS8OKhu2sJ0CoxANZCroSoANwVsuAhW4BOGUYmsFEMqk7Hh4Ga8ZB5re5Iu2TBhOusxBWmurG9biHHwtnPAKQsMM5liqlqBHOQYtEyDDZAxUQ3qjFCo0YjCFSV7J4pncSZBx5DQaaCjNyMsHwJGVYZCZA2RBNpG07TvpGIOtGTccXu5OfQZDZD";
 
-
-
-  List data;
-  List data2;
+  List _data;
+  List _subData;
   List<String> listOfTitle = List();
   List<String> listOfItem = List();
   List<String> listOfImages = List();
@@ -42,7 +40,7 @@ class _FetchDataState extends State<FetchData> {
         .get(Uri.parse(url), headers: {"Content-Type": "application/json"});
 
     var resBody = json.decode(utf8.decode(res.bodyBytes));
-    data = resBody["feed"]["data"];
+    _data = resBody["feed"]["data"];
 //posts.data[2].attachments.data[0].description
     //  String myData=resBody=["feed"]["data"][0]['attachments']['data'][0]['description'].toString();
 
@@ -59,10 +57,10 @@ class _FetchDataState extends State<FetchData> {
 
     //feed.data[1].attachments.data[0].subattachments.data[0].description
 
-    data.forEach((n) {
-      //print('Hello Mr. ${n['attachments']['data'][0]['description'].split('\n')}');∫∫√¶
+    _data.forEach((n) {
 
-      if (data.isNotEmpty) {
+
+      if (_data.isNotEmpty) {
         for (String line in n['message'].split('\n')) {
           var parts = line.split(':');
           if (parts.length == 1) {
@@ -79,77 +77,81 @@ class _FetchDataState extends State<FetchData> {
 
             print('$fieldName ------- $fieldValue');
             listOfItem.add(fieldValue);
-            //print('salam is a good boy');
-            // createUserInFireCloud(UserName: fieldValue);
+
           }
         }
 
-        listOfItem.add(data[index]['created_time']);
+        listOfItem.add(_data[index]['created_time']);
 
-        if (data[index]['attachments']['data'][0]['media'] != null) {
+        if (_data[index]['attachments']['data'][0]['media'] != null) {
           listOfItem.add(
-              data[index]['attachments']['data'][0]['media']['image']['src']);
-          createUserInFireCloud(UserName: listOfItem);
+              _data[index]['attachments']['data'][0]['media']['image']['src']);
+
+          createUserInFireCloud(userName: listOfItem);
         }
 
-        if (data[index]['attachments']['data'][0]['subattachments'] != null) {
-          data2 =
-              data[index]['attachments']['data'][0]['subattachments']['data'];
+        if (_data[index]['attachments']['data'][0]['subattachments'] != null) {
+          _subData =
+              _data[index]['attachments']['data'][0]['subattachments']['data'];
 
-          data2.forEach((n) {
+          _subData.forEach((n) {
             listOfImages.add(n['media']['image']['src']);
-            if(n['description']!=null)
+            if (n['description'] != null)
               listOfDescription.add(n['description']);
             else
               listOfDescription.add("");
           });
 
-
-
-
           createUserInFireCloud2(
-              UserName: listOfItem, ListImages: listOfImages, ListTitles: listOfDescription);
+              userName: listOfItem,
+              listImages: listOfImages,
+              listTitles: listOfDescription);
         }
 
-
-
         listOfItem = [];
-        listOfImages=[];
-        listOfDescription=[];
+        listOfImages = [];
+        listOfDescription = [];
         index++;
       }
     });
   }
 
-  createUserInFireCloud({List<String> UserName}) async {
+  createUserInFireCloud({List<String> userName}) async {
     await usersRef.document().setData({
-      "title": UserName[0],
-      "profileName": UserName[1],
-      "pris": UserName[2],
-      "pages": UserName[3],
-      "Type": UserName[4],
-      "Time": UserName[5],
-    "ImageUrl": UserName[6],
-
+      "title": userName[0],
+      "profileName": userName[1],
+      "pris": userName[2],
+      "pages": userName[3],
+      "Type": userName[4],
+      "Time": userName[5],
+      "ImageUrl": userName[6],
     });
   }
 
   createUserInFireCloud2(
-      {List<String> UserName, List<String> ListImages, List<String> ListTitles}) async {
+      {List<String> userName,
+      List<String> listImages,
+      List<String> listTitles}) async {
     await usersRef.document().setData({
-      "title": UserName[0],
-      "profileName": UserName[1],
-      "pris": UserName[2],
-      "pages": UserName[3],
-      "Type": UserName[4],
-      "Time": UserName[5],
-      "ImageUrl": ListImages,
-      "ImagesTitles":ListTitles
+      "title": userName[0],
+      "profileName": userName[1],
+      "pris": userName[2],
+      "pages": userName[3],
+      "Type": userName[4],
+      "Time": userName[5],
+      "ImageUrl": listImages,
+      "ImagesTitles": listTitles
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      alignment: Alignment.center,
+      child: RaisedButton(
+        onPressed: getData,
+        child: Text('getData'),
+      ),
+    );
   }
 }

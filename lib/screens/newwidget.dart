@@ -23,11 +23,17 @@ class NewWidget extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
 
-                      (Image.network(
-                        myWidgets[index],width: 200,height: 200,
 
-                      )),
-                      Text( myTitle[index]),
+                      Expanded(
+                        flex: 9,
+                        child: (Image.network(
+                          myWidgets[index]
+
+                        )),
+                      ),
+                      Expanded(
+                          flex: 3,
+                          child: Text( myTitle[index], textAlign: TextAlign.center,)),
                     ],
                   ),
                 ),

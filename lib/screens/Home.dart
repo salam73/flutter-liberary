@@ -1,5 +1,7 @@
 import 'package:bookhouse2/screens/MyListView.dart';
 import 'package:bookhouse2/screens/Search.dart';
+import 'package:bookhouse2/screens/mystreambuilder.dart';
+import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -44,14 +46,11 @@ class _HomeState extends State<Home> {
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           //  Timeline(),
+          MyStreamBuilder(),
           Search(),
           MyListview(),
 
-
-
-
-
-
+         // FetchData(),
 
         ],
       ),
@@ -66,6 +65,10 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: Icon(Icons.whatshot),
           ),
+ BottomNavigationBarItem(
+            icon: Icon(Icons.attachment),
+          ),
+
 
         ],
       ),
