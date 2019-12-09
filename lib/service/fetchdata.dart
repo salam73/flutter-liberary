@@ -16,8 +16,8 @@ class _FetchDataState extends State<FetchData> {
   static String accesstoken="EAAC5ryfjvqABANcZAfGrsSWcFpa3GiYOAZCi6q1zzDskXXCz6j0DkePwcql6PZBEoUkFhlxV6lGPZCV50RMSBUmAG0v3W26l3TaG3V19JGRG9wUpA11BcgjEIGxbrFecpKFyLPFvaZCnkePhv4yyirxTcqp1GYP9l3NewT6vZA94CCVpEvIlal6jxqTtZBy1ThnEDF0DSjMzgZDZD";
   final String url =
 
-  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cmedia%2Cdescription%7D%2Ccreated_time%7D&access_token=EAAC5ryfjvqABANcZAfGrsSWcFpa3GiYOAZCi6q1zzDskXXCz6j0DkePwcql6PZBEoUkFhlxV6lGPZCV50RMSBUmAG0v3W26l3TaG3V19JGRG9wUpA11BcgjEIGxbrFecpKFyLPFvaZCnkePhv4yyirxTcqp1GYP9l3NewT6vZA94CCVpEvIlal6jxqTtZBy1ThnEDF0DSjMzgZDZD"
-  ;
+
+  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%7D&access_token=EAAC5ryfjvqABANx26ynxh8mESvWAXhv19Qx8skzXr2LVka50E7eO7y4eUVMDBbN1IEZCuQHIuznvJ7LcaBVGZC9jvnJFENhs5I7xEqILOtRzT6oD2k2KXiWQa44tcAooHZC2yJ6NOaHkY1vhaQm7AM30NhT05n7TZBTxBDv8DxokZBz5iIxcSwbBwwXsH2dEZD";
 
 
 

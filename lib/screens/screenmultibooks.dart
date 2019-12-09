@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ScreenMultiBooks extends StatelessWidget {
+  final String title;
+  final Color colors;
+
+  final List data;
+  final List<String> myList;
+
+
   ScreenMultiBooks({
     this.title,
     this.colors,
@@ -8,11 +15,7 @@ class ScreenMultiBooks extends StatelessWidget {
     @required this.myList,
   });
 
-  final String title;
-  final Color colors;
 
-  final List data;
-  final List<String> myList;
 
   @override
   Widget build(BuildContext context) {

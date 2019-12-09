@@ -1,5 +1,7 @@
 import 'dart:collection';
 
+import 'package:bookhouse2/screens/newwidget.dart';
+import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -32,27 +34,42 @@ class _SearchState extends State<Search> {
 
         // print(myDocuments.data["ImageUrl"]);
 
-        var myList = myDocuments.data["ImageUrl"];
+        var myListImageUrl = myDocuments.data["ImageUrl"];
         List myTitles = myDocuments.data["ImagesTitles"];
         List<Widget> listOfImage = List();
 
-        print(myList is List);
+        print(myListImageUrl is List);
 
-        if (myList is List) {
+        if (myListImageUrl is List) {
           setState(() {
             images.add(
               Center(
                 child: Text(
                   myDocuments.data["title"],
-                  style: TextStyle(color: Colors.blue, fontSize: 45),
+                  style: TextStyle(color: Colors.blue, fontSize: 30),
                 ),
               ),
             );
 
-            myList.asMap().forEach((index, m) {
+            listOfImage.add(Column(
+              children: <Widget>[
+                Image.network(
+                  myListImageUrl[0].toString(),
+                  width: 120,
+                  height: 120,
+                ),
+                Text(
+                  myTitles[0],
+                  style: TextStyle(color: Colors.black),
+                ),
+                Text('there is ${myListImageUrl.length - 1} of pictures more')
+              ],
+            ));
+
+            myListImageUrl.asMap().forEach((index, m) {
               print("imagesTitles=${m}");
 
-              listOfImage.add(Column(
+              /* listOfImage.add(Column(
                 children: <Widget>[
                   Image.network(
                     m.toString(),
@@ -64,7 +81,7 @@ class _SearchState extends State<Search> {
                     style: TextStyle(color: Colors.white),
                   )
                 ],
-              ));
+              ));*/
             });
 
             /*  ListOfImage.add(
@@ -81,19 +98,34 @@ class _SearchState extends State<Search> {
                 ],
               ));*/
 
-            images.add(Container(
-              color: Colors.blue,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: listOfImage.toList(),
+            images.add(GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NewWidget(
+                        myWidgets: myListImageUrl,
+                        myTitle: myTitles,
+                      ),
+                    ));
+              },
+              child: Container(
+                // color: Colors.redAccent,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: listOfImage.toList(),
+                ),
               ),
             ));
 
-            print("title= ${myDocuments.data["title"]}");
+           // print("title= ${myDocuments.data["title"]}");
           });
-        } else {
-          print("title (false)= ${myDocuments.data["title"]}");
-          print(myList);
+
+
+        } else
+          {
+         // print("title (false)= ${myDocuments.data["title"]}");
+         // print(myListImageUrl);
 
           setState(() {
             images.add(Padding(
@@ -112,7 +144,7 @@ class _SearchState extends State<Search> {
           });
         }
 
-        print("-----------------------------------");
+        //print("-----------------------------------");
       });
     });
     /* return Container(
@@ -125,6 +157,7 @@ class _SearchState extends State<Search> {
   @override
   void initState() {
     // TODO: implement initState
+
     _getData();
     super.initState();
   }
