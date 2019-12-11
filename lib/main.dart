@@ -13,10 +13,11 @@ void main() {
       MaterialApp(
     debugShowCheckedModeBanner: false,
     title: 'Passing Data',
-    home: Home(),
     theme: ThemeData(
       primaryColor: Colors.red,
     ),
+    home: Home(),
+    
     //home: Search(),
   ));
 

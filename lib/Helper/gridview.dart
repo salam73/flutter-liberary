@@ -35,7 +35,8 @@ return mynewList;
       child: GridView.count(
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        childAspectRatio:1.30,
+        childAspectRatio:1,
+        
 
         // Create a grid with 2 columns. If you change the scrollDirection to
         // horizontal, this produces 2 rows.

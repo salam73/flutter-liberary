@@ -1,5 +1,3 @@
-
-
 import 'package:bookhouse2/screens/newwidget.dart';
 import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -43,34 +41,43 @@ class _SearchState extends State<Search> {
         if (myListImageUrl is List) {
           if (!mounted) return;
           setState(() {
-            images.add(
+            /* images.add(
               Center(
                 child: Text(
                   myDocuments.data["title"],
                   style: TextStyle(color: Colors.blue, fontSize: 30),
                 ),
               ),
-            );
+            ); */
 
-            listOfImage.add(Column(
-              children: <Widget>[
-                Image.network(
-                  myListImageUrl[0].toString(),
-                  width: 120,
-                  height: 120,
-                ),
-                Text(
-                  myTitles[0],
-                  style: TextStyle(color: Colors.black),
-                ),
-                Text('there is ${myListImageUrl.length - 1} of pictures more')
-              ],
+            listOfImage.add(Card(
+              elevation: 3,
+              child: Column(
+                children: <Widget>[
+                  Image.network(
+                    myListImageUrl[0].toString(),
+                    width: 120,
+                    height: 120,
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: 100,
+                      child: Text(
+                        myDocuments.data["title"],
+                        style: TextStyle(color: Colors.black),textAlign: TextAlign.right,
+                      ),
+                    ),
+                  ),
+                  // Text('there is ${myListImageUrl.length - 1} of pictures more')
+                ],
+              ),
             ));
 
-            myListImageUrl.asMap().forEach((index, m) {
+            /*  
+           myListImageUrl.asMap().forEach((index, m) {
               print("imagesTitles=${m}");
 
-              /* listOfImage.add(Column(
+              listOfImage.add(Column(
                 children: <Widget>[
                   Image.network(
                     m.toString(),
@@ -82,8 +89,8 @@ class _SearchState extends State<Search> {
                     style: TextStyle(color: Colors.white),
                   )
                 ],
-              ));*/
-            });
+              ));
+            }); */
 
             /*  ListOfImage.add(
               Column(
@@ -119,21 +126,18 @@ class _SearchState extends State<Search> {
               ),
             ));
 
-           // print("title= ${myDocuments.data["title"]}");
+            // print("title= ${myDocuments.data["title"]}");
           });
-
-
-        } else
-          {
-         // print("title (false)= ${myDocuments.data["title"]}");
-         // print(myListImageUrl);
-            if (!mounted) return;
+        } else {
+          // print("title (false)= ${myDocuments.data["title"]}");
+          // print(myListImageUrl);
+          if (!mounted) return;
           setState(() {
             images.add(Padding(
               padding: const EdgeInsets.all(18.0),
               child: Column(
                 children: <Widget>[
-                  Text(myDocuments.data["title"]),
+                  //Text(myDocuments.data["title"]),
                   (Image.network(
                     myDocuments.data["ImageUrl"],
                     //width: 150,
@@ -166,24 +170,28 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Search'),
-           backgroundColor: Colors.blueAccent,
-        ),
-        body: images.length > 0
-            ? Container(
-                child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    //reverse: true,
-                    itemCount: images == null ? 0 : images.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return images[index];
-                    }),
-              )
-            : Center(
-                child: Container(
-                  child: Text('Waiting'),
-                ),
-              ));
+      appBar: AppBar(
+        title: Text('Search'),
+        backgroundColor: Colors.blueAccent,
+      ),
+      body: images.length > 0
+          ? ConstrainedBox(
+              constraints: BoxConstraints(maxHeight: 1000),
+              child: GridView.count(
+                childAspectRatio: 0.9,
+
+                // Create a grid with 2 columns. If you change the scrollDirection to
+                // horizontal, this produces 2 rows.
+                crossAxisCount: 2,
+                // Generate 100 widgets that display their index in the List.
+                children: images,
+              ),
+            )
+          : Center(
+              child: Container(
+                child: Text('Waiting'),
+              ),
+            ),
+    );
   }
 }

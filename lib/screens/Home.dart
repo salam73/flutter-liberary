@@ -2,6 +2,7 @@ import 'package:bookhouse2/screens/MyListView.dart';
 import 'package:bookhouse2/screens/Search.dart';
 import 'package:bookhouse2/screens/mystreambuilder.dart';
 import 'package:bookhouse2/service/fetchdata.dart';
+import 'package:bookhouse2/service/getfbd.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,11 @@ class _HomeState extends State<Home> {
         );
   }
 
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
   onPageChanged(int pageIndex) {
     setState(() {
       this.pageIndex = pageIndex;
@@ -42,10 +48,12 @@ class _HomeState extends State<Home> {
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           //  Timeline(),
+            MyListview(),
           MyStreamBuilder(),
           Search(),
-          MyListview(),
-          FetchData()
+        
+          //FetchData()
+          GetFBD()
 
           // FetchData(),
         ],

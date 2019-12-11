@@ -44,11 +44,13 @@ class _MyHomePageState extends State<MyHomePage> {
         .get(Uri.parse(url), headers: {"Content-Type": "application/json"});
 
     setState(() {
-      var resBody = json.decode(utf8.decode(res.bodyBytes));
+       var resBody = json.decode(utf8.decode(res.bodyBytes));
       data = resBody["feed"]["data"];
+    });
+     
 
       //  String myData=resBody=["feed"]["data"][0]['attachments']['data'][0]['description'].toString();
-    });
+    
 
     data.forEach((n) {
       //print('Hello Mr. ${n['attachments']['data'][0]['description'].split('\n')}');∫∫√¶
@@ -140,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //books
             Newbook(data: data, myList: listOfTitle),
 
-            MyView(data: data, myList:listOfTitle),
+            //MyView(data: data, myList:listOfTitle),
 
             //best seller
             SeeAll(seeAllText: "الكتب الأكثر مبيعاً"),

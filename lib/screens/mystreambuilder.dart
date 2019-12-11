@@ -24,28 +24,43 @@ class MyStreamBuilder extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
+
+
+
+
+ 
+ 
+
+
+
     List<Widget> listToImags(DocumentSnapshot urls) {
+
+
+
       List<Widget> images = [];
       List<Widget> images2 = [];
       List<Widget> images3 = [];
       List<Widget> images4 = [];
 
+      
+      
+
       for (String url in urls['ImageUrl']) {
-        Widget img = (Expanded(
-          flex: 13,
-          child: Image.network(
+        Widget img = Flexible(
+          flex: 6,
+          child: (Image.network(
             url,
             width: 100,
             height: 100,
-          ),
-        ));
+          )),
+        );
         // Widget img2 = Text(url , );
         images.add(img);
       }
       for (String url in urls['ImagesTitles']) {
         //  Widget img = Image.network(url , width: 100, height: 100,);
         Widget img2 = (Expanded(
-          flex: 7,
+          flex: 2,
           child: Text(
             url,
             textAlign: TextAlign.center,
@@ -62,15 +77,47 @@ class MyStreamBuilder extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-          //color: Colors.pink,
-          elevation: 10,
-          child: Container(
-            child: w,
-          ),
+          // color: Colors.pink,
+
+          child: w,
         ));
       });
 
       return images3;
+    }
+
+    Column listofColumn(doc) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: Text('العنوان:${doc['title']}'),
+          ),
+          Container(
+            child: doc['ImageUrl'] is List
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: listToImags(doc),
+                    ),
+                  )
+                : Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    //color: Colors.pink,
+                    elevation: 10,
+
+                    child: (Image.network(
+                      doc['ImageUrl'],
+                      width: 100,
+                      height: 100,
+                    )),
+                  ),
+          )
+        ],
+      );
     }
 
     return StreamBuilder<QuerySnapshot>(
@@ -81,34 +128,9 @@ class MyStreamBuilder extends StatelessWidget {
           }
 
           final List<Column> children = snapshot.data.documents
-              .map((doc) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Text(doc['title']),
-                      Container(
-                        child: doc['ImageUrl'] is List
-                            ? Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: listToImags(doc),
-                                ),
-                              )
-                            : Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                //color: Colors.pink,
-                                elevation: 10,
-
-                                child: (Image.network(
-                                  doc['ImageUrl'],
-                                  width: 100,
-                                  height: 100,
-                                )),
-                              ),
-                      )
-                    ],
-                  ))
+              .map(
+                (doc) => listofColumn(doc),
+              )
               .toList();
 
           //Container(child: Image.network(doc['ImageUrl'][0], width: 100, height: 100,))
@@ -118,7 +140,6 @@ class MyStreamBuilder extends StatelessWidget {
               title: Text('list'),
               backgroundColor: Colors.green,
             ),
-           
             body: Container(
                 child: ListView(
               children: children,
