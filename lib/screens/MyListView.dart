@@ -140,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //books
             Newbook(data: data, myList: listOfTitle),
 
-            // MyView(),
+            MyView(data: data, myList:listOfTitle),
 
             //best seller
             SeeAll(seeAllText: "الكتب الأكثر مبيعاً"),

@@ -14,6 +14,9 @@ void main() {
     debugShowCheckedModeBanner: false,
     title: 'Passing Data',
     home: Home(),
+    theme: ThemeData(
+      primaryColor: Colors.red,
+    ),
     //home: Search(),
   ));
 

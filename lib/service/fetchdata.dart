@@ -17,7 +17,10 @@ class _FetchDataState extends State<FetchData> {
   final String url =
 
 
-  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%2Ccreated_time%7D&access_token=EAAC5ryfjvqABAEJaxbtxTtYv6eZAS8OKhu2sJ0CoxANZCroSoANwVsuAhW4BOGUYmsFEMqk7Hh4Ga8ZB5re5Iu2TBhOusxBWmurG9biHHwtnPAKQsMM5liqlqBHOQYtEyDDZAxUQ3qjFCo0YjCFSV7J4pncSZBx5DQaaCjNyMsHwJGVYZCZA2RBNpG07TvpGIOtGTccXu5OfQZDZD";
+
+  "https://graph.facebook.com/v4.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cmedia%2Cdescription%7D%2Ccreated_time%7D&access_token=EAAC5ryfjvqABANYkrdeZAScAJW0If6GREGOPXiX10DQPfmnS0JbfXrZCi9vCJLSCu6yOmWukjQ0rgpDCQWvukNBTHcyKPn5rTvSNBU4ZCpobXfy02J3MYSIvL6qpsUcXyHnGpeWUwLF02KZBqihTsIER5jyOCPBC1UN1b9ULPXRZAvZCGVOya6eQMKvJSygnLH0rkH8CX6aQZDZD";
+
+
 
   List _data;
   List _subData;
@@ -28,7 +31,7 @@ class _FetchDataState extends State<FetchData> {
 
   @override
   void initState() {
-    getData();
+   // getData();
     // createUserInFireCloud();
     super.initState();
   }
@@ -36,26 +39,16 @@ class _FetchDataState extends State<FetchData> {
   Future getData() async {
     int index = 0;
 
+
+
+
     var res = await http
         .get(Uri.parse(url), headers: {"Content-Type": "application/json"});
 
     var resBody = json.decode(utf8.decode(res.bodyBytes));
     _data = resBody["feed"]["data"];
-//posts.data[2].attachments.data[0].description
-    //  String myData=resBody=["feed"]["data"][0]['attachments']['data'][0]['description'].toString();
 
-//feed.data[0].attachments.data[0].subattachments.data[0].media.image.src
-//feed.data[0].attachments.data[0].subattachments.data[1].media.image.src
-//feed.data[0].attachments.data[0].subattachments.data[2].media.image.src
 
-//feed.data[1].attachments.data[0].subattachments.data[0].media.image.src
-//feed.data[1].attachments.data[0].subattachments.data[1].media.image.src
-
-// feed.data[1].attachments.data[0].subattachments.data[0].description
-// feed.data[1].attachments.data[0].subattachments.data[1].description
-//feed.data[0].created_time
-
-    //feed.data[1].attachments.data[0].subattachments.data[0].description
 
     _data.forEach((n) {
 
@@ -87,12 +80,28 @@ class _FetchDataState extends State<FetchData> {
           listOfItem.add(
               _data[index]['attachments']['data'][0]['media']['image']['src']);
 
-          createUserInFireCloud(userName: listOfItem);
+
+
+
+
+
+
+          listOfImages.add(_data[index]['attachments']['data'][0]['media']['image']['src']);
+          listOfDescription.add(listOfItem[0]);
+
+          createUserInFireCloud2(
+              userName: listOfItem,
+              listImages: listOfImages,
+              listTitles: listOfDescription);
+
+          //createUserInFireCloud(userName: listOfItem);
+
+
         }
 
         if (_data[index]['attachments']['data'][0]['subattachments'] != null) {
           _subData =
-              _data[index]['attachments']['data'][0]['subattachments']['data'];
+          _data[index]['attachments']['data'][0]['subattachments']['data'];
 
           _subData.forEach((n) {
             listOfImages.add(n['media']['image']['src']);
@@ -102,7 +111,7 @@ class _FetchDataState extends State<FetchData> {
               listOfDescription.add("");
           });
 
-          createUserInFireCloud2(
+         createUserInFireCloud2(
               userName: listOfItem,
               listImages: listOfImages,
               listTitles: listOfDescription);
@@ -117,6 +126,7 @@ class _FetchDataState extends State<FetchData> {
   }
 
   createUserInFireCloud({List<String> userName}) async {
+
     await usersRef.document().setData({
       "title": userName[0],
       "profileName": userName[1],
@@ -126,12 +136,16 @@ class _FetchDataState extends State<FetchData> {
       "Time": userName[5],
       "ImageUrl": userName[6],
     });
+
+
   }
 
   createUserInFireCloud2(
       {List<String> userName,
-      List<String> listImages,
-      List<String> listTitles}) async {
+        List<String> listImages,
+        List<String> listTitles}) async {
+
+
     await usersRef.document().setData({
       "title": userName[0],
       "profileName": userName[1],

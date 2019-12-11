@@ -1,4 +1,4 @@
-import 'dart:collection';
+
 
 import 'package:bookhouse2/screens/newwidget.dart';
 import 'package:bookhouse2/service/fetchdata.dart';
@@ -41,6 +41,7 @@ class _SearchState extends State<Search> {
         print(myListImageUrl is List);
 
         if (myListImageUrl is List) {
+          if (!mounted) return;
           setState(() {
             images.add(
               Center(
@@ -126,7 +127,7 @@ class _SearchState extends State<Search> {
           {
          // print("title (false)= ${myDocuments.data["title"]}");
          // print(myListImageUrl);
-
+            if (!mounted) return;
           setState(() {
             images.add(Padding(
               padding: const EdgeInsets.all(18.0),
@@ -167,6 +168,7 @@ class _SearchState extends State<Search> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Search'),
+           backgroundColor: Colors.blueAccent,
         ),
         body: images.length > 0
             ? Container(
