@@ -26,6 +26,8 @@ dependencies:
   http: any
   cloud_firestore: ^0.12.10+2
   firebase_storage: ^3.0.8
+  dio: ^3.0.7
+  google_fonts: ^0.1.1
 
 dev_dependencies:
   flutter_test:

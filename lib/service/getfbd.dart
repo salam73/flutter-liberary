@@ -12,13 +12,11 @@ class GetFBD extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
  getData()async{
-   final d= await usersRef.getDocuments();
-   final m= d.documents;
-   print(m);
+  
+   
 }
 
 getData();
-
 
     return Center(
       child: Container(

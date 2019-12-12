@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future getSWData() async {
     var res = await http
         .get(Uri.parse(url), headers: {"Content-Type": "application/json"});
-
+if (!mounted) return;
     setState(() {
        var resBody = json.decode(utf8.decode(res.bodyBytes));
       data = resBody["feed"]["data"];
@@ -173,6 +173,8 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     this.getSWData();
   }
+ 
+  
 }
 
 class BookPart extends StatelessWidget {
