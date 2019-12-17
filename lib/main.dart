@@ -17,7 +17,7 @@ void main() {
       primaryColor: Colors.red,
     ),
     home: Home(),
-    
+
     //home: Search(),
   ));
 

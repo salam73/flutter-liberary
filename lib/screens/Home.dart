@@ -50,13 +50,15 @@ class _HomeState extends State<Home> {
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           //  Timeline(),
-          FireBaseData(),
-           MyListview(),
-          MyStreamBuilder(),
           Search(),
+          FireBaseData(),
+           Center(child: MyListview()),
+          MyStreamBuilder(),
+
+         FetchData(),
         
           //FetchData()
-          GetFBD(),
+
  
           // FetchData(),
         ],
@@ -67,10 +69,10 @@ class _HomeState extends State<Home> {
         activeColor: Theme.of(context).primaryColor,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.whatshot),
+            icon: Icon(Icons.person),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.security),
+            icon: Center(child: Icon(Icons.security)),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.attachment),

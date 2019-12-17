@@ -1,3 +1,4 @@
+import 'package:bookhouse2/service/mysearch.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -18,10 +19,6 @@ class GetFBD extends StatelessWidget {
 
 getData();
 
-    return Center(
-      child: Container(
-        child: Text('salam'),
-      ),
-    );
+    return Mysearch();
   }
 }

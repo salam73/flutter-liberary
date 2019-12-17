@@ -23,27 +23,20 @@ class MyStreamBuilder extends StatelessWidget {
     }
   }
 
+  deletData() {
+    usersRef.getDocuments().then((snapshot) {
+      for (DocumentSnapshot doc in snapshot.documents) {
+        doc.reference.delete();
+      }
+    });
+  }
+
   Widget build(BuildContext context) {
-
-
-
-
- 
- 
-
-
-
     List<Widget> listToImags(DocumentSnapshot urls) {
-
-
-
       List<Widget> images = [];
       List<Widget> images2 = [];
       List<Widget> images3 = [];
       List<Widget> images4 = [];
-
-      
-      
 
       for (String url in urls['ImageUrl']) {
         Widget img = Flexible(
@@ -59,13 +52,14 @@ class MyStreamBuilder extends StatelessWidget {
       }
       for (String url in urls['ImagesTitles']) {
         //  Widget img = Image.network(url , width: 100, height: 100,);
-        Widget img2 = (Expanded(
-          flex: 2,
+        Widget img2 = RotatedBox(
+          quarterTurns: -1,
           child: Text(
-            url,
+            url, //(url)  مهم تذكر هذا الشيء واستخدام ما بين القوسين
             textAlign: TextAlign.center,
+            textDirection: TextDirection.rtl,
           ),
-        ));
+        );
         images2.add(img2);
       }
       images3 = merge(images, images2).toList();
@@ -88,33 +82,27 @@ class MyStreamBuilder extends StatelessWidget {
 
     Column listofColumn(doc) {
       return Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        textDirection: TextDirection.rtl,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 20),
             child: Text('العنوان:${doc['title']}'),
           ),
           Container(
+            // alignment: Alignment.topLeft,
+
             child: doc['ImageUrl'] is List
                 ? Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(bottom: 8),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: listToImags(doc),
                     ),
                   )
-                : Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    //color: Colors.pink,
-                    elevation: 10,
-
-                    child: (Image.network(
-                      doc['ImageUrl'],
-                      width: 100,
-                      height: 100,
-                    )),
-                  ),
+                : (Image.network(
+                    doc['ImageUrl'],
+                  )),
           )
         ],
       );
@@ -140,13 +128,25 @@ class MyStreamBuilder extends StatelessWidget {
               title: Text('list'),
               backgroundColor: Colors.green,
             ),
-            body: Container(
-                child: ListView(
-              children: children,
-            )),
+            body: Column(
+              children: <Widget>[
+                FlatButton(
+                  onPressed: deletData,
+                  color: Colors.grey,
+                  child: Text(
+                    'Delete',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                      child: ListView(
+                    children: children,
+                  )),
+                ),
+              ],
+            ),
           );
         });
   }
 }
-
-//salam

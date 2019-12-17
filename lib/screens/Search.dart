@@ -17,6 +17,8 @@ class _SearchState extends State<Search> {
 
   List myListId = List();
 
+  int _crossAxisCount = 2;
+
   /* salam({String documentID}) {
     debugPrint(documentID);
   }
@@ -52,24 +54,56 @@ class _SearchState extends State<Search> {
 
             listOfImage.add(Card(
               elevation: 3,
-              child: Column(
-                children: <Widget>[
-                  Image.network(
-                    myListImageUrl[0].toString(),
-                    width: 120,
-                    height: 120,
-                  ),
-                  Expanded(
-                    child: Container(
-                      width: 100,
-                      child: Text(
-                        myDocuments.data["title"],
-                        style: TextStyle(color: Colors.black),textAlign: TextAlign.right,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 1),
+                child: Column(
+                  children: <Widget>[
+                    Flexible(
+                      flex: 6,
+                      child: Image.network(
+                        myListImageUrl[0].toString(),
+                        width: 100,
+                        height: 100,
                       ),
                     ),
-                  ),
-                  // Text('there is ${myListImageUrl.length - 1} of pictures more')
-                ],
+                    Flexible(
+                      flex: 2,
+                      child: Container(
+                        width: 150,
+                        child: Text(
+                          myDocuments.data["title"],
+                          style: TextStyle(color: Colors.black),
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 2,
+                      child: Container(
+                        width: 150,
+                        child: Text(
+                          myDocuments.data["profileName"],
+                          style: TextStyle(color: Colors.black),
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                    ),
+
+                    myListImageUrl.length > 1
+                        ? Flexible(
+                            child: Container(
+                              width: 150,
+                              child: Text(
+                                'عدد الكتب ${myListImageUrl.length}',
+                                style: TextStyle(color: Colors.black),
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                          )
+                        : Text(''),
+                    // Text('there is ${myListImageUrl.length - 1} of pictures more')
+                  ],
+                ),
               ),
             ));
 
@@ -114,6 +148,7 @@ class _SearchState extends State<Search> {
                       builder: (context) => NewWidget(
                         myWidgets: myListImageUrl,
                         myTitle: myTitles,
+                        mytitle: myDocuments.data["title"],
                       ),
                     ));
               },
@@ -173,19 +208,40 @@ class _SearchState extends State<Search> {
       appBar: AppBar(
         title: Text('Search'),
         backgroundColor: Colors.blueAccent,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.collections,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              setState(() {
+                _crossAxisCount = 3;
+              });
+            },
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.home,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              setState(() {
+                _crossAxisCount = 2;
+              });
+            },
+          ),
+        ],
       ),
       body: images.length > 0
-          ? ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: 1000),
-              child: GridView.count(
-                childAspectRatio: 0.9,
+          ? GridView.count(
+               childAspectRatio: 0.8,
 
-                // Create a grid with 2 columns. If you change the scrollDirection to
-                // horizontal, this produces 2 rows.
-                crossAxisCount: 2,
-                // Generate 100 widgets that display their index in the List.
-                children: images,
-              ),
+              // Create a grid with 2 columns. If you change the scrollDirection to
+              // horizontal, this produces 2 rows.
+              crossAxisCount: _crossAxisCount,
+              // Generate 100 widgets that display their index in the List.
+              children: images,
             )
           : Center(
               child: Container(

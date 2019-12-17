@@ -14,7 +14,7 @@ class _FireBaseDataState extends State<FireBaseData> {
   final List<Widget> mm = List<Widget>();
   @override
   void initState() {
-    // TODO: implement initState
+    
     getFirebaseData();
     super.initState();
   }
@@ -62,8 +62,8 @@ class _FireBaseDataState extends State<FireBaseData> {
                 flex: 3,
                 child: Column(
                   children: <Widget>[
-                    Text(doc["title"], style: GoogleFonts.cairo(fontSize: 20),textDirection: TextDirection.rtl,),
-                    Text(doc["pris"]),
+                    Text(doc["pris"], style: TextStyle(fontSize: 20),),
+                    Text(doc["title"], style: GoogleFonts.almarai(fontSize: 20),textDirection: TextDirection.rtl,),
                   ],
                 ),
               )

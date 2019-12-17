@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 class NewWidget extends StatelessWidget {
   final List myWidgets;
   final List myTitle;
+  final String mytitle;
 
-  NewWidget({this.myWidgets, this.myTitle});
+  NewWidget({this.myWidgets, this.myTitle , this.mytitle});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('hello'),
+          title: Text(mytitle),
         ),
         body: ListView.builder(
             scrollDirection: Axis.vertical,
