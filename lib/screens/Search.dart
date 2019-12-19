@@ -55,7 +55,7 @@ class _SearchState extends State<Search> {
             listOfImage.add(Card(
               elevation: 3,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 1),
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Column(
                   children: <Widget>[
                     Flexible(
@@ -107,38 +107,6 @@ class _SearchState extends State<Search> {
               ),
             ));
 
-            /*  
-           myListImageUrl.asMap().forEach((index, m) {
-              print("imagesTitles=${m}");
-
-              listOfImage.add(Column(
-                children: <Widget>[
-                  Image.network(
-                    m.toString(),
-                    width: 120,
-                    height: 120,
-                  ),
-                  Text(
-                    myTitles[index],
-                    style: TextStyle(color: Colors.white),
-                  )
-                ],
-              ));
-            }); */
-
-            /*  ListOfImage.add(
-              Column(
-
-                children: <Widget>[
-                  Image.network(
-                    myList[0].toString(),
-                    width: 250,
-                    height: 250,
-                  ),
-                  Text(
-                    myTitles[0], style: TextStyle(color: Colors.white, fontSize: 30),)
-                ],
-              ));*/
 
             images.add(GestureDetector(
               onTap: () {

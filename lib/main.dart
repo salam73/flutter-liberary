@@ -15,6 +15,7 @@ void main() {
     title: 'Passing Data',
     theme: ThemeData(
       primaryColor: Colors.red,
+      //scaffoldBackgroundColor: Color(0xffffde03),
     ),
     home: Home(),
 

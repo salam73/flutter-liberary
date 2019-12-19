@@ -4,6 +4,7 @@ import 'package:bookhouse2/screens/mystreambuilder.dart';
 import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:bookhouse2/service/firebasedata.dart';
 import 'package:bookhouse2/service/getfbd.dart';
+import 'package:bookhouse2/service/justtest.dart';
 import 'package:bookhouse2/service/token.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,10 +51,13 @@ class _HomeState extends State<Home> {
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           //  Timeline(),
-          Search(),
+         // Justtest(),
+
+          MyStreamBuilder(),
+           Search(),
           FireBaseData(),
            Center(child: MyListview()),
-          MyStreamBuilder(),
+
 
          FetchData(),
         

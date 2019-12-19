@@ -108,6 +108,12 @@ class MyStreamBuilder extends StatelessWidget {
       );
     }
 
+    bool _getQuery({List myList}) {
+      bool myBool = myList.any((a) => a.toString().contains('جميلة'));
+
+      return myBool;
+    }
+
     return StreamBuilder<QuerySnapshot>(
         stream: usersRef.snapshots(),
         builder: (context, snapshot) {
@@ -115,7 +121,11 @@ class MyStreamBuilder extends StatelessWidget {
             return (Text('Waiting'));
           }
 
+          //final resualt= usersRef.snapshots().data.where((a) => a.title.toLowerCase().contains('f'));
           final List<Column> children = snapshot.data.documents
+              .where((a) => (a['ImagesTitles'].toList().length > 1)
+                  ? _getQuery(myList: a['ImagesTitles'])
+                  : a['ImagesTitles'][0].toString().contains('جميلة'))
               .map(
                 (doc) => listofColumn(doc),
               )
@@ -127,6 +137,14 @@ class MyStreamBuilder extends StatelessWidget {
             appBar: AppBar(
               title: Text('list'),
               backgroundColor: Colors.green,
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    showSearch(context: context, delegate: Searchbook());
+                  },
+                )
+              ],
             ),
             body: Column(
               children: <Widget>[
@@ -148,5 +166,43 @@ class MyStreamBuilder extends StatelessWidget {
             ),
           );
         });
+  }
+}
+
+class Searchbook extends SearchDelegate {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // TODO: implement buildActions
+    return [
+      IconButton(
+        icon: Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // TODO: implement buildLeading
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    return Container();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+    return Text(query);
   }
 }
