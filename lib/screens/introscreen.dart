@@ -1,4 +1,5 @@
-import 'package:bookhouse2/screens/mystreambuilder.dart';
+import 'package:bookhouse2/screens/homescreen.dart';
+import 'package:bookhouse2/screens/searchscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -50,29 +51,42 @@ class OnBoardingPage extends StatelessWidget {
     return IntroductionScreen(
       pages: [
         PageViewModel(
-          title: "Fractional shares",
+          title: "مكتبة دار الكتب",
           body:
-          "Instead of having to buy an entire share, invest any amount you want.",
+          "أول مكتبة تستخدم برنامج مكتبيتي للتصفح والبحث",
           image: _buildImage('img1'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Learn as you go",
+          title: "البحث",
           body:
-          "Download the Stockpile app and master the market with our mini-lesson.",
+          "يمكنك الأن البحث بين ألاف الكتب عن طريق كتابة اسم عنوان الكتاب",
           image: _buildImage('img2'),
+          footer: RaisedButton(
+            onPressed: () {/* Nothing */},
+            child: const Text(
+              'FooButton',
+              style: TextStyle(color: Colors.white),
+            ),
+            color: Colors.lightBlue,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Kids and teens",
+          title: "التصفح",
           body:
-          "Kids and teens can track their stocks 24/7 and place trades that you approve.",
+          "الأن يمكنك تصفح جميع الكتب بطرق مختلفة",
           image: _buildImage('img3'),
           decoration: pageDecoration,
+
         ),
         PageViewModel(
-          title: "Another title page",
-          body: "Another beautiful body text for this example onboarding",
+          title: "مشاهدة",
+          body: "الكتب الاكثر مبيعا, العروض المختلفة وجميع الاقسام المكتبة",
           image: _buildImage('img2'),
           footer: RaisedButton(
             onPressed: () {/* Nothing */},
@@ -124,6 +138,6 @@ class OnBoardingPage extends StatelessWidget {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MyStreamBuilder();
+    return HomeScreen();
   }
 }

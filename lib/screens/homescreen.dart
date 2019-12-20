@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 
 final usersRef = Firestore.instance.collection('library');
 
-class Search extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _SearchState createState() => _SearchState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _SearchState extends State<Search> {
+class _HomeScreenState extends State<HomeScreen> {
   List<Widget> images = List();
 
   //Column myColumn = Column();
@@ -174,7 +174,7 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search'),
+        title: Text('Home'),
         backgroundColor: Colors.blueAccent,
         actions: <Widget>[
           IconButton(

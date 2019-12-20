@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 final usersRef = Firestore.instance.collection('library');
 
-class MyStreamBuilder extends StatelessWidget {
+class SearchScreen extends StatelessWidget {
   List<String> MyList = List();
 
   @override
@@ -214,7 +214,7 @@ class MyStreamBuilder extends StatelessWidget {
 }
 
 class SearchBook extends SearchDelegate<Widget> {
-  MyStreamBuilder myStreamBuilder = MyStreamBuilder();
+  SearchScreen myStreamBuilder = SearchScreen();
 
   @override
   ThemeData appBarTheme(BuildContext context) {

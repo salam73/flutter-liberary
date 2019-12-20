@@ -1,7 +1,8 @@
 import 'dart:async';
 
+import 'package:bookhouse2/screens/homescreen.dart';
 import 'package:bookhouse2/screens/introscreen.dart';
-import 'package:bookhouse2/screens/mystreambuilder.dart';
+import 'package:bookhouse2/screens/searchscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,9 +27,9 @@ class SplashState extends State<Splash> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool _seen = (prefs.getBool('seen') ?? false);
 
-    if (_seen) {
+    if (!_seen) {
       Navigator.of(context).pushReplacement(
-          new MaterialPageRoute(builder: (context) => new MyStreamBuilder()));
+          new MaterialPageRoute(builder: (context) => new HomeScreen()));
     } else {
       await prefs.setBool('seen', true);
       Navigator.of(context).pushReplacement(
@@ -69,7 +70,7 @@ class IntroScreen2 extends StatelessWidget {
               child: new Text('Gogo Home Page'),
               onPressed: () {
                 Navigator.of(context).pushReplacement(
-                    new MaterialPageRoute(builder: (context) => new MyStreamBuilder()));
+                    new MaterialPageRoute(builder: (context) => new HomeScreen()));
               },
             )
           ],

@@ -1,6 +1,6 @@
 import 'package:bookhouse2/screens/MyListView.dart';
-import 'package:bookhouse2/screens/Search.dart';
-import 'package:bookhouse2/screens/mystreambuilder.dart';
+import 'package:bookhouse2/screens/homescreen.dart';
+import 'package:bookhouse2/screens/searchscreen.dart';
 import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:bookhouse2/service/firebasedata.dart';
 import 'package:bookhouse2/service/getfbd.dart';
@@ -52,9 +52,9 @@ class _HomeState extends State<Home> {
         children: <Widget>[
           //  Timeline(),
          Justtest(),
+          //Search(),
+         SearchScreen(),
 
-        //  MyStreamBuilder(),
-           Search(),
           FireBaseData(),
            Center(child: MyListview()),
 
@@ -73,10 +73,10 @@ class _HomeState extends State<Home> {
         activeColor: Theme.of(context).primaryColor,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
-            icon: Center(child: Icon(Icons.security)),
+            icon: Center(child: Icon(Icons.search)),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.attachment),
