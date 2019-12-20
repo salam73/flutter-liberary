@@ -1,5 +1,6 @@
 import 'package:bookhouse2/screens/Home.dart';
 import 'package:bookhouse2/screens/Search.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ void main() {
 
       MaterialApp(
     debugShowCheckedModeBanner: false,
-    title: 'Passing Data',
+    title: 'Book house',
     theme: ThemeData(
       primaryColor: Colors.red,
       //scaffoldBackgroundColor: Color(0xffffde03),

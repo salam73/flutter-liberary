@@ -38,7 +38,7 @@ class _SearchState extends State<Search> {
         List myTitles = myDocuments.data["ImagesTitles"];
         List<Widget> listOfImage = List();
 
-        print(myListImageUrl is List);
+       // print(myListImageUrl is List);
 
         if (myListImageUrl is List) {
           if (!mounted) return;
