@@ -3,16 +3,20 @@ import 'package:bookhouse2/screens/homescreen.dart';
 import 'package:bookhouse2/screens/searchscreen.dart';
 import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:bookhouse2/service/firebasedata.dart';
-import 'package:bookhouse2/service/getfbd.dart';
-import 'package:bookhouse2/service/justtest.dart';
-import 'package:bookhouse2/service/token.dart';
+
+
+import 'typescreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
+
   @override
   _HomeState createState() => _HomeState();
+
 }
+
+
 
 class _HomeState extends State<Home> {
   bool isAuth = false;
@@ -45,27 +49,34 @@ class _HomeState extends State<Home> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: pageController,
-        onPageChanged: onPageChanged,
-        physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[
-          //  Timeline(),
-         Justtest(),
-          //Search(),
-         SearchScreen(),
+      body: SafeArea(
+        child: PageView(
+          controller: pageController,
+          onPageChanged: onPageChanged,
+          physics: NeverScrollableScrollPhysics(),
+          children: <Widget>[
+            //  Timeline(),
+            //  Splashscreen(),
+            //Search(),
+            // Splash(),
 
-          FireBaseData(),
-           Center(child: MyListview()),
+            Tyepscreen(),
+            FireBaseData(),
+            SearchScreen(),
+
+            HomeScreen(),
 
 
-         FetchData(),
-        
-          //FetchData()
 
- 
-          // FetchData(),
-        ],
+            MyListview(),
+
+            FetchData(),
+
+            //FetchData()
+
+            // FetchData(),
+          ],
+        ),
       ),
       bottomNavigationBar: CupertinoTabBar(
         currentIndex: pageIndex,
@@ -82,10 +93,10 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.attachment),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.adb),
+            icon: Icon(Icons.local_library),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
+            icon: Icon(Icons.update),
           ),
         ],
       ),

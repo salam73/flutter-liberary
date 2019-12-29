@@ -12,7 +12,7 @@ class FetchData extends StatefulWidget {
 }
 
 class _FetchDataState extends State<FetchData> {
-  String accesstoken = "";
+  String _accessToken = "";
 
   String url =
       "https://graph.facebook.com/v5.0/me?fields=feed%7Bmessage%2Cattachments%7Bsubattachments%2Cdescription%2Cmedia%7D%2Ccreated_time%7D&access_token=";
@@ -21,7 +21,7 @@ class _FetchDataState extends State<FetchData> {
 
   List _data;
   List _subData;
-  List<String> my_items = List();
+  List<String> _myItems = List();
   List<String> listOfItem = List();
   List<String> listOfImages = List();
   List<String> listOfTitles = List();
@@ -35,10 +35,10 @@ class _FetchDataState extends State<FetchData> {
 
   Future getData() async {
     setState(() {
-      accesstoken = myController.value.text;
-      url = url + accesstoken;
-      accesstoken = '';
-      myController.text='';
+      _accessToken = myController.value.text;
+      url = url + _accessToken;
+      _accessToken = '';
+      myController.text = '';
     });
 
     int index = 0;
@@ -56,13 +56,13 @@ class _FetchDataState extends State<FetchData> {
           if (parts.length == 1) {
             //  print('invalid: $line');
             {
-              my_items.add("invalid: $line");
+              _myItems.add("invalid: $line");
             }
           } else {
             String fieldName = (parts[0]);
             String fieldValue = (parts[1]);
             if (parts[0].contains("عنوان")) {
-              my_items.add(parts[1]);
+              _myItems.add(parts[1]);
             }
 
             print('$fieldName ------- $fieldValue');
@@ -141,7 +141,13 @@ class _FetchDataState extends State<FetchData> {
     });
   }
 
-  deleteData() {}
+  deletData() {
+    usersRef.getDocuments().then((snapshot) {
+      for (DocumentSnapshot doc in snapshot.documents) {
+        doc.reference.delete();
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -156,12 +162,17 @@ class _FetchDataState extends State<FetchData> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Container(
+            alignment: Alignment.center,
+            child: RaisedButton(
+              onPressed: deletData,
+              child: Text('deletData'),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              decoration: InputDecoration(
-                
-                  hintText: 'Enter a Token'),
+              decoration: InputDecoration(hintText: 'Enter a Token'),
               controller: myController,
             ),
           ),

@@ -1,5 +1,4 @@
 import 'package:bookhouse2/screens/newwidget.dart';
-import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         List myTitles = myDocuments.data["ImagesTitles"];
         List<Widget> listOfImage = List();
 
-       // print(myListImageUrl is List);
+        // print(myListImageUrl is List);
 
         if (myListImageUrl is List) {
           if (!mounted) return;
@@ -87,6 +86,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           textAlign: TextAlign.right,
                         ),
                       ),
+                    ), Flexible(
+                      flex: 2,
+                      child: Container(
+                        width: 150,
+                        child: Text(
+                          myDocuments.data["Type"],
+                          style: TextStyle(color: Colors.black),
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
                     ),
 
                     myListImageUrl.length > 1
@@ -106,7 +115,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ));
-
 
             images.add(GestureDetector(
               onTap: () {
@@ -203,12 +211,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: images.length > 0
           ? GridView.count(
-               childAspectRatio: 0.8,
-
-              // Create a grid with 2 columns. If you change the scrollDirection to
-              // horizontal, this produces 2 rows.
+              childAspectRatio: 0.8,
               crossAxisCount: _crossAxisCount,
-              // Generate 100 widgets that display their index in the List.
               children: images,
             )
           : Center(

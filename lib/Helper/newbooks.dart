@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bookhouse2/screens/screentwo.dart';
 
-
 class Newbook extends StatelessWidget {
   const Newbook({
     Key key,
@@ -16,7 +15,7 @@ class Newbook extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints:
-      BoxConstraints(maxHeight: 180), // **THIS is the important part**
+          BoxConstraints(maxHeight: 180), // **THIS is the important part**
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         reverse: true,
@@ -28,11 +27,12 @@ class Newbook extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ScreenTwo(
-                      dice:  data[index]['attachments']['data'][0]['description'],
+                      dice: data[index]['attachments']['data'][0]
+                          ['description'],
                       myList: myList,
                       index: index,
                       src: data[index]['attachments']['data'][0]['media']
-                      ['image']['src']),
+                          ['image']['src']),
                 ),
               );
             },
@@ -54,7 +54,7 @@ class Newbook extends StatelessWidget {
                   ),
                   Image.network(
                     data[index]['attachments']['data'][0]['media']['image']
-                    ['src'],
+                        ['src'],
                   ),
                 ],
               ),

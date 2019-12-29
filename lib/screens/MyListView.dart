@@ -1,5 +1,6 @@
 
 import 'package:bookhouse2/service/fetchdata.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -18,11 +19,8 @@ class MyListview extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'دار الكتب',
-      home: MyHomePage(),
-    );
+    return  MyHomePage() ;
+    
   }
 }
 
@@ -236,9 +234,12 @@ class SeeAll extends StatelessWidget {
               fontSize: 20,
             ),
           ),
-          Text(
-            "شاهد الكل ->",
-            style: TextStyle(fontSize: 20, color: Colors.grey),
+          FlatButton(
+            onPressed: (){},
+            child: Text(
+              "شاهد الكل ->",
+              style: TextStyle(fontSize: 20, color: Colors.grey),
+            ),
           )
         ],
       ),

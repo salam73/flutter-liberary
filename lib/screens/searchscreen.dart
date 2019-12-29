@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
-
-
 final usersRef = Firestore.instance.collection('library');
 
 class SearchScreen extends StatelessWidget {
@@ -51,13 +48,16 @@ class SearchScreen extends StatelessWidget {
       //   print (value);
 
       if (value is List) {
-        print(doc['title']);
+        // print(doc['title']);
       }
 
       //  print (doc['ImagesTitles'][index])
     });
 
+
+
     for (String url in doc['ImageUrl']) {
+
       Widget img = Flexible(
         flex: 6,
         child: GestureDetector(
@@ -72,8 +72,10 @@ class SearchScreen extends StatelessWidget {
         ),
       );
       // Widget img2 = Text(url , );
+
       images.add(img);
       ListImagesTitles.add(url);
+
     }
     for (String url in doc['ImagesTitles']) {
       //  Widget img = Image.network(url , width: 100, height: 100,);
@@ -81,7 +83,7 @@ class SearchScreen extends StatelessWidget {
         quarterTurns: -1,
         child: Text(
           url, //(url)  مهم تذكر هذا الشيء واستخدام ما بين القوسين
-          textAlign: TextAlign.center,
+          // textAlign: TextAlign.center,
           textDirection: TextDirection.rtl,
         ),
       );
@@ -110,18 +112,38 @@ class SearchScreen extends StatelessWidget {
 
   Column listofColumn(doc) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      textDirection: TextDirection.rtl,
+
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(right: 20),
-          child: Text('العنوان:${doc['title']}'),
+        Column(
+
+          children: <Widget>[
+            Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.only(right: 10),
+
+              child: Text(
+                'العنوان:${doc['title']}',
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.only(right: 10),
+              child: Text(
+                'الكاتب :${doc['profileName']}',
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
+              ),
+            ),
+          ],
         ),
         Container(
+          color: Colors.black12,
             // alignment: Alignment.topLeft,
 
             child: Padding(
-          padding: const EdgeInsets.only(bottom: 8),
+          padding: const EdgeInsets.symmetric(vertical: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: listToImags(doc),
@@ -131,11 +153,14 @@ class SearchScreen extends StatelessWidget {
     );
   }
 
-  bool _getQuery({List myList, String myQuery}) {
-    bool myBool = myList.any((a) => a.toString().contains(myQuery));
-
-    return myBool;
+  bool _getQuery({List imageTitles, String profileTitles, String myQuery}) {
+    bool _queryResualt =
+        imageTitles.any((a) => a.toString().contains(myQuery)) ||
+            profileTitles.contains(myQuery);
+    return _queryResualt;
   }
+
+  List<Column> _getSearchData() {}
 
   Widget build(BuildContext context) {
     Stream<QuerySnapshot> _mySnap = usersRef.snapshots();
@@ -192,14 +217,7 @@ class SearchScreen extends StatelessWidget {
             ),
             body: Column(
               children: <Widget>[
-                FlatButton(
-                  onPressed: deletData,
-                  color: Colors.grey,
-                  child: Text(
-                    'Delete',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ), //delete items
+               //delete items
                 Expanded(
                   child: Container(
                       child: ListView(
@@ -214,7 +232,8 @@ class SearchScreen extends StatelessWidget {
 }
 
 class SearchBook extends SearchDelegate<Widget> {
-  SearchScreen myStreamBuilder = SearchScreen();
+
+  SearchScreen myClassRefrance = SearchScreen();
 
   @override
   ThemeData appBarTheme(BuildContext context) {
@@ -263,11 +282,15 @@ class SearchBook extends SearchDelegate<Widget> {
           //final resualt= usersRef.snapshots().data.where((a) => a.title.toLowerCase().contains('f'));
           final List<Column> children = snapshot.data.documents
               .where((a) => (a['ImagesTitles'].toList().length > 1)
-                  ? myStreamBuilder._getQuery(
-                      myList: a['ImagesTitles'], myQuery: query)
-                  : a['ImagesTitles'][0].toString().contains(query))
+                  ? myClassRefrance._getQuery(
+                      imageTitles: a['ImagesTitles'],
+                      profileTitles: a['profileName'],
+                      myQuery: query)
+                  : a['ImagesTitles'][0].toString().contains(query) ||
+                      a['profileName'].contains(query) ||
+                      a['title'].contains(query))
               .map(
-                (doc) => myStreamBuilder.listofColumn(doc),
+                (doc) => myClassRefrance.listofColumn(doc),
               )
               .toList();
 
@@ -290,11 +313,15 @@ class SearchBook extends SearchDelegate<Widget> {
           //final resualt= usersRef.snapshots().data.where((a) => a.title.toLowerCase().contains('f'));
           final List<Column> children = snapshot.data.documents
               .where((a) => (a['ImagesTitles'].toList().length > 1)
-                  ? myStreamBuilder._getQuery(
-                      myList: a['ImagesTitles'], myQuery: query)
-                  : a['ImagesTitles'][0].toString().contains(query))
+                  ? myClassRefrance._getQuery(
+                      imageTitles: a['ImagesTitles'],
+                      profileTitles: a['profileName'],
+                      myQuery: query)
+                  : a['ImagesTitles'][0].toString().contains(query) ||
+                      a['profileName'].contains(query) ||
+                      a['title'].contains(query))
               .map(
-                (doc) => myStreamBuilder.listofColumn(doc),
+                (doc) => myClassRefrance.listofColumn(doc),
               )
               .toList();
 
@@ -305,5 +332,5 @@ class SearchBook extends SearchDelegate<Widget> {
   }
 
   @override
-  String get searchFieldLabel => "بحث";
+  String get searchFieldLabel => "إكتب عنوان الكتاب أو اسم المؤلف";
 }
