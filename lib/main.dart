@@ -19,7 +19,7 @@ void main() {
       primaryColor: Colors.red,
       //scaffoldBackgroundColor: Color(0xffffde03),
     ),
-    home:Home()// SplashScreen(),
+    home: Home()//SplashScreen(),
 
     //home: Search(),
   ));

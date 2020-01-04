@@ -152,6 +152,48 @@ class SearchScreen extends StatelessWidget {
       ],
     );
   }
+  Column listofColumnWinthouImage(doc) {
+    return Column(
+
+      children: <Widget>[
+        Column(
+
+          children: <Widget>[
+            Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.only(right: 10),
+
+              child: Text(
+                'العنوان:${doc['title']}',
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.only(right: 10),
+              child: Text(
+                'الكاتب :${doc['profileName']}',
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
+              ),
+            ),
+          ],
+        ),
+       /*  Container(
+          color: Colors.black12,
+            // alignment: Alignment.topLeft,
+
+            child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: listToImags(doc),
+          ),
+        )) */
+      ],
+    );
+  }
 
   bool _getQuery({List imageTitles, String profileTitles, String myQuery}) {
     bool _queryResualt =
@@ -218,12 +260,12 @@ class SearchScreen extends StatelessWidget {
             body: Column(
               children: <Widget>[
                //delete items
-                Expanded(
+              /*   Expanded(
                   child: Container(
                       child: ListView(
                     children: children,
                   )),
-                ),
+                ), */
               ],
             ),
           );
@@ -280,6 +322,7 @@ class SearchBook extends SearchDelegate<Widget> {
           }
 
           //final resualt= usersRef.snapshots().data.where((a) => a.title.toLowerCase().contains('f'));
+          
           final List<Column> children = snapshot.data.documents
               .where((a) => (a['ImagesTitles'].toList().length > 1)
                   ? myClassRefrance._getQuery(
@@ -293,7 +336,7 @@ class SearchBook extends SearchDelegate<Widget> {
                 (doc) => myClassRefrance.listofColumn(doc),
               )
               .toList();
-
+         
           return ListView(
             children: children,
           );
@@ -321,12 +364,15 @@ class SearchBook extends SearchDelegate<Widget> {
                       a['profileName'].contains(query) ||
                       a['title'].contains(query))
               .map(
-                (doc) => myClassRefrance.listofColumn(doc),
+                (doc) => myClassRefrance.listofColumnWinthouImage(doc),
               )
               .toList();
-
+ if(query.length>0)
           return ListView(
             children: children,
+          );
+          return Text(
+           'هل تبحث عن كتب في مجال', textDirection: TextDirection.rtl, textAlign: TextAlign.start,
           );
         });
   }

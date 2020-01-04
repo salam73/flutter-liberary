@@ -5,7 +5,7 @@ class NewWidget extends StatelessWidget {
   final List myTitle;
   final String mytitle;
 
-  NewWidget({this.myWidgets, this.myTitle , this.mytitle});
+  NewWidget({this.myWidgets, this.myTitle, this.mytitle});
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +23,17 @@ class NewWidget extends StatelessWidget {
                   //width: double.infinity,
                   child: Row(
                     children: <Widget>[
-
-
                       Expanded(
-                        flex: 9,
-                        child: (Image.network(
-                          myWidgets[index]
-
-                        )),
+                        flex: 6,
+                        child: Text(
+                          myTitle[index],
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                       Expanded(
-                          flex: 3,
-                          child: Text( myTitle[index], textAlign: TextAlign.center,)),
+                        flex: 9,
+                        child: (Image.network(myWidgets[index])),
+                      ),
                     ],
                   ),
                 ),

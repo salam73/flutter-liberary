@@ -21,7 +21,7 @@ class SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool _seen = (prefs.getBool('seen') ?? false);
 
-    if (!_seen) {
+    if (_seen) {
       Navigator.of(context).pushReplacement(
            MaterialPageRoute(builder: (context) =>  Home()));
     } else {

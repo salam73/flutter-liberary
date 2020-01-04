@@ -115,11 +115,11 @@ class _FetchDataState extends State<FetchData> {
 
   createUserInFireCloud({List<String> userName}) async {
     await usersRef.document().setData({
-      "title": userName[0],
-      "profileName": userName[1],
-      "pris": userName[2],
-      "pages": userName[3],
-      "Type": userName[4],
+      "title": userName[0].trim(),
+      "profileName": userName[1].trim(),
+      "pris": userName[2].trim(),
+      "pages": userName[3].trim(),
+      "Type": userName[4].trim(),
       "Time": userName[5],
       "ImageUrl": userName[6],
     });
@@ -130,11 +130,11 @@ class _FetchDataState extends State<FetchData> {
       List<String> listImages,
       List<String> listTitles}) async {
     await usersRef.document().setData({
-      "title": userName[0],
-      "profileName": userName[1],
-      "pris": userName[2],
-      "pages": userName[3],
-      "Type": userName[4],
+      "title": userName[0].trim(),
+      "profileName": userName[1].trim(),
+      "pris": userName[2].trim(),
+      "pages": userName[3].trim(),
+      "Type": userName[4].trim(),
       "Time": userName[5],
       "ImageUrl": listImages,
       "ImagesTitles": listTitles

@@ -53,9 +53,9 @@ class Newbook extends StatelessWidget {
                     ),
                   ),
                   Image.network(
-                    data[index]['attachments']['data'][0]['media']['image']
-                        ['src'],
-                  ),
+                        data[index]['attachments']['data'][0]['media']['image']
+                            ['src'],
+                      ),
                 ],
               ),
             ),

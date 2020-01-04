@@ -4,19 +4,14 @@ import 'package:bookhouse2/screens/searchscreen.dart';
 import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:bookhouse2/service/firebasedata.dart';
 
-
 import 'typescreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-
   @override
   _HomeState createState() => _HomeState();
-
 }
-
-
 
 class _HomeState extends State<Home> {
   bool isAuth = false;
@@ -58,15 +53,15 @@ class _HomeState extends State<Home> {
             //  Timeline(),
             //  Splashscreen(),
             //Search(),
-            // Splash(),
+            //Splash(),
+            //SplashScreen(),
 
-            Tyepscreen(),
+             Tyepscreen(),
+           // Headerbar(),
             FireBaseData(),
             SearchScreen(),
 
             HomeScreen(),
-
-
 
             MyListview(),
 
@@ -87,6 +82,9 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.library_music),
+          ),
+          BottomNavigationBarItem(
             icon: Center(child: Icon(Icons.search)),
           ),
           BottomNavigationBarItem(
@@ -98,6 +96,7 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: Icon(Icons.update),
           ),
+         
         ],
       ),
     );

@@ -22,28 +22,9 @@ class ScreenTwo extends StatelessWidget {
         ),
         backgroundColor: Colors.deepPurpleAccent,
       ),
-      body: ListView(
-
-        children: <Widget>[
-          Image.network(
+      body: Image.network(
             src,
           ),
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Center(
-              child: Container(
-                child: Text(
-                  this.dice,textDirection: TextDirection.rtl,
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            ),
-          ),
-         // Text(this.myList[index]),
-         // Text(this.myList[1]),
-
-        ],
-      ),
     );
   }
 }
