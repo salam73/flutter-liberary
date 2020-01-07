@@ -144,18 +144,15 @@ class _HomeScreenState extends State<HomeScreen> {
           // print(myListImageUrl);
           if (!mounted) return;
           setState(() {
-            images.add(Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Column(
-                children: <Widget>[
-                  //Text(myDocuments.data["title"]),
-                  (Image.network(
-                    myDocuments.data["ImageUrl"],
-                    //width: 150,
-                    height: 150,
-                  )),
-                ],
-              ),
+            images.add(Column(
+              children: <Widget>[
+                //Text(myDocuments.data["title"]),
+                (Image.network(
+                  myDocuments.data["ImageUrl"],
+                  //width: 150,
+                  height: 150,
+                )),
+              ],
             ));
           });
         }

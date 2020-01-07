@@ -1,4 +1,5 @@
 import 'package:bookhouse2/screens/MyListView.dart';
+import 'package:bookhouse2/screens/NotUpdate.dart';
 import 'package:bookhouse2/screens/homescreen.dart';
 import 'package:bookhouse2/screens/searchscreen.dart';
 import 'package:bookhouse2/service/fetchdata.dart';
@@ -14,7 +15,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool isAuth = false;
+  // bool isAuth = false;
   PageController pageController;
   int pageIndex = 0;
 
@@ -48,7 +49,7 @@ class _HomeState extends State<Home> {
         child: PageView(
           controller: pageController,
           onPageChanged: onPageChanged,
-          physics: NeverScrollableScrollPhysics(),
+          // physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             //  Timeline(),
             //  Splashscreen(),
@@ -56,9 +57,13 @@ class _HomeState extends State<Home> {
             //Splash(),
             //SplashScreen(),
 
-             Tyepscreen(),
-           // Headerbar(),
+           ExpandableListView(),
+
+            Tyepscreen(),
             FireBaseData(),
+
+            // Headerbar(),
+
             SearchScreen(),
 
             HomeScreen(),
@@ -79,10 +84,13 @@ class _HomeState extends State<Home> {
         activeColor: Theme.of(context).primaryColor,
         items: [
           BottomNavigationBarItem(
+            icon: Icon(Icons.hot_tub),
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.library_music),
+            icon: Icon(Icons.library_books),
           ),
           BottomNavigationBarItem(
             icon: Center(child: Icon(Icons.search)),
@@ -96,7 +104,7 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: Icon(Icons.update),
           ),
-         
+        
         ],
       ),
     );

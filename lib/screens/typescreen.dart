@@ -2,12 +2,10 @@ import 'package:bookhouse2/screens/screentwo.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:bookhouse2/Helper/mydata.dart';
 
 final usersRef = Firestore.instance.collection('library');
 
-List textItem = [];
-List m = [];
+
 
 class Tyepscreen extends StatefulWidget {
   @override
@@ -15,10 +13,13 @@ class Tyepscreen extends StatefulWidget {
 }
 
 class _TyepscreenState extends State<Tyepscreen> {
+List textItem = [];
+List m = [];
+
   List<Widget> myWidgetList = [];
   List<Widget> myMaha = [];
 
-  List mysalamList2 = [];
+  List dataList = [];
   List sortTypeArray = [];
 
   List mysetList = [];
@@ -34,20 +35,21 @@ class _TyepscreenState extends State<Tyepscreen> {
         .getDocuments();
 
     snapshot.documents.forEach((DocumentSnapshot doc) {
-      mysalamList2.add(doc.data);
+      setState(() {
+        dataList.add(doc.data);
+      });
     });
 
-    mysalamList2.forEach((m) => {
-      sortTypeArray.add(m['Type'])
-      });
+    dataList.forEach((m) => {sortTypeArray.add(m['Type'])});
 
-    sortTypeArray = sortTypeArray.toSet().toList();
-    print(sortTypeArray);
+    sortTypeArray =
+        sortTypeArray.toSet().toList(); //remove duplicate items of list
+    //print(sortTypeArray);
 
     sortTypeArray.forEach((m) {
       typeItemArray.add(m.toString());
 
-      mysalamList2.forEach((f) {
+      dataList.forEach((f) {
         if (f['Type'] == m) {
           //  print(   mysalamList.every((f)=>f['Type'] == m));
 
@@ -74,42 +76,6 @@ class _TyepscreenState extends State<Tyepscreen> {
     print(widgetItemArray.toSet());
 
     mysetList = widgetItemArray.toSet().toList();
-
-    setState(() {
-      /* textItem.forEach((f) => {
-            m = f.toList(),
-            m.asMap().forEach((i, x) => {
-
-              i==0?
-                  
-                    {
-                      myWidgetList.add(
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          color: Colors.amberAccent,
-                          child: Text(
-                            x.toString(),
-                            style: TextStyle(fontSize: 30),
-                          ),
-                        ),
-                      )
-                    }
-                  :
-                    {
-                      myMaha.add(
-                        Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(x.toString()),
-                          ),
-                        ),
-                      )
-                    }
-                }),
-                myWidgetList.add(Wrap(children: myMaha)),
-                 myMaha=[]
-          }); */
-    });
   }
 
   @override
@@ -119,7 +85,13 @@ class _TyepscreenState extends State<Tyepscreen> {
     super.initState();
   }
 
-Color myColor({String myString}) {
+  @override
+  void dispose() {
+    // myWidgetList = [];
+    super.dispose();
+  }
+
+  Color myColor({String myString}) {
     if (myString.contains('متنوع')) return Colors.brown;
 
     if (myString.contains('رواية')) return Colors.deepOrangeAccent;
@@ -131,9 +103,8 @@ Color myColor({String myString}) {
       return Colors.black;
   }
 
-Widget rowWidget({var doc}) {
-   
-return ConstrainedBox(
+  Widget rowWidget({var doc}) {
+    return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: 150),
       child: ListView.builder(
         reverse: true,
@@ -188,79 +159,106 @@ return ConstrainedBox(
         },
       ),
     );
-
-
   }
-
 
   @override
   Widget build(BuildContext context) {
-    myWidgetList = [];
+   // myWidgetList = [];
 
     return Scaffold(
-        body: Center(
-            child: ListView.builder(
-                itemCount: 1,
-                itemBuilder: (BuildContext ctxt, int index) {
-                  mysetList.asMap().forEach((index2,f) => {
-                        m = f.toList(),
-                        m.asMap().forEach((i, x) => {
-                              i == 0
-                                  ? {
-                                      myWidgetList.add(
-                                        Container(
-                                          
-                                          padding: EdgeInsets.all(10),
-                                           color: Colors.cyan[900-100 * (index2 % 9)],
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              Text(
-                                                x.toString(),
-                                                style: TextStyle(fontSize: 30, color: Colors.amber[900-300 * (index2 % 9)]),
+      appBar: AppBar(
+        title: Text('books'),
+      ),
+        body: mysetList.length < 1
+            ? Center(
+                child: Container(
+                  child: Text('Waiting'),
+                ),
+              )
+            : Center(
+                child: ListView.builder(
+                    itemCount: 1,
+                    itemBuilder: (BuildContext ctxt, int index) {
+                      mysetList.asMap().forEach((index2, f) => {
+                            m = f.toList(),
+                            m.asMap().forEach((i, x) => {
+                                  i == 0
+                                      ? {
+                                          myWidgetList.add(
+                                            Container(
+                                              padding: EdgeInsets.all(10),
+                                              color: Colors.lightBlue[
+                                                  100 * (index2 % 9)],
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Text(
+                                                    x.toString(),
+                                                    style: TextStyle(
+                                                      fontSize: 30,
+
+                                                      // color: Colors.grey[100 * (index2 % 9)],
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              
-                                              
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    }
-                                  : {
-                                      myMaha.add(
-                                        Container(
-                                           color: Colors.lightBlue[100 * (i % 9)],
-                                          // color: Colors.grey,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:   x["ImageUrl"].toList().length > 1 ?
-                                          Column(children: <Widget>[
-                                            Text('سلسلة كتب عدد: '+ x["ImageUrl"].toList().length.toString()),
-                                             rowWidget(doc: x)
-
-                                          ])
-                                         
-                                            :
-
-                                             Image.network(x['ImageUrl'][0], width: 100,)
-                                          ),
-                                        ),
-                                      )
-                                    }
-                            }),
-                        myWidgetList.add(
-                          Container(
-                            
-                            child: Wrap(
-                             // mainAxisAlignment: MainAxisAlignment.start,
-                              children: myMaha
+                                            ),
+                                          )
+                                        }
+                                      : {
+                                          myMaha.add(
+                                            Container(
+                                              color: Colors
+                                                  .lightBlue[100 * (i % 9)],
+                                              // color: Colors.grey,
+                                              child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: x["ImageUrl"]
+                                                              .toList()
+                                                              .length > 1
+                                                      ? Column(
+                                                          children: <Widget>[
+                                                              Text('سلسلة كتب عدد: ' +
+                                                                  x["ImageUrl"]
+                                                                      .toList()
+                                                                      .length
+                                                                      .toString()),
+                                                              rowWidget(doc: x)
+                                                            ])
+                                                      : GestureDetector(
+                                                          onTap: () {
+                                                            Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder: (context) => ScreenTwo(
+                                                                  dice: x['ImagesTitles'][0],
+                                                                  myList: null,
+                                                                  index: index,
+                                                                  src: x['ImageUrl']  [0],
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                          child: Image.network(
+                                                            x['ImageUrl'][0], width: 100,
+                                                          ))),
+                                            ),
+                                          )
+                                        }
+                                }),
+                            myWidgetList.add(
+                              Container(
+                                child: Wrap(
+                                    // mainAxisAlignment: MainAxisAlignment.start,
+                                    children: myMaha),
                               ),
-                          ),
-                        ),
-                        myMaha = []
-                      });
+                            ),
+                            myMaha = []
+                          });
 
-                  return Column(children: myWidgetList);
-                })));
+                      return Column(children: myWidgetList);
+                    })));
   }
 }

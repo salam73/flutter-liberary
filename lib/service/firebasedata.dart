@@ -12,14 +12,23 @@ class FireBaseData extends StatefulWidget {
 }
 
 class _FireBaseDataState extends State<FireBaseData> {
-  final List<Widget> _dataListWidget = List<Widget>();
-  List<Widget> _dataListWidget2 = List<Widget>();
+  List<Widget> _dataListWidget = List<Widget>();
+  //List<Widget> _dataListWidget2 = List<Widget>();
 
   @override
   void initState() {
     getFirebaseData();
     super.initState();
   }
+
+  
+
+  @override
+  void dispose() {
+    _dataListWidget=[];
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +48,7 @@ class _FireBaseDataState extends State<FireBaseData> {
                       color: Colors.white,
                       fontSize: 16.0,
                     )),
-                background: Image.network(
-                  'https://images.pexels.com/photos/443356/pexels-photo-443356.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+                background: Image.asset('assets/home.jpg',
                   fit: BoxFit.cover,
                 )),
             floating: false,
@@ -127,7 +135,7 @@ class _FireBaseDataState extends State<FireBaseData> {
     );
   }
 
-  
+
 
   /* List<Widget> _sliverList(int size, int sliverChildCount) {
     var widgetList = List<Widget>();
@@ -152,7 +160,7 @@ class _FireBaseDataState extends State<FireBaseData> {
     return widgetList;
   } */
 
-  getFirebaseData() async {
+  Future getFirebaseData() async {
     List pariList = [];
     List itemList = [];
     List arrayitemList = [];
@@ -162,9 +170,9 @@ class _FireBaseDataState extends State<FireBaseData> {
         .getDocuments();
 
     snapshot.documents.forEach((DocumentSnapshot doc) {
-      setState(() {
+     /*  setState(() {
         pariList.add(doc['Type']);
-      });
+      }); */
     });
 
     var distinctIds = pariList.toSet().toList();
@@ -180,9 +188,12 @@ class _FireBaseDataState extends State<FireBaseData> {
     print(arrayitemList);
 
     snapshot.documents.forEach((DocumentSnapshot doc) {
+      if (!mounted) return;
       setState(() {
-        _dataListWidget.add(Column(
+        _dataListWidget.add(Column (
+
           children: <Widget>[
+            
             Text("كتب " + doc["Type"]),
             Container(
               padding: EdgeInsets.only(bottom: 15),
@@ -217,12 +228,7 @@ class _FireBaseDataState extends State<FireBaseData> {
             ),
           ],
         ));
-        /*  mm.add(Column(
-          children: <Widget>[
-            Text(doc["title"]),
-            Text(doc["pris"]),
-          ],
-        )); */
+       
       });
     });
   }
