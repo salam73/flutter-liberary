@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
@@ -22,9 +23,18 @@ class ScreenTwo extends StatelessWidget {
         ),
         backgroundColor: Colors.deepPurpleAccent,
       ),
-      body: Image.network(
-            src,
-          ),
+      body: 
+      
+       Center(
+         child: CachedNetworkImage(
+                  imageUrl: src,
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                //  width: 100,
+                ),
+       )
+      
+      
     );
   }
 }

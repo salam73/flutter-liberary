@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -59,18 +60,6 @@ class _ExpandableListViewState extends State<ExpandableListView> {
           //  print(   mysalamList.every((f)=>f['Type'] == m));
 
           typeItemArray.add(f);
-
-          // typeItemArray.add(f);
-
-          /* setState(() {
-            myWidgetList.add(
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(f['profileName']),
-              ),
-            );
-          }); */
-
         } else {
           return;
         }
@@ -95,6 +84,25 @@ class _ExpandableListViewState extends State<ExpandableListView> {
     super.dispose();
   }
 
+  @override
+  Iterable<T> merge<T>(Iterable<T> c1, Iterable<T> c2) sync* {
+    var it1 = c1.iterator;
+    var it2 = c2.iterator;
+    var active = true;
+    while (active) {
+      active = false;
+      if (it1.moveNext()) {
+        active = true;
+        yield it1.current;
+      }
+
+      if (it2.moveNext()) {
+        active = true;
+        yield it2.current;
+      }
+    }
+  }
+
   List<Widget> listWidget({List data}) {
     myList = [];
     //List<dynamic> myHani=data.removeAt(0);
@@ -104,42 +112,64 @@ class _ExpandableListViewState extends State<ExpandableListView> {
         myList.add(Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            Text(f['ImagesTitles'][0].toString(),
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.red,
-                )),
-            Image.network(
-              f['ImageUrl'][0].toString(),
-              width: 150,
+            Text(
+              f['ImagesTitles'][0].toString(),
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.red,
+              ),
+              textDirection: TextDirection.rtl,
             ),
+            CachedNetworkImage(
+              imageUrl: f['ImageUrl'][0].toString(),
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+              width: 150,
+            )
           ],
         ));
       else {
         Map<String, dynamic> salam = f;
+
+        List<Widget> WrapText = [];
+        List<Widget> WrapImage = [];
+        List<Widget> WrapTextImage = [];
+
         salam.forEach((i, d) {
           //print(d.runtimeType);
-          if (i == 'ImagesTitles') {
+
+          if (i == 'ImageUrl') {
             List m = d.toList();
             m.forEach((g) {
-              myList.add(Text(g.toString()));
-            });
-          }
-          if (i == 'ImageUrl' ) {
-            List<Widget> mdd = [];
-            List m = d.toList();
-            m.forEach((g) {
-              mdd.add(Image.network(
-                g.toString(),
+              WrapImage.add(CachedNetworkImage(
+                imageUrl: g.toString(),
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
                 width: 100,
               ));
             });
+          }
 
-            myList.add(
-              Wrap(children: mdd),
-            );
+          if (i == 'ImagesTitles') {
+            List m = d.toList();
+            m.forEach((g) {
+              WrapText.add(
+                RotatedBox(
+                  quarterTurns: -1,
+                  child: Text(g.toString()),
+                ),
+              );
+            });
+
+            //WrapTextImage.add(Text())
           }
         });
+
+        WrapTextImage = merge(WrapImage, WrapText).toList();
+
+        myList.add(
+          Wrap(children: WrapTextImage),
+        );
       }
     });
 
@@ -156,7 +186,10 @@ class _ExpandableListViewState extends State<ExpandableListView> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Expandable ListView Example'),
+          title: Text(
+            'تصنيف الكتب عن طريق الأقسام',
+            textDirection: TextDirection.rtl,
+          ),
         ),
         body: ListView(children: myListTitle));
   }

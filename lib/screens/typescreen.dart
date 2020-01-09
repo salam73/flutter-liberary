@@ -1,11 +1,11 @@
 import 'package:bookhouse2/screens/screentwo.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:incrementally_loading_listview/incrementally_loading_listview.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 final usersRef = Firestore.instance.collection('library');
-
-
 
 class Tyepscreen extends StatefulWidget {
   @override
@@ -13,8 +13,8 @@ class Tyepscreen extends StatefulWidget {
 }
 
 class _TyepscreenState extends State<Tyepscreen> {
-List textItem = [];
-List m = [];
+  List textItem = [];
+  List m = [];
 
   List<Widget> myWidgetList = [];
   List<Widget> myMaha = [];
@@ -107,6 +107,7 @@ List m = [];
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: 150),
       child: ListView.builder(
+        // itemExtent: 100,
         reverse: true,
         scrollDirection: Axis.horizontal,
         itemCount: doc['ImageUrl'].toList().length,
@@ -116,35 +117,26 @@ List m = [];
             child: Row(
               children: <Widget>[
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ScreenTwo(
-                          dice: doc['ImagesTitles'][index],
-                          myList: null,
-                          index: index,
-                          src: doc['ImageUrl'][index],
-                        ),
-                      ),
-                    );
-                  },
-                  child: Image.network(
-                    doc['ImageUrl'][index],
-                    loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes
-                              : null,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ScreenTwo(
+                            dice: doc['ImagesTitles'][index],
+                            myList: null,
+                            index: index,
+                            src: doc['ImageUrl'][index],
+                          ),
                         ),
                       );
                     },
-                  ),
-                ),
+                    child: CachedNetworkImage(
+                      imageUrl: doc['ImageUrl'][index],
+                      placeholder: (context, url) =>
+                          CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                      width: 100,
+                    )),
                 RotatedBox(
                   quarterTurns: -1,
                   child: Text(
@@ -163,12 +155,12 @@ List m = [];
 
   @override
   Widget build(BuildContext context) {
-   // myWidgetList = [];
+    myWidgetList = [];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('books'),
-      ),
+        appBar: AppBar(
+          title: Text('books'),
+        ),
         body: mysetList.length < 1
             ? Center(
                 child: Container(
@@ -177,6 +169,7 @@ List m = [];
               )
             : Center(
                 child: ListView.builder(
+
                     itemCount: 1,
                     itemBuilder: (BuildContext ctxt, int index) {
                       mysetList.asMap().forEach((index2, f) => {
@@ -187,8 +180,9 @@ List m = [];
                                           myWidgetList.add(
                                             Container(
                                               padding: EdgeInsets.all(10),
-                                              color: Colors.lightBlue[
-                                                  100 * (index2 % 9)],
+                                              /*color: Colors.lightBlue[
+                                                  100 * (index2 % 9)],*/
+                                              color:Colors.lightGreen,
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
@@ -196,7 +190,7 @@ List m = [];
                                                   Text(
                                                     x.toString(),
                                                     style: TextStyle(
-                                                      fontSize: 30,
+                                                      fontSize: 30, color: Colors.white
 
                                                       // color: Colors.grey[100 * (index2 % 9)],
                                                     ),
@@ -209,15 +203,16 @@ List m = [];
                                       : {
                                           myMaha.add(
                                             Container(
-                                              color: Colors
-                                                  .lightBlue[100 * (i % 9)],
+                                            /*  color: Colors
+                                                  .lightBlue[100 * (i % 9)],*/
                                               // color: Colors.grey,
                                               child: Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: x["ImageUrl"]
                                                               .toList()
-                                                              .length > 1
+                                                              .length >
+                                                          1
                                                       ? Column(
                                                           children: <Widget>[
                                                               Text('سلسلة كتب عدد: ' +
@@ -232,17 +227,27 @@ List m = [];
                                                             Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                builder: (context) => ScreenTwo(
-                                                                  dice: x['ImagesTitles'][0],
+                                                                builder:
+                                                                    (context) =>
+                                                                        ScreenTwo(
+                                                                  dice:
+                                                                      x['ImagesTitles']
+                                                                          [0],
                                                                   myList: null,
                                                                   index: index,
-                                                                  src: x['ImageUrl']  [0],
+                                                                  src:
+                                                                      x['ImageUrl']
+                                                                          [0],
                                                                 ),
                                                               ),
                                                             );
                                                           },
-                                                          child: Image.network(
-                                                            x['ImageUrl'][0], width: 100,
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            imageUrl: x['ImageUrl'] [0],
+                                                            placeholder: (context, url) => CircularProgressIndicator(),
+                                                            errorWidget: (context, url, error) =>Icon(Icons.error),
+                                                            width: 100,
                                                           ))),
                                             ),
                                           )

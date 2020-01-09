@@ -1,4 +1,5 @@
 import 'package:bookhouse2/screens/screentwo.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -103,21 +104,15 @@ class _FireBaseDataState extends State<FireBaseData> {
                       ),
                     );
                   },
-                  child: Image.network(
-                    doc['ImageUrl'][index],
-                    loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes
-                              : null,
-                        ),
-                      );
-                    },
-                  ),
+                  child:  CachedNetworkImage(
+                              imageUrl: doc['ImageUrl'][index],
+                              placeholder: (context, url) => CircularProgressIndicator(),
+                              errorWidget: (context, url, error) => Icon(Icons.error),
+                              width: 100,
+                          ),
+
+
+
                 ),
                 RotatedBox(
                   quarterTurns: -1,
@@ -137,28 +132,6 @@ class _FireBaseDataState extends State<FireBaseData> {
 
 
 
-  /* List<Widget> _sliverList(int size, int sliverChildCount) {
-    var widgetList = List<Widget>();
-    for (int index = 0; index < size; index++)
-      widgetList
-        ..add(SliverAppBar(
-          title: Text("Title $index"),
-          pinned: true,
-        ))
-        ..add(SliverFixedExtentList(
-          itemExtent: 50.0,
-          delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-            return Container(
-              alignment: Alignment.center,
-              color: Colors.lightBlue[100 * (index % 9)],
-              child: Text('list item $index'),
-            );
-          }, childCount: sliverChildCount),
-        ));
-
-    return widgetList;
-  } */
 
   Future getFirebaseData() async {
     List pariList = [];
@@ -193,7 +166,7 @@ class _FireBaseDataState extends State<FireBaseData> {
         _dataListWidget.add(Column (
 
           children: <Widget>[
-            
+
             Text("كتب " + doc["Type"]),
             Container(
               padding: EdgeInsets.only(bottom: 15),
