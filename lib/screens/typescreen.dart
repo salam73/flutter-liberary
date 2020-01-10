@@ -105,17 +105,28 @@ class _TyepscreenState extends State<Tyepscreen> {
 
   Widget rowWidget({var doc}) {
     return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: 150),
+      constraints: BoxConstraints(maxHeight: 160),
       child: ListView.builder(
         // itemExtent: 100,
-        reverse: true,
+        reverse: false,
         scrollDirection: Axis.horizontal,
         itemCount: doc['ImageUrl'].toList().length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
             color: myColor(myString: doc['Type']),
+
             child: Row(
               children: <Widget>[
+
+                RotatedBox(
+                  quarterTurns: -1,
+                  child: Text(
+                    doc['ImagesTitles'][index],
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+
                 GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -137,14 +148,6 @@ class _TyepscreenState extends State<Tyepscreen> {
                       errorWidget: (context, url, error) => Icon(Icons.error),
                       width: 100,
                     )),
-                RotatedBox(
-                  quarterTurns: -1,
-                  child: Text(
-                    doc['ImagesTitles'][index],
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
               ],
             ),
           );
@@ -159,7 +162,7 @@ class _TyepscreenState extends State<Tyepscreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('books'),
+          title: Text('كتب متنوعة'),
         ),
         body: mysetList.length < 1
             ? Center(

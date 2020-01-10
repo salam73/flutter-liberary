@@ -22,14 +22,11 @@ class _FireBaseDataState extends State<FireBaseData> {
     super.initState();
   }
 
-  
-
   @override
   void dispose() {
-    _dataListWidget=[];
+    _dataListWidget = [];
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +46,8 @@ class _FireBaseDataState extends State<FireBaseData> {
                       color: Colors.white,
                       fontSize: 16.0,
                     )),
-                background: Image.asset('assets/home.jpg',
+                background: Image.asset(
+                  'assets/home.jpg',
                   fit: BoxFit.cover,
                 )),
             floating: false,
@@ -77,12 +75,10 @@ class _FireBaseDataState extends State<FireBaseData> {
   }
 
   Widget rowWidget({DocumentSnapshot doc}) {
-   
-
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: 150),
       child: ListView.builder(
-        reverse: true,
+        reverse: false,
         scrollDirection: Axis.horizontal,
         itemCount: doc['ImageUrl'].toList().length,
         itemBuilder: (BuildContext context, int index) {
@@ -90,6 +86,16 @@ class _FireBaseDataState extends State<FireBaseData> {
             color: myColor(myString: doc['Type']),
             child: Row(
               children: <Widget>[
+                RotatedBox(
+                  quarterTurns: -1,
+                  child: Text(
+                    doc['ImagesTitles'][index],
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+
+
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -104,24 +110,14 @@ class _FireBaseDataState extends State<FireBaseData> {
                       ),
                     );
                   },
-                  child:  CachedNetworkImage(
-                              imageUrl: doc['ImageUrl'][index],
-                              placeholder: (context, url) => CircularProgressIndicator(),
-                              errorWidget: (context, url, error) => Icon(Icons.error),
-                              width: 100,
-                          ),
-
-
-
-                ),
-                RotatedBox(
-                  quarterTurns: -1,
-                  child: Text(
-                    doc['ImagesTitles'][index],
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(color: Colors.white),
+                  child: CachedNetworkImage(
+                    imageUrl: doc['ImageUrl'][index],
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    width: 100,
                   ),
                 ),
+
               ],
             ),
           );
@@ -129,9 +125,6 @@ class _FireBaseDataState extends State<FireBaseData> {
       ),
     );
   }
-
-
-
 
   Future getFirebaseData() async {
     List pariList = [];
@@ -143,7 +136,7 @@ class _FireBaseDataState extends State<FireBaseData> {
         .getDocuments();
 
     snapshot.documents.forEach((DocumentSnapshot doc) {
-     /*  setState(() {
+      /*  setState(() {
         pariList.add(doc['Type']);
       }); */
     });
@@ -163,37 +156,46 @@ class _FireBaseDataState extends State<FireBaseData> {
     snapshot.documents.forEach((DocumentSnapshot doc) {
       if (!mounted) return;
       setState(() {
-        _dataListWidget.add(Column (
+        _dataListWidget.add(
+            Column(
 
-          children: <Widget>[
-
+             children: <Widget>[
             Text("كتب " + doc["Type"]),
             Container(
               padding: EdgeInsets.only(bottom: 15),
               child: doc["ImageUrl"].toList().length > 1
                   ? rowWidget(doc: doc)
                   : Row(
+
                       children: <Widget>[
                         Expanded(
-                          flex: 3,
+                          flex: 5,
                           child: Column(
                             children: <Widget>[
-                              Text(
+                             /* Text(
                                 doc["pris"],
                                 style: TextStyle(fontSize: 20),
-                              ),
-                              Text(
-                                doc["title"],
-                                style: GoogleFonts.almarai(fontSize: 20),
-                                textDirection: TextDirection.rtl,
+                              ),*/
+                              Padding(
+                                padding: const EdgeInsets.only(right:8.0),
+                                child: Text(
+                                  doc["title"],
+                                  style: GoogleFonts.almarai(fontSize: 20),
+                                  textDirection: TextDirection.rtl,
+                                ),
                               ),
                             ],
                           ),
                         ),
                         Expanded(
-                          flex: 5,
-                          child: Image.network(
-                            doc["ImageUrl"][0].toString(),
+                          flex: 6,
+                          child: CachedNetworkImage(
+                            imageUrl: doc["ImageUrl"][0].toString(),
+                            placeholder: (context, url) =>
+                                CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
+                            width: 100,
                           ),
                         ),
                       ],
@@ -201,7 +203,6 @@ class _FireBaseDataState extends State<FireBaseData> {
             ),
           ],
         ));
-       
       });
     });
   }

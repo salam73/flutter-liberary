@@ -1,3 +1,4 @@
+import 'package:bookhouse2/screens/NotUpdate.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -257,17 +258,8 @@ class SearchScreen extends StatelessWidget {
                 )
               ],
             ),
-            body: Column(
-              children: <Widget>[
-               //delete items
-              /*   Expanded(
-                  child: Container(
-                      child: ListView(
-                    children: children,
-                  )),
-                ), */
-              ],
-            ),
+            body:
+            ExpandableListView()
           );
         });
   }

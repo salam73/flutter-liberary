@@ -13,13 +13,19 @@ void main() {
   runApp(
 
       MaterialApp(
+
     debugShowCheckedModeBanner: false,
     title: 'Book house',
     theme: ThemeData(
       primaryColor: Colors.red,
       //scaffoldBackgroundColor: Color(0xffffde03),
     ),
-    home: Home()//SplashScreen(),
+    home: Directionality(
+      textDirection: TextDirection.rtl,
+
+        child:Home()
+      //SplashScreen(),
+    )
 
     //home: Search(),
   ));

@@ -4,35 +4,25 @@ import 'package:flutter/material.dart';
 
 final usersRef = Firestore.instance.collection('library');
 
-class ExpandableListView extends StatefulWidget {
-  /* static final List<String> _listViewData = [
-    "Inducesmile.com",
-    "Flutter Dev",
-    "Android Dev",
-    "iOS Dev!",
-    "React Native Dev!",
-    "React Dev!",
-    "express Dev!",
-    "Laravel Dev!",
-    "Angular Dev!",
-  ]; */
+List<Widget> wrapTextImage = [];
 
+class ExpandableListView extends StatefulWidget {
   @override
   _ExpandableListViewState createState() => _ExpandableListViewState();
 }
 
 class _ExpandableListViewState extends State<ExpandableListView> {
-  List dataList = [];
+  List FB_dataList = [];
   List sortTypeArray = [];
   List typeItemArray = [];
   List widgetItemArray = [];
-  List mysetList = [];
-  List mysetListTitle = [];
+  List setList = [];
+  List setListTitle = [];
   List<Widget> myList;
 
-  List<ExpansionTile> myListTitle;
+  List<ExpansionTile> _WidgetExpansionTile;
 
-  getFirebaseData() async {
+  loadingData() async {
 //print(itemsTypeArray);
 
     final QuerySnapshot snapshot = await usersRef
@@ -42,11 +32,11 @@ class _ExpandableListViewState extends State<ExpandableListView> {
 
     snapshot.documents.forEach((DocumentSnapshot doc) {
       setState(() {
-        dataList.add(doc.data);
+        FB_dataList.add(doc.data);
       });
     });
 
-    dataList.forEach((m) => {sortTypeArray.add(m['Type'])});
+    FB_dataList.forEach((m) => {sortTypeArray.add(m['Type'])});
 
     sortTypeArray =
         sortTypeArray.toSet().toList(); //remove duplicate items of list
@@ -55,10 +45,8 @@ class _ExpandableListViewState extends State<ExpandableListView> {
     sortTypeArray.forEach((m) {
       typeItemArray.add(m.toString());
 
-      dataList.forEach((f) {
+      FB_dataList.forEach((f) {
         if (f['Type'] == m) {
-          //  print(   mysalamList.every((f)=>f['Type'] == m));
-
           typeItemArray.add(f);
         } else {
           return;
@@ -69,12 +57,12 @@ class _ExpandableListViewState extends State<ExpandableListView> {
     });
     // print(widgetItemArray.toSet());
 
-    mysetList = widgetItemArray.toSet().toList();
+    setList = widgetItemArray.toSet().toList();
   }
 
   @override
   void initState() {
-    getFirebaseData();
+    loadingData();
 
     super.initState();
   }
@@ -103,14 +91,18 @@ class _ExpandableListViewState extends State<ExpandableListView> {
     }
   }
 
-  List<Widget> listWidget({List data}) {
+  List<Widget> listWidget({List data, String title}) {
     myList = [];
+
+    List<Widget> wrapTextWidget = [];
+
+    List<Widget> wrapImageWidget = [];
     //List<dynamic> myHani=data.removeAt(0);
 
     data.forEach((f) {
       if (f is Map<String, dynamic>) if (f['ImagesTitles'].length == 1)
         myList.add(Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Text(
               f['ImagesTitles'][0].toString(),
@@ -118,7 +110,7 @@ class _ExpandableListViewState extends State<ExpandableListView> {
                 fontSize: 25,
                 color: Colors.red,
               ),
-              textDirection: TextDirection.rtl,
+              // textDirection: TextDirection.rtl,
             ),
             CachedNetworkImage(
               imageUrl: f['ImageUrl'][0].toString(),
@@ -131,17 +123,28 @@ class _ExpandableListViewState extends State<ExpandableListView> {
       else {
         Map<String, dynamic> salam = f;
 
-        List<Widget> WrapText = [];
-        List<Widget> WrapImage = [];
-        List<Widget> WrapTextImage = [];
-
-        salam.forEach((i, d) {
+        salam.forEach((i, item) {
           //print(d.runtimeType);
-
-          if (i == 'ImageUrl') {
-            List m = d.toList();
+          if (i == 'ImagesTitles') {
+            List m = item.toList();
             m.forEach((g) {
-              WrapImage.add(CachedNetworkImage(
+              wrapTextWidget.add(
+                RotatedBox(
+                  quarterTurns: -1,
+                  child: Text(
+                    g.toString(),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              );
+            });
+
+            //WrapTextImage.add(Text())
+          }
+          if (i == 'ImageUrl') {
+            List m = item.toList();
+            m.forEach((g) {
+              wrapImageWidget.add(CachedNetworkImage(
                 imageUrl: g.toString(),
                 placeholder: (context, url) => CircularProgressIndicator(),
                 errorWidget: (context, url, error) => Icon(Icons.error),
@@ -149,29 +152,23 @@ class _ExpandableListViewState extends State<ExpandableListView> {
               ));
             });
           }
-
-          if (i == 'ImagesTitles') {
-            List m = d.toList();
-            m.forEach((g) {
-              WrapText.add(
-                RotatedBox(
-                  quarterTurns: -1,
-                  child: Text(g.toString()),
-                ),
-              );
-            });
-
-            //WrapTextImage.add(Text())
-          }
         });
-
-        WrapTextImage = merge(WrapImage, WrapText).toList();
-
-        myList.add(
-          Wrap(children: WrapTextImage),
-        );
       }
     });
+    wrapTextImage = merge(wrapTextWidget,wrapImageWidget).toList();
+
+    //ExpansionTile(title: Text('سلسلة كتب '+ title), children: wrapTextImage);
+    if (wrapTextImage.length > 1)
+      myList.add(
+          ExpansionTile(title: Text('سلسلة كتب ' + title), children: <Widget>[
+        Container(
+          height: 200.0,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: wrapTextImage,
+          ),
+        )
+      ]));
 
     return myList;
   }
@@ -179,9 +176,13 @@ class _ExpandableListViewState extends State<ExpandableListView> {
   @override
   Widget build(BuildContext context) {
     //if (myListTitle.length < 1)
-    myListTitle = mysetList
-        .map((data) => ExpansionTile(
-            title: Text(data[0].toString()), children: listWidget(data: data)))
+    _WidgetExpansionTile = setList
+        .map(
+          (data) => ExpansionTile(
+            title: Text(data[0].toString()),
+            children: listWidget(data: data, title: data[0].toString()),
+          ),
+        )
         .toList();
 
     return Scaffold(
@@ -191,6 +192,6 @@ class _ExpandableListViewState extends State<ExpandableListView> {
             textDirection: TextDirection.rtl,
           ),
         ),
-        body: ListView(children: myListTitle));
+        body: ListView(children: _WidgetExpansionTile));
   }
 }
