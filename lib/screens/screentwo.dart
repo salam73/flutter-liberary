@@ -25,13 +25,18 @@ class ScreenTwo extends StatelessWidget {
       ),
       body: 
       
-       Center(
-         child: CachedNetworkImage(
-                  imageUrl: src,
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                //  width: 100,
-                ),
+       Column(
+         children: <Widget>[
+           Center(
+             child: CachedNetworkImage(
+                      imageUrl: src,
+                      placeholder: (context, url) => CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    //  width: 100,
+                    ),
+           ),
+           Text(dice)
+         ],
        )
       
       

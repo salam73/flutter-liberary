@@ -9,6 +9,7 @@ import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:bookhouse2/service/firebasedata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'intro.dart';
 import 'typescreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -114,28 +115,32 @@ class _HomeState extends State<Home> {
             //Search(),
             //Splash(),
             //SplashScreen(),
-             ExpandableListView(),
-            Tyepscreen(),
-           // ExpansionTileSample(),
-           
-            //ParsingData(mysetList),
-            //ScreenImageOne(),
 
             FireBaseData(),
 
+
+            ExpandableListView(),
+
+            Tyepscreen(),
+            SearchScreen(),
+            // ExpansionTileSample(),
+
+            //ParsingData(mysetList),
+            //ScreenImageOne(),
+
+
+
             // Headerbar(),
 
-            SearchScreen(),
+
 
             HomeScreen(),
 
             MyListview(),
 
+           // IntroScreen(),
+
             FetchData(),
-
-            //FetchData()
-
-            // FetchData(),
           ],
         ),
       ),
@@ -145,17 +150,12 @@ class _HomeState extends State<Home> {
         activeColor: Theme.of(context).primaryColor,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.hot_tub),
-          ),
+              icon: Icon(Icons.home), title: Text('رئيسية')),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-          ),
+              icon: Icon(Icons.line_style), title: Text('أقسام')),
           BottomNavigationBarItem(
-            icon: Icon(Icons.library_books),
-          ),
-          BottomNavigationBarItem(
-            icon: Center(child: Icon(Icons.search)),
-          ),
+              icon: Icon(Icons.layers), title: Text('ترتيب')),
+          BottomNavigationBarItem(icon: Icon(Icons.search), title: Text('بحث')),
           BottomNavigationBarItem(
             icon: Icon(Icons.attachment),
           ),

@@ -33,17 +33,19 @@ class _FireBaseDataState extends State<FireBaseData> {
     List<Widget> mylist = [Column(children: _dataListWidget)];
 
     return Scaffold(
+
       body: CustomScrollView(
         slivers:
             // _sliverList(5, 10),
             <Widget>[
+              
           SliverAppBar(
             expandedHeight: 220.0,
             flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
                 title: Text('المكتبة العامة',
                     style: TextStyle(
-                      color: Colors.white,
+                      //color: Colors.white,
                       fontSize: 16.0,
                     )),
                 background: Image.asset(
@@ -83,7 +85,7 @@ class _FireBaseDataState extends State<FireBaseData> {
         itemCount: doc['ImageUrl'].toList().length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
-            color: myColor(myString: doc['Type']),
+           // color: myColor(myString: doc['Type']),
             child: Row(
               children: <Widget>[
                 RotatedBox(
@@ -91,7 +93,8 @@ class _FireBaseDataState extends State<FireBaseData> {
                   child: Text(
                     doc['ImagesTitles'][index],
                     textDirection: TextDirection.rtl,
-                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                    //style: TextStyle(color: Colors.white),
                   ),
                 ),
 
@@ -129,7 +132,7 @@ class _FireBaseDataState extends State<FireBaseData> {
   Future getFirebaseData() async {
     List pariList = [];
     List itemList = [];
-    List arrayitemList = [];
+   // List arrayitemList = [];
     final QuerySnapshot snapshot = await usersRef
         //  .where("Type", isEqualTo: "اطفال")
         .orderBy('Type')
@@ -149,9 +152,9 @@ class _FireBaseDataState extends State<FireBaseData> {
       itemList.add(doc);
     });
 
-    itemList.forEach((m) => {arrayitemList.add(m.data), print(arrayitemList)});
+    //itemList.forEach((m) => {arrayitemList.add(m.data), print(arrayitemList)});
 
-    print(arrayitemList);
+   // print(arrayitemList);
 
     snapshot.documents.forEach((DocumentSnapshot doc) {
       if (!mounted) return;
@@ -160,6 +163,7 @@ class _FireBaseDataState extends State<FireBaseData> {
             Column(
 
              children: <Widget>[
+               
             Text("كتب " + doc["Type"]),
             Container(
               padding: EdgeInsets.only(bottom: 15),

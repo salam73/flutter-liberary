@@ -55,10 +55,7 @@ class SearchScreen extends StatelessWidget {
       //  print (doc['ImagesTitles'][index])
     });
 
-
-
     for (String url in doc['ImageUrl']) {
-
       Widget img = Flexible(
         flex: 6,
         child: GestureDetector(
@@ -76,7 +73,6 @@ class SearchScreen extends StatelessWidget {
 
       images.add(img);
       ListImagesTitles.add(url);
-
     }
     for (String url in doc['ImagesTitles']) {
       //  Widget img = Image.network(url , width: 100, height: 100,);
@@ -113,15 +109,12 @@ class SearchScreen extends StatelessWidget {
 
   Column listofColumn(doc) {
     return Column(
-
       children: <Widget>[
         Column(
-
           children: <Widget>[
             Container(
               alignment: Alignment.centerRight,
               padding: EdgeInsets.only(right: 10),
-
               child: Text(
                 'العنوان:${doc['title']}',
                 textAlign: TextAlign.right,
@@ -140,30 +133,28 @@ class SearchScreen extends StatelessWidget {
           ],
         ),
         Container(
-          color: Colors.black12,
+            color: Colors.black12,
             // alignment: Alignment.topLeft,
 
             child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: listToImags(doc),
-          ),
-        ))
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: listToImags(doc),
+              ),
+            ))
       ],
     );
   }
+
   Column listofColumnWinthouImage(doc) {
     return Column(
-
       children: <Widget>[
         Column(
-
           children: <Widget>[
             Container(
               alignment: Alignment.centerRight,
               padding: EdgeInsets.only(right: 10),
-
               child: Text(
                 'العنوان:${doc['title']}',
                 textAlign: TextAlign.right,
@@ -181,7 +172,7 @@ class SearchScreen extends StatelessWidget {
             ),
           ],
         ),
-       /*  Container(
+        /*  Container(
           color: Colors.black12,
             // alignment: Alignment.topLeft,
 
@@ -246,27 +237,24 @@ class SearchScreen extends StatelessWidget {
               .toList();
 
           return Scaffold(
-            appBar: AppBar(
-              title: Text('قائمة الكتب'),
-              backgroundColor: Colors.green,
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                    showSearch(context: context, delegate: SearchBook());
-                  },
-                )
-              ],
-            ),
-            body:
-            ExpandableListView()
-          );
+              appBar: AppBar(
+                title: Text('البحث عن كتاب'),
+                backgroundColor: Colors.green,
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      showSearch(context: context, delegate: SearchBook());
+                    },
+                  )
+                ],
+              ),
+              body: ExpandableListView());
         });
   }
 }
 
 class SearchBook extends SearchDelegate<Widget> {
-
   SearchScreen myClassRefrance = SearchScreen();
 
   @override
@@ -314,7 +302,7 @@ class SearchBook extends SearchDelegate<Widget> {
           }
 
           //final resualt= usersRef.snapshots().data.where((a) => a.title.toLowerCase().contains('f'));
-          
+
           final List<Column> children = snapshot.data.documents
               .where((a) => (a['ImagesTitles'].toList().length > 1)
                   ? myClassRefrance._getQuery(
@@ -328,7 +316,7 @@ class SearchBook extends SearchDelegate<Widget> {
                 (doc) => myClassRefrance.listofColumn(doc),
               )
               .toList();
-         
+
           return ListView(
             children: children,
           );
@@ -359,12 +347,16 @@ class SearchBook extends SearchDelegate<Widget> {
                 (doc) => myClassRefrance.listofColumnWinthouImage(doc),
               )
               .toList();
- if(query.length>0)
-          return ListView(
-            children: children,
-          );
-          return Text(
-           'هل تبحث عن كتب في مجال', textDirection: TextDirection.rtl, textAlign: TextAlign.start,
+          if (query.length > 0)
+            return ListView(
+              children: children,
+            );
+          return Center(
+            child: Text(
+              'اكتب اسم الكتاب أو اسم المؤالف',
+              textDirection: TextDirection.rtl,
+              textAlign: TextAlign.start,
+            ),
           );
         });
   }
