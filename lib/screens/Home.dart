@@ -191,7 +191,6 @@ class _HomeState extends State<Home> {
             //Splash(),
             //SplashScreen(),
 
-
             FireBaseData(
               dbList: dataList,
             ),
