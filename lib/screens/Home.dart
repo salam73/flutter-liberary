@@ -196,6 +196,7 @@ class _HomeState extends State<Home> {
               dbList: dataList,
             ),
             Tyepscreen(dbList: dataList),
+
             ExpandableListView(),
 
             IntroScreen(
