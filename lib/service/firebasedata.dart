@@ -8,6 +8,11 @@ import 'package:google_fonts/google_fonts.dart';
 final usersRef = Firestore.instance.collection('library');
 
 class FireBaseData extends StatefulWidget {
+
+  final List dbList;
+
+  const FireBaseData({Key key, this.dbList}) : super(key: key);
+
   @override
   _FireBaseDataState createState() => _FireBaseDataState();
 }
@@ -18,8 +23,9 @@ class _FireBaseDataState extends State<FireBaseData> {
 
   @override
   void initState() {
-    getFirebaseData();
+
     super.initState();
+
   }
 
   @override
@@ -30,38 +36,17 @@ class _FireBaseDataState extends State<FireBaseData> {
 
   @override
   Widget build(BuildContext context) {
+
+    getFirebaseData(widget.dbList);
+
+
     List<Widget> mylist = [Column(children: _dataListWidget)];
 
-    return Scaffold(
-
-      body: CustomScrollView(
-        slivers:
-            // _sliverList(5, 10),
-            <Widget>[
-              
-          SliverAppBar(
-            expandedHeight: 220.0,
-            flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Text('المكتبة العامة',
-                    style: TextStyle(
-                      //color: Colors.white,
-                      fontSize: 16.0,
-                    )),
-                background: Image.asset(
-                  'assets/home.jpg',
-                  fit: BoxFit.cover,
-                )),
-            floating: false,
-            pinned: true,
-            snap: false,
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(mylist),
-          ),
-        ],
-      ),
-    );
+    return
+      ListView(
+        children: mylist,
+      )
+      ;
   }
 
   Color myColor({String myString}) {
@@ -76,16 +61,17 @@ class _FireBaseDataState extends State<FireBaseData> {
       return Colors.black;
   }
 
-  Widget rowWidget({DocumentSnapshot doc}) {
+  Widget rowWidget({doc}) {
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: 150),
+
       child: ListView.builder(
         reverse: false,
         scrollDirection: Axis.horizontal,
         itemCount: doc['ImageUrl'].toList().length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
-           // color: myColor(myString: doc['Type']),
+            // color: myColor(myString: doc['Type']),
             child: Row(
               children: <Widget>[
                 RotatedBox(
@@ -97,8 +83,6 @@ class _FireBaseDataState extends State<FireBaseData> {
                     //style: TextStyle(color: Colors.white),
                   ),
                 ),
-
-
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -115,12 +99,11 @@ class _FireBaseDataState extends State<FireBaseData> {
                   },
                   child: CachedNetworkImage(
                     imageUrl: doc['ImageUrl'][index],
-                    placeholder: (context, url) => CircularProgressIndicator(),
+                    placeholder: (context, url) => Image.asset('assets/loading.gif'),
                     errorWidget: (context, url, error) => Icon(Icons.error),
                     width: 100,
                   ),
                 ),
-
               ],
             ),
           );
@@ -129,59 +112,32 @@ class _FireBaseDataState extends State<FireBaseData> {
     );
   }
 
-  Future getFirebaseData() async {
-    List pariList = [];
-    List itemList = [];
-   // List arrayitemList = [];
-    final QuerySnapshot snapshot = await usersRef
-        //  .where("Type", isEqualTo: "اطفال")
-        .orderBy('Type')
-        .getDocuments();
+   getFirebaseData(List dataList)  {
 
-    snapshot.documents.forEach((DocumentSnapshot doc) {
-      /*  setState(() {
-        pariList.add(doc['Type']);
-      }); */
-    });
 
-    var distinctIds = pariList.toSet().toList();
-    //  print(pariList);
-    //  print(distinctIds);
+    dataList.forEach((doc) {
 
-    snapshot.documents.forEach((DocumentSnapshot doc) {
-      itemList.add(doc);
-    });
 
-    //itemList.forEach((m) => {arrayitemList.add(m.data), print(arrayitemList)});
-
-   // print(arrayitemList);
-
-    snapshot.documents.forEach((DocumentSnapshot doc) {
-      if (!mounted) return;
-      setState(() {
         _dataListWidget.add(
             Column(
-
-             children: <Widget>[
-               
-            Text("كتب " + doc["Type"]),
+          children: <Widget>[
+            Text("كتب " + doc["Type"], style: GoogleFonts.almarai(fontSize: 15),),
             Container(
               padding: EdgeInsets.only(bottom: 15),
               child: doc["ImageUrl"].toList().length > 1
                   ? rowWidget(doc: doc)
                   : Row(
-
                       children: <Widget>[
                         Expanded(
                           flex: 5,
                           child: Column(
                             children: <Widget>[
-                             /* Text(
+                              /* Text(
                                 doc["pris"],
                                 style: TextStyle(fontSize: 20),
                               ),*/
                               Padding(
-                                padding: const EdgeInsets.only(right:8.0),
+                                padding: const EdgeInsets.only(right: 8.0),
                                 child: Text(
                                   doc["title"],
                                   style: GoogleFonts.almarai(fontSize: 20),
@@ -196,7 +152,7 @@ class _FireBaseDataState extends State<FireBaseData> {
                           child: CachedNetworkImage(
                             imageUrl: doc["ImageUrl"][0].toString(),
                             placeholder: (context, url) =>
-                                CircularProgressIndicator(),
+                                Image.asset('assets/loading.gif'),
                             errorWidget: (context, url, error) =>
                                 Icon(Icons.error),
                             width: 100,
@@ -207,7 +163,7 @@ class _FireBaseDataState extends State<FireBaseData> {
             ),
           ],
         ));
-      });
+
     });
   }
 }

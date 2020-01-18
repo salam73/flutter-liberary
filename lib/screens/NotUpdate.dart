@@ -49,7 +49,7 @@ class _ExpandableListViewState extends State<ExpandableListView> {
 //print(itemsTypeArray);
 
     final QuerySnapshot snapshot = await usersRef
-        //  .where("Type", isEqualTo: "اطفال")
+    //  .where("Type", isEqualTo: "اطفال")
         .orderBy('Type')
         .getDocuments();
 
@@ -133,7 +133,7 @@ class _ExpandableListViewState extends State<ExpandableListView> {
           children: <Widget>[
             CachedNetworkImage(
               imageUrl: f['ImageUrl'][0].toString(),
-              placeholder: (context, url) => CircularProgressIndicator(),
+              placeholder: (context, url) => Image.asset('assets/loading.gif'),
               errorWidget: (context, url, error) => Icon(Icons.error),
               width: 150,
             ),
@@ -154,7 +154,7 @@ class _ExpandableListViewState extends State<ExpandableListView> {
         Map<String, dynamic> multilistItem = f;
 
         multilistItem.forEach((i, item) //loop for multiitem list
-            {
+        {
           //print(d.runtimeType);
           if (i == 'ImagesTitles') {
             List m = item.toList();
@@ -214,7 +214,7 @@ class _ExpandableListViewState extends State<ExpandableListView> {
 
       child2 = map<Widget>(
         childitem2,
-        (index, i) {
+            (index, i) {
           return Container(
             margin: EdgeInsets.all(5.0),
             child: ClipRRect(
@@ -237,7 +237,7 @@ class _ExpandableListViewState extends State<ExpandableListView> {
                       ),
                     ),
                     padding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                     child: Text(
                       '${index + 1}',
                       style: TextStyle(
@@ -265,8 +265,8 @@ class _ExpandableListViewState extends State<ExpandableListView> {
     // if (wrapTextImage.length > 1)
     onelistItem.add(
 
-        // very important to make subExpansionTile
-        /* ExpansionTile(title: Text('سلسلة كتب ' + title), children: <Widget>[
+      // very important to make subExpansionTile
+      /* ExpansionTile(title: Text('سلسلة كتب ' + title), children: <Widget>[
               Container(
                 height: 150 * wrapListImageWidget.length.toDouble(),
                 child: ListView(
@@ -278,35 +278,35 @@ class _ExpandableListViewState extends State<ExpandableListView> {
               )
             ])*/
         Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 12.0),
-              child: Text(
-                'كتب',
-                style: TextStyle(fontSize: 18),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(right: 12.0),
+                  child: Text(
+                    'كتب',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12.0),
+                  child: Text(
+                    'المزيد',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                )
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12.0),
-              child: Text(
-                'المزيد',
-                style: TextStyle(fontSize: 18),
-              ),
+
+            // wrapListImageWidgetColumn
+            Column(
+              children: wrapListImageWidgetColumn,
             )
           ],
-        ),
 
-        // wrapListImageWidgetColumn
-        Column(
-          children: wrapListImageWidgetColumn,
-        )
-      ],
-
-      // children: wrapListImageWidgetColumn,
-    ));
+          // children: wrapListImageWidgetColumn,
+        ));
 
     return onelistItem;
   }
@@ -317,32 +317,30 @@ class _ExpandableListViewState extends State<ExpandableListView> {
     _WidgetExpansionTile = setList
         .map(
           (data) => ExpansionTile(
-            title: Text(data[0].toString()),
-            children: listWidget(data: data, title: data[0].toString()),
-          ),
-        )
+        title: Text(data[0].toString()),
+        children: listWidget(data: data, title: data[0].toString()),
+      ),
+    )
         .toList();
 
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'تصنيف الكتب عن طريق الأقسام',
-            textDirection: TextDirection.rtl,
-          ),
-        ),
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              //flex: 1,
-              child: ListView(children: <Widget>[
-                SliderShow(),
+    return Column(
+      children: <Widget>[
+        Expanded(
+          //flex: 1,
+          child: ListView(children: <Widget>[
+            //   SliderShow(),
+            Column(
+              children: <Widget>[
+                Text('Hello'),
                 Column(
                   children: _WidgetExpansionTile,
-                )
-              ]),
-            ),
-          ],
-        ));
+                ),
+              ],
+            )
+          ]),
+        ),
+      ],
+    );
 
     /*  CarouselSlider(
                 height: 400.0,

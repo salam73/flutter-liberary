@@ -4,21 +4,19 @@ import 'package:flutter/material.dart';
 
 final usersRef = Firestore.instance.collection('library');
 
+class GetFBD  {
 
-class GetFBD extends StatelessWidget {
-  const GetFBD({Key key}) : super(key: key);
+final List mylist;
+
+GetFBD(this.mylist);
+ 
+
+ 
 
 
+   //return   FB_dataList;
 
-  @override
-  Widget build(BuildContext context) {
- getData()async{
   
-   
-}
 
-getData();
-
-    return Mysearch();
-  }
+ 
 }

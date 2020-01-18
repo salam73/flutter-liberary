@@ -30,7 +30,7 @@ class ScreenTwo extends StatelessWidget {
            Center(
              child: CachedNetworkImage(
                       imageUrl: src,
-                      placeholder: (context, url) => CircularProgressIndicator(),
+                      placeholder: (context, url) => Image.asset('assets/loading.gif'),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                     //  width: 100,
                     ),

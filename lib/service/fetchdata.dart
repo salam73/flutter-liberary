@@ -65,7 +65,7 @@ class _FetchDataState extends State<FetchData> {
               _myItems.add(parts[1]);
             }
 
-            print('$fieldName ------- $fieldValue');
+           // print('$fieldName ------- $fieldValue');
             listOfItem.add(fieldValue);
           }
         }
@@ -116,11 +116,11 @@ class _FetchDataState extends State<FetchData> {
   createUserInFireCloud({List<String> userName}) async {
     await usersRef.document().setData({
       "title": userName[0].trim(),
-      "profileName": userName[1].trim(),
+      /* "profileName": userName[1].trim(),
       "pris": userName[2].trim(),
-      "pages": userName[3].trim(),
-      "Type": userName[4].trim(),
-      "Time": userName[5],
+      "pages": userName[3].trim(), */
+      "Type": userName[1].trim(),
+      "Time": userName[2],
       "ImageUrl": userName[6],
     });
   }
@@ -129,16 +129,41 @@ class _FetchDataState extends State<FetchData> {
       {List<String> userName,
       List<String> listImages,
       List<String> listTitles}) async {
+
+        if(userName.length<4)
     await usersRef.document().setData({
-      "title": userName[0].trim(),
+   
+      
+    "title": userName[0].trim(),
+    "profileName": '',
+      "pris": '',
+      "pages": '', 
+
+      "Type": userName[1].trim(),
+      "Time": userName[2],
+      "ImageUrl": listImages,
+      "ImagesTitles": listTitles
+      
+      
+    });
+
+else
+await usersRef.document().setData({
+   
+      
+    "title": userName[0].trim(),
       "profileName": userName[1].trim(),
       "pris": userName[2].trim(),
-      "pages": userName[3].trim(),
+      "pages": userName[3].trim(), 
       "Type": userName[4].trim(),
       "Time": userName[5],
       "ImageUrl": listImages,
       "ImagesTitles": listTitles
+      
+      
     });
+
+
   }
 
   deletData() {

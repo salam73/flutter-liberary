@@ -5,6 +5,7 @@ import 'package:bookhouse2/screens/homescreen.dart';
 import 'package:bookhouse2/screens/parsingdata.dart';
 import 'package:bookhouse2/screens/screenimageone.dart';
 import 'package:bookhouse2/screens/searchscreen.dart';
+import 'package:bookhouse2/screens/slider.dart';
 import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:bookhouse2/service/firebasedata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -36,6 +37,8 @@ class _HomeState extends State<Home> {
   PageController pageController;
   int pageIndex = 0;
 
+  String _title='رئيسية';
+
   getFirebaseData() async {
     final QuerySnapshot snapshot = await usersRef
         //  .where("Type", isEqualTo: "اطفال")
@@ -48,7 +51,7 @@ class _HomeState extends State<Home> {
       });
     });
 
-    dataList.forEach((m) => {sortTypeArray.add(m['Type'])});
+   /*  dataList.forEach((m) => {sortTypeArray.add(m['Type'])});
 
     sortTypeArray =
         sortTypeArray.toSet().toList(); //remove duplicate items of list
@@ -71,7 +74,7 @@ class _HomeState extends State<Home> {
     });
     // print(widgetItemArray.toSet());
 
-    mysetList = widgetItemArray.toSet().toList();
+    mysetList = widgetItemArray.toSet().toList(); */
   }
 
   @override
@@ -94,6 +97,19 @@ class _HomeState extends State<Home> {
   onPageChanged(int pageIndex) {
     setState(() {
       this.pageIndex = pageIndex;
+
+switch(pageIndex) { 
+       case 0: { _title = 'رئيسية'; } 
+       break; 
+       case 1: { _title = 'أقسام'; } 
+       break;
+       case 2: { _title = 'ترتيب'; } 
+       break;
+       case 3: { _title = 'بحث'; } 
+       break;
+     
+      } 
+
     });
   }
 
@@ -104,6 +120,65 @@ class _HomeState extends State<Home> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(_title),
+
+        actions: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                     
+                    },
+                  )
+                ],
+      ),
+
+drawer:Drawer(
+  // Add a ListView to the drawer. This ensures the user can scroll
+  // through the options in the drawer if there isn't enough vertical
+  // space to fit everything.
+  child: ListView(
+    // Important: Remove any padding from the ListView.
+    padding: EdgeInsets.zero,
+    children: <Widget>[
+      DrawerHeader(
+        child: Text('المكتبة', style: TextStyle(color: Colors.white, fontSize: 30),),
+        decoration: BoxDecoration(
+          color: Colors.purple,
+        ),
+      ),
+      ListTile(
+        title: Text('عن المكتبة'),
+        onTap: () {
+          // Update the state of the app.
+          // ...
+        },
+      ),
+      ListTile(
+        title: Text('العنوان'),
+        onTap: () {
+          // Update the state of the app.
+          // ...
+        },
+      ),
+      ListTile(
+        title: Text('الأقسام'),
+        onTap: () {
+          // Update the state of the app.
+          // ...
+        },
+      ),
+      ListTile(
+        title: Text('اتصل بنا'),
+        onTap: () {
+          // Update the state of the app.
+          // ...
+        },
+      ),
+    ],
+  ),
+),
+
       body: SafeArea(
         child: PageView(
           controller: pageController,
@@ -116,29 +191,30 @@ class _HomeState extends State<Home> {
             //Splash(),
             //SplashScreen(),
 
-            FireBaseData(),
-
-
+            Tyepscreen(dbList: dataList),
+            FireBaseData(dbList: dataList,),
             ExpandableListView(),
 
-            Tyepscreen(),
+           IntroScreen(dbList: dataList,),
+            //SliderShow(dbList: dataList,),
+
+
+
             SearchScreen(),
+
+
             // ExpansionTileSample(),
 
             //ParsingData(mysetList),
             //ScreenImageOne(),
 
-
-
             // Headerbar(),
-
-
 
             HomeScreen(),
 
-            MyListview(),
+            // MyListview(),
 
-           // IntroScreen(),
+            // IntroScreen(),
 
             FetchData(),
           ],
@@ -167,6 +243,9 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
+    
+  
+    
     );
   }
 }

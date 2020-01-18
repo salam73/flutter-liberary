@@ -249,7 +249,9 @@ class SearchScreen extends StatelessWidget {
                   )
                 ],
               ),
-              body: ExpandableListView());
+              body: Text('salam')
+              // ExpandableListView()
+              );
         });
   }
 }

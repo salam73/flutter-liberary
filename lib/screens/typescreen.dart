@@ -9,6 +9,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 final usersRef = Firestore.instance.collection('library');
 
 class Tyepscreen extends StatefulWidget {
+  final List dbList;
+
+  const Tyepscreen({Key key, this.dbList}) : super(key: key);
+
   @override
   _TyepscreenState createState() => _TyepscreenState();
 }
@@ -32,7 +36,7 @@ class _TyepscreenState extends State<Tyepscreen> {
 
     final QuerySnapshot snapshot = await usersRef
         //  .where("Type", isEqualTo: "اطفال")
-        // .orderBy('Type')
+        .orderBy('Type')
         .getDocuments();
 
     snapshot.documents.forEach((DocumentSnapshot doc) {
@@ -41,10 +45,11 @@ class _TyepscreenState extends State<Tyepscreen> {
       });
     });
 
-    dataList.forEach((m) => {sortTypeArray.add(m['Type'])});
+    widget.dbList.forEach((m) => {sortTypeArray.add(m['Type'])});
 
-    sortTypeArray =
-        sortTypeArray.toSet().toList(); //remove duplicate items of list
+    sortTypeArray = sortTypeArray.toSet().toList();
+
+    //remove duplicate items of list
     //print(sortTypeArray);
 
     sortTypeArray.forEach((m) {
@@ -144,7 +149,7 @@ class _TyepscreenState extends State<Tyepscreen> {
                     child: CachedNetworkImage(
                       imageUrl: doc['ImageUrl'][index],
                       placeholder: (context, url) =>
-                          CircularProgressIndicator(),
+                          Image.asset('assets/loading.gif'),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                       width: 100,
                     )),
@@ -172,7 +177,7 @@ class _TyepscreenState extends State<Tyepscreen> {
                   itemBuilder: (BuildContext ctxt, int index) {
                     mysetList.asMap().forEach((index2, f) => {
                           m = f.toList(),
-                          m.asMap().forEach((i, x) => {
+                          m.asMap().forEach((i, typeTitle) => {
                                 i == 0
                                     ? {
                                         myWidgetList.add(
@@ -186,7 +191,7 @@ class _TyepscreenState extends State<Tyepscreen> {
                                                   MainAxisAlignment.center,
                                               children: <Widget>[
                                                 Text(
-                                                  x.toString(),
+                                                  typeTitle.toString(),
                                                   style: TextStyle(
                                                       fontSize: 30,
                                                       color: Colors.black
@@ -208,18 +213,14 @@ class _TyepscreenState extends State<Tyepscreen> {
                                             child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
-                                                child: x["ImageUrl"]
-                                                            .toList()
-                                                            .length >
+                                                child: typeTitle["ImageUrl"] .toList() .length >
                                                         1
                                                     ? Column(children: <Widget>[
                                                         Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
+                                                          mainAxisAlignment: MainAxisAlignment .spaceBetween,
                                                           children: <Widget>[
-                                                            Text('books'),
-                                                            Text('more')
+                                                            Text('كتب'),
+                                                            Text('أكثر')
                                                           ],
                                                         ),
                                                         /* Text('سلسلة كتب عدد: ' +
@@ -228,38 +229,24 @@ class _TyepscreenState extends State<Tyepscreen> {
                                                                       .length
                                                                       .toString()),*/
 
-                                                        rowWidget(doc: x)
+                                                        rowWidget(doc: typeTitle)
                                                       ])
                                                     : GestureDetector(
                                                         onTap: () {
                                                           Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      ScreenTwo(
-                                                                dice:
-                                                                    x['ImagesTitles']
-                                                                        [0],
+                                                              builder: (context) => ScreenTwo( dice: typeTitle['ImagesTitles'] [0],
                                                                 myList: null,
                                                                 index: index,
-                                                                src:
-                                                                    x['ImageUrl']
-                                                                        [0],
+                                                                src: typeTitle['ImageUrl'] [0],
                                                               ),
                                                             ),
                                                           );
                                                         },
-                                                        child:
-                                                            CachedNetworkImage(
-                                                          imageUrl:
-                                                              x['ImageUrl'][0],
-                                                          placeholder: (context,
-                                                                  url) =>
-                                                              CircularProgressIndicator(),
-                                                          errorWidget: (context,
-                                                                  url, error) =>
-                                                              Icon(Icons.error),
+                                                        child: CachedNetworkImage( imageUrl: typeTitle['ImageUrl'][0],
+                                                          placeholder: (context, url) => Image.asset( 'assets/loading.gif'),
+                                                          errorWidget: (context, url, error) => Icon(Icons.error),
                                                           width: 120,
                                                         ))),
                                           ),
@@ -268,7 +255,7 @@ class _TyepscreenState extends State<Tyepscreen> {
                               }),
                           myWidgetList.add(
                             Container(
-                              child: Wrap(
+                               child: Wrap(
                                   // mainAxisAlignment: MainAxisAlignment.start,
                                   children: myMaha),
                             ),
@@ -280,21 +267,17 @@ class _TyepscreenState extends State<Tyepscreen> {
                   }));
     }
 
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('كتب متنوعة'),
-        ),
-        body: Column(
-          children: <Widget>[
-           /*  Expanded(
+    return Column(
+      children: <Widget>[
+        /*  Expanded(
               flex:2,
               child: SliderShow(),
             ), */
-            Expanded(
-              flex:3,
-              child: salam(),
-            ),
-          ],
-        ));
+        Expanded(
+          flex: 3,
+          child: salam(),
+        ),
+      ],
+    );
   }
 }
