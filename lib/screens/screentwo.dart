@@ -16,30 +16,26 @@ class ScreenTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "كتب جديدة",
-          textDirection: TextDirection.rtl,
+        appBar: AppBar(
+          title: Text(
+            "كتب جديدة",
+            textDirection: TextDirection.rtl,
+          ),
+          backgroundColor: Colors.deepPurpleAccent,
         ),
-        backgroundColor: Colors.deepPurpleAccent,
-      ),
-      body: 
-      
-       Column(
-         children: <Widget>[
-           Center(
-             child: CachedNetworkImage(
-                      imageUrl: src,
-                      placeholder: (context, url) => Image.asset('assets/loading.gif'),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    //  width: 100,
-                    ),
-           ),
-           Text(dice)
-         ],
-       )
-      
-      
-    );
+        body: Column(
+          children: <Widget>[
+            Center(
+              child: CachedNetworkImage(
+                imageUrl: src,
+                placeholder: (context, url) =>
+                    Image.asset('assets/loading.gif'),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+                //  width: 100,
+              ),
+            ),
+            Text(dice)
+          ],
+        ));
   }
 }

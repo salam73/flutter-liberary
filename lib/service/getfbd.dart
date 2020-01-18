@@ -4,19 +4,11 @@ import 'package:flutter/material.dart';
 
 final usersRef = Firestore.instance.collection('library');
 
-class GetFBD  {
+class GetFBD {
+  final List mylist;
 
-final List mylist;
+  GetFBD(this.mylist);
 
-GetFBD(this.mylist);
- 
+  //return   FB_dataList;
 
- 
-
-
-   //return   FB_dataList;
-
-  
-
- 
 }

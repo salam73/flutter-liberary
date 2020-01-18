@@ -43,15 +43,14 @@ class Starsview extends StatelessWidget {
                   Column(
                     children: <Widget>[
                       Image.network(
-                        data[index ]['attachments']['data'][0]['media']
-                            ['image']['src'],
+                        data[index]['attachments']['data'][0]['media']['image']
+                            ['src'],
                         height: 100,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: Text(
-                          data[index ]['attachments']['data'][0]
-                              ['description'],
+                          data[index]['attachments']['data'][0]['description'],
                           textDirection: TextDirection.rtl,
                           style: TextStyle(fontSize: 13),
                         ),

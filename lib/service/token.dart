@@ -7,7 +7,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyHomePage(title: 'ListView with Search');
- 
   }
 }
 
@@ -22,19 +21,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController editingController = TextEditingController();
 
-
-
   final duplicateItems = [''];
   var items = List<String>();
 
   @override
   void initState() {
-for (var i = 0; i < 10; i++) {
-  duplicateItems.add(i.toString());
-}
+    for (var i = 0; i < 10; i++) {
+      duplicateItems.add(i.toString());
+    }
 
-
-   List<String> me=['salam','fouad','hadi','noor salam'];
+    List<String> me = ['salam', 'fouad', 'hadi', 'noor salam'];
     duplicateItems.add(me[0]);
     duplicateItems.add(me[1]);
     duplicateItems.add(me[2]);
@@ -44,15 +40,12 @@ for (var i = 0; i < 10; i++) {
   }
 
   void filterSearchResults(String query) {
-
-
-    
     List<String> dummySearchList = List<String>();
     dummySearchList.addAll(duplicateItems);
-    if(query.isNotEmpty) {
+    if (query.isNotEmpty) {
       List<String> dummyListData = List<String>();
       dummySearchList.forEach((item) {
-        if(item.contains(query)) {
+        if (item.contains(query)) {
           dummyListData.add(item);
         }
       });
@@ -67,7 +60,6 @@ for (var i = 0; i < 10; i++) {
         items.addAll(duplicateItems);
       });
     }
-
   }
 
   @override

@@ -5,29 +5,18 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 
 import 'package:flutter/material.dart';
 
-
-
-
-
 void main() {
-  runApp(
+  runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Book house',
+      theme: ThemeData(
+        primaryColor: Colors.red,
+        //scaffoldBackgroundColor: Color(0xffffde03),
+      ),
+      home: Directionality(textDirection: TextDirection.rtl, child: Home()
+          //SplashScreen(),
+          )
 
-      MaterialApp(
-
-    debugShowCheckedModeBanner: false,
-    title: 'Book house',
-    theme: ThemeData(
-      primaryColor: Colors.red,
-      //scaffoldBackgroundColor: Color(0xffffde03),
-    ),
-    home: Directionality(
-      textDirection: TextDirection.rtl,
-
-        child:Home()
-      //SplashScreen(),
-    )
-
-    //home: Search(),
-  ));
-
+      //home: Search(),
+      ));
 }

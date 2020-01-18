@@ -86,7 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           textAlign: TextAlign.right,
                         ),
                       ),
-                    ), Flexible(
+                    ),
+                    Flexible(
                       flex: 2,
                       child: Container(
                         width: 150,

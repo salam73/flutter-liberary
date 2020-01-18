@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
   PageController pageController;
   int pageIndex = 0;
 
-  String _title='رئيسية';
+  String _title = 'رئيسية';
 
   getFirebaseData() async {
     final QuerySnapshot snapshot = await usersRef
@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
       });
     });
 
-   /*  dataList.forEach((m) => {sortTypeArray.add(m['Type'])});
+    /*  dataList.forEach((m) => {sortTypeArray.add(m['Type'])});
 
     sortTypeArray =
         sortTypeArray.toSet().toList(); //remove duplicate items of list
@@ -98,18 +98,28 @@ class _HomeState extends State<Home> {
     setState(() {
       this.pageIndex = pageIndex;
 
-switch(pageIndex) { 
-       case 0: { _title = 'رئيسية'; } 
-       break; 
-       case 1: { _title = 'أقسام'; } 
-       break;
-       case 2: { _title = 'ترتيب'; } 
-       break;
-       case 3: { _title = 'بحث'; } 
-       break;
-     
-      } 
-
+      switch (pageIndex) {
+        case 0:
+          {
+            _title = 'رئيسية';
+          }
+          break;
+        case 1:
+          {
+            _title = 'أقسام';
+          }
+          break;
+        case 2:
+          {
+            _title = 'ترتيب';
+          }
+          break;
+        case 3:
+          {
+            _title = 'بحث';
+          }
+          break;
+      }
     });
   }
 
@@ -122,63 +132,61 @@ switch(pageIndex) {
     return Scaffold(
       appBar: AppBar(
         title: Text(_title),
-
         actions: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {
-                     
-                    },
-                  )
-                ],
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {},
+          )
+        ],
       ),
-
-drawer:Drawer(
-  // Add a ListView to the drawer. This ensures the user can scroll
-  // through the options in the drawer if there isn't enough vertical
-  // space to fit everything.
-  child: ListView(
-    // Important: Remove any padding from the ListView.
-    padding: EdgeInsets.zero,
-    children: <Widget>[
-      DrawerHeader(
-        child: Text('المكتبة', style: TextStyle(color: Colors.white, fontSize: 30),),
-        decoration: BoxDecoration(
-          color: Colors.purple,
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text(
+                'المكتبة',
+                style: TextStyle(color: Colors.white, fontSize: 30),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.purple,
+              ),
+            ),
+            ListTile(
+              title: Text('عن المكتبة'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Text('العنوان'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Text('الأقسام'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Text('اتصل بنا'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
         ),
       ),
-      ListTile(
-        title: Text('عن المكتبة'),
-        onTap: () {
-          // Update the state of the app.
-          // ...
-        },
-      ),
-      ListTile(
-        title: Text('العنوان'),
-        onTap: () {
-          // Update the state of the app.
-          // ...
-        },
-      ),
-      ListTile(
-        title: Text('الأقسام'),
-        onTap: () {
-          // Update the state of the app.
-          // ...
-        },
-      ),
-      ListTile(
-        title: Text('اتصل بنا'),
-        onTap: () {
-          // Update the state of the app.
-          // ...
-        },
-      ),
-    ],
-  ),
-),
-
       body: SafeArea(
         child: PageView(
           controller: pageController,
@@ -192,16 +200,17 @@ drawer:Drawer(
             //SplashScreen(),
 
             Tyepscreen(dbList: dataList),
-            FireBaseData(dbList: dataList,),
+            FireBaseData(
+              dbList: dataList,
+            ),
             ExpandableListView(),
 
-           IntroScreen(dbList: dataList,),
+            IntroScreen(
+              dbList: dataList,
+            ),
             //SliderShow(dbList: dataList,),
 
-
-
             SearchScreen(),
-
 
             // ExpansionTileSample(),
 
@@ -243,9 +252,6 @@ drawer:Drawer(
           ),
         ],
       ),
-    
-  
-    
     );
   }
 }

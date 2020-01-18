@@ -37,7 +37,6 @@ class _SliderShowState extends State<SliderShow> {
   //var fiftyDaysFromNow = today.subtract(new Duration(days: 2));
 
   loadingData(List dataList) {
-
     dataList.forEach((m) => {sortTypeArray.add(m['ImageUrl'])});
     sortTypeArray.forEach((f) => {
           f.forEach((d) => {setListTitle.add(d)})
@@ -54,7 +53,8 @@ class _SliderShowState extends State<SliderShow> {
                 imageUrl: i,
                 fit: BoxFit.fill,
                 width: 1200,
-                placeholder: (context, url) => Image.asset('assets/loading.gif'),
+                placeholder: (context, url) =>
+                    Image.asset('assets/loading.gif'),
               ),
 
               //Image.network(i, fit: BoxFit.fill, width: 1200.0),

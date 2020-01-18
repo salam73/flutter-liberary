@@ -7,15 +7,12 @@ class ScreenMultiBooks extends StatelessWidget {
   final List data;
   final List<String> myList;
 
-
   ScreenMultiBooks({
     this.title,
     this.colors,
     @required this.data,
     @required this.myList,
   });
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +22,12 @@ class ScreenMultiBooks extends StatelessWidget {
         backgroundColor: colors,
       ),
       body: ListView.builder(
-       // scrollDirection: Axis.horizontal,
+        // scrollDirection: Axis.horizontal,
 
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
-            onTap: () {
-
-            },
+            onTap: () {},
             child: Padding(
               padding: const EdgeInsets.all(18.0),
               child: Card(
@@ -53,7 +48,7 @@ class ScreenMultiBooks extends StatelessWidget {
                     ),
                     Image.network(
                       data[index]['attachments']['data'][0]['media']['image']
-                      ['src'],
+                          ['src'],
                     ),
                   ],
                 ),

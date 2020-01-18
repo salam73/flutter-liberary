@@ -34,11 +34,9 @@ class OnBoardingPage extends StatelessWidget {
         title: Text('مقدمة'),
       ),
       body: SafeArea(
-        
         child: Container(
           margin: EdgeInsets.only(top: 50),
           child: IntroductionScreen(
-            
             pages: [
               PageViewModel(
                 title: "مكتبة دار الكتب",
@@ -73,7 +71,8 @@ class OnBoardingPage extends StatelessWidget {
               ),
               PageViewModel(
                 title: "مشاهدة",
-                body: "الكتب الاكثر مبيعا, العروض المختلفة وجميع الاقسام المكتبة",
+                body:
+                    "الكتب الاكثر مبيعا, العروض المختلفة وجميع الاقسام المكتبة",
                 image: Image.asset('assets/m3.png'),
                 footer: RaisedButton(
                   onPressed: () {/* Nothing */},
@@ -109,7 +108,8 @@ class OnBoardingPage extends StatelessWidget {
             nextFlex: 0,
             skip: const Text('تخطي'),
             next: const Icon(Icons.arrow_forward),
-            done: const Text('تم', style: TextStyle(fontWeight: FontWeight.w600)),
+            done:
+                const Text('تم', style: TextStyle(fontWeight: FontWeight.w600)),
             dotsDecorator: const DotsDecorator(
               size: Size(10.0, 10.0),
               color: Color(0xFFBDBDBD),

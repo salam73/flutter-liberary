@@ -98,67 +98,66 @@ void main() {
   runApp(ExpansionTileSample());
 }
 
-  
-/* 
+/*
 List mysalamList=
 [
   {'profileName': 'سلام', 'Type': 'since', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1'], 'Time': 2019-12-16, 'title': 'alibaba', 'ImagesTitles': [ 'imgTitle1']},
- 
+
   {'profileName': 'Hayder', 'Type': 'kid', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'hayderabudm', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'محمد', 'Type': 'bio', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'فؤاد', 'Type': 'since', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'fouad', 'Type': 'kid', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
-  
+
   {'profileName': 'هادي', 'Type': 'since', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'سعد', 'Type': 'bio', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
 
   {'profileName': 'نور', 'Type': 'maha', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
 
   {'profileName': 'ليلى', 'Type': 'school', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'محمد', 'Type': 'maha', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
   {'profileName': 'محمد', 'Type': 'since', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1'], 'Time': 2019-12-16, 'title': 'alibaba', 'ImagesTitles': [ 'imgTitle1']},
- 
+
   {'profileName': 'Hayder', 'Type': 'kid', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'hayderabudm', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'محمد', 'Type': 'bio', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'rabab', 'Type': 'since', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'fouad', 'Type': 'kid', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
-  
+
   {'profileName': 'rabab', 'Type': 'since', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'سعد', 'Type': 'bio', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
 
   {'profileName': 'صالح', 'Type': 'maha', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
 
   {'profileName': 'ليلى', 'Type': 'school', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'حسن', 'Type': 'maha', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'فؤاد', 'Type': 'kid', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
 
   {'profileName': 'صالح', 'Type': 'school', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'سعد', 'Type': 'kid', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'حسين', 'Type': 'maha', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
 
   {'profileName': 'ليلى', 'Type': 'school', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'عبد الله', 'Type': 'maha', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'فؤاد', 'Type': 'kid', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
 
   {'profileName': 'صالح', 'Type': 'school', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
   {'profileName': 'سعد', 'Type': 'kid', 'pages': 120, 'pris': 25, 'ImageUrl': ['imgUrl1','imgUrl2'], 'Time': 2019-12-16, 'title': 'itemtitle', 'ImagesTitles': [ 'imgTitle1','imgTitle2']},
- 
+
 ];
 
  */

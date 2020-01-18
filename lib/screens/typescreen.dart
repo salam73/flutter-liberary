@@ -213,11 +213,15 @@ class _TyepscreenState extends State<Tyepscreen> {
                                             child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
-                                                child: typeTitle["ImageUrl"] .toList() .length >
+                                                child: typeTitle["ImageUrl"]
+                                                            .toList()
+                                                            .length >
                                                         1
                                                     ? Column(children: <Widget>[
                                                         Row(
-                                                          mainAxisAlignment: MainAxisAlignment .spaceBetween,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
                                                           children: <Widget>[
                                                             Text('كتب'),
                                                             Text('أكثر')
@@ -229,24 +233,38 @@ class _TyepscreenState extends State<Tyepscreen> {
                                                                       .length
                                                                       .toString()),*/
 
-                                                        rowWidget(doc: typeTitle)
+                                                        rowWidget(
+                                                            doc: typeTitle)
                                                       ])
                                                     : GestureDetector(
                                                         onTap: () {
                                                           Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                              builder: (context) => ScreenTwo( dice: typeTitle['ImagesTitles'] [0],
+                                                              builder:
+                                                                  (context) =>
+                                                                      ScreenTwo(
+                                                                dice: typeTitle[
+                                                                    'ImagesTitles'][0],
                                                                 myList: null,
                                                                 index: index,
-                                                                src: typeTitle['ImageUrl'] [0],
+                                                                src: typeTitle[
+                                                                    'ImageUrl'][0],
                                                               ),
                                                             ),
                                                           );
                                                         },
-                                                        child: CachedNetworkImage( imageUrl: typeTitle['ImageUrl'][0],
-                                                          placeholder: (context, url) => Image.asset( 'assets/loading.gif'),
-                                                          errorWidget: (context, url, error) => Icon(Icons.error),
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          imageUrl: typeTitle[
+                                                              'ImageUrl'][0],
+                                                          placeholder: (context,
+                                                                  url) =>
+                                                              Image.asset(
+                                                                  'assets/loading.gif'),
+                                                          errorWidget: (context,
+                                                                  url, error) =>
+                                                              Icon(Icons.error),
                                                           width: 120,
                                                         ))),
                                           ),
@@ -255,7 +273,7 @@ class _TyepscreenState extends State<Tyepscreen> {
                               }),
                           myWidgetList.add(
                             Container(
-                               child: Wrap(
+                              child: Wrap(
                                   // mainAxisAlignment: MainAxisAlignment.start,
                                   children: myMaha),
                             ),

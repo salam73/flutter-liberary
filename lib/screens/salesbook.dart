@@ -3,17 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'screentwo.dart';
 
-
-
-
-
 class Salesbook extends StatefulWidget {
-
   Salesbook({this.fontsize});
 
   final int fontsize;
-
-
 
   @override
   _SalesbookState createState() => _SalesbookState();
@@ -37,7 +30,7 @@ class _SalesbookState extends State<Salesbook> {
     data.forEach((n) {
       if (data != null) {
         for (String line
-        in n['attachments']['data'][0]['description'].split('\n')) {
+            in n['attachments']['data'][0]['description'].split('\n')) {
           var parts = line.split(':');
           if (parts.length == 1) {
             //  print('invalid: $line');
@@ -58,42 +51,36 @@ class _SalesbookState extends State<Salesbook> {
 
   @override
   Widget build(BuildContext context) {
-
-    return  ConstrainedBox(
-      constraints: BoxConstraints(
-          maxHeight: 150), // **THIS is the important part**
+    return ConstrainedBox(
+      constraints:
+          BoxConstraints(maxHeight: 150), // **THIS is the important part**
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         reverse: true,
         itemCount: data == null ? 0 : 3,
         itemBuilder: (BuildContext context, int index) {
           return Container(
-
               child: Card(
-
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        data[index+2]['attachments']['data'][0]
-                        ['description'],
-                        textDirection: TextDirection.rtl,
-                        style: TextStyle(fontSize: 13),
-                      ),
-                    ),
-                    Image.network(
-                      data[index+2]['attachments']['data'][0]['media']
-                      ['image']['src'],
-                    ),
-                  ],
+            child: Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    data[index + 2]['attachments']['data'][0]['description'],
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(fontSize: 13),
+                  ),
                 ),
-              ));
+                Image.network(
+                  data[index + 2]['attachments']['data'][0]['media']['image']
+                      ['src'],
+                ),
+              ],
+            ),
+          ));
         },
       ),
     );
-
-
   }
 
   @override

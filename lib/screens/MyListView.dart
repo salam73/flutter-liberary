@@ -1,4 +1,3 @@
-
 import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -12,15 +11,11 @@ import 'package:bookhouse2/Helper/popularbook.dart';
 import 'package:bookhouse2/Helper/gridview.dart';
 import 'package:bookhouse2/Helper/starsview.dart';
 
-
-
-
 class MyListview extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MyHomePage() ;
-    
+    return MyHomePage();
   }
 }
 
@@ -40,22 +35,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Future getSWData() async {
     var res = await http
         .get(Uri.parse(url), headers: {"Content-Type": "application/json"});
-if (!mounted) return;
+    if (!mounted) return;
     setState(() {
-       var resBody = json.decode(utf8.decode(res.bodyBytes));
+      var resBody = json.decode(utf8.decode(res.bodyBytes));
       data = resBody["feed"]["data"];
     });
-     
 
-      //  String myData=resBody=["feed"]["data"][0]['attachments']['data'][0]['description'].toString();
-    
+    //  String myData=resBody=["feed"]["data"][0]['attachments']['data'][0]['description'].toString();
 
     data.forEach((n) {
       //print('Hello Mr. ${n['attachments']['data'][0]['description'].split('\n')}');∫∫√¶
 
       if (data != null) {
         for (String line
-        in n['attachments']['data'][0]['description'].split('\n')) {
+            in n['attachments']['data'][0]['description'].split('\n')) {
           var parts = line.split(':');
           if (parts.length == 1) {
             //  print('invalid: $line');
@@ -127,13 +120,11 @@ if (!mounted) return;
                       myList: listOfTitle,
                     ),
                   ),
-                //  FetchData(),
-
-
+                  //  FetchData(),
                 ],
               ),
             ),
-           // FetchData(),
+            // FetchData(),
             //best seller
             SeeAll(seeAllText: "كتب جديدةً"),
 
@@ -153,13 +144,8 @@ if (!mounted) return;
             //best seller
             SeeAll(seeAllText: "كتب مخفظة"),
 
-
-
             //books
             Salebook(data: data, myList: listOfTitle),
-
-
-
           ],
         ),
       ),
@@ -171,8 +157,6 @@ if (!mounted) return;
     super.initState();
     this.getSWData();
   }
- 
-  
 }
 
 class BookPart extends StatelessWidget {
@@ -235,7 +219,7 @@ class SeeAll extends StatelessWidget {
             ),
           ),
           FlatButton(
-            onPressed: (){},
+            onPressed: () {},
             child: Text(
               "شاهد الكل ->",
               style: TextStyle(fontSize: 20, color: Colors.grey),

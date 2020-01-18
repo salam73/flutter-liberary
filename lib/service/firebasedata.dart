@@ -8,7 +8,6 @@ import 'package:google_fonts/google_fonts.dart';
 final usersRef = Firestore.instance.collection('library');
 
 class FireBaseData extends StatefulWidget {
-
   final List dbList;
 
   const FireBaseData({Key key, this.dbList}) : super(key: key);
@@ -23,9 +22,7 @@ class _FireBaseDataState extends State<FireBaseData> {
 
   @override
   void initState() {
-
     super.initState();
-
   }
 
   @override
@@ -36,17 +33,13 @@ class _FireBaseDataState extends State<FireBaseData> {
 
   @override
   Widget build(BuildContext context) {
-
     getFirebaseData(widget.dbList);
-
 
     List<Widget> mylist = [Column(children: _dataListWidget)];
 
-    return
-      ListView(
-        children: mylist,
-      )
-      ;
+    return ListView(
+      children: mylist,
+    );
   }
 
   Color myColor({String myString}) {
@@ -64,7 +57,6 @@ class _FireBaseDataState extends State<FireBaseData> {
   Widget rowWidget({doc}) {
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: 150),
-
       child: ListView.builder(
         reverse: false,
         scrollDirection: Axis.horizontal,
@@ -99,7 +91,8 @@ class _FireBaseDataState extends State<FireBaseData> {
                   },
                   child: CachedNetworkImage(
                     imageUrl: doc['ImageUrl'][index],
-                    placeholder: (context, url) => Image.asset('assets/loading.gif'),
+                    placeholder: (context, url) =>
+                        Image.asset('assets/loading.gif'),
                     errorWidget: (context, url, error) => Icon(Icons.error),
                     width: 100,
                   ),
@@ -112,58 +105,55 @@ class _FireBaseDataState extends State<FireBaseData> {
     );
   }
 
-   getFirebaseData(List dataList)  {
-
-
+  getFirebaseData(List dataList) {
     dataList.forEach((doc) {
-
-
-        _dataListWidget.add(
-            Column(
-          children: <Widget>[
-            Text("كتب " + doc["Type"], style: GoogleFonts.almarai(fontSize: 15),),
-            Container(
-              padding: EdgeInsets.only(bottom: 15),
-              child: doc["ImageUrl"].toList().length > 1
-                  ? rowWidget(doc: doc)
-                  : Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 5,
-                          child: Column(
-                            children: <Widget>[
-                              /* Text(
+      _dataListWidget.add(Column(
+        children: <Widget>[
+          Text(
+            "كتب " + doc["Type"],
+            style: GoogleFonts.almarai(fontSize: 15),
+          ),
+          Container(
+            padding: EdgeInsets.only(bottom: 15),
+            child: doc["ImageUrl"].toList().length > 1
+                ? rowWidget(doc: doc)
+                : Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 5,
+                        child: Column(
+                          children: <Widget>[
+                            /* Text(
                                 doc["pris"],
                                 style: TextStyle(fontSize: 20),
                               ),*/
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: Text(
-                                  doc["title"],
-                                  style: GoogleFonts.almarai(fontSize: 20),
-                                  textDirection: TextDirection.rtl,
-                                ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: Text(
+                                doc["title"],
+                                style: GoogleFonts.almarai(fontSize: 20),
+                                textDirection: TextDirection.rtl,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Expanded(
-                          flex: 6,
-                          child: CachedNetworkImage(
-                            imageUrl: doc["ImageUrl"][0].toString(),
-                            placeholder: (context, url) =>
-                                Image.asset('assets/loading.gif'),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
-                            width: 100,
-                          ),
+                      ),
+                      Expanded(
+                        flex: 6,
+                        child: CachedNetworkImage(
+                          imageUrl: doc["ImageUrl"][0].toString(),
+                          placeholder: (context, url) =>
+                              Image.asset('assets/loading.gif'),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                          width: 100,
                         ),
-                      ],
-                    ),
-            ),
-          ],
-        ));
-
+                      ),
+                    ],
+                  ),
+          ),
+        ],
+      ));
     });
   }
 }

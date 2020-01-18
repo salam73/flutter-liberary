@@ -5,15 +5,12 @@ class Headerbar extends StatelessWidget {
   final String headerTitle;
   final List<Widget> myList;
 
-
   Headerbar(this.backgroundColor, this.headerTitle, this.myList);
-
   @override
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
       pinned: true,
       floating: false,
-      
       delegate: delegate(backgroundColor, headerTitle, myList),
     );
   }
