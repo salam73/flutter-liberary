@@ -191,10 +191,11 @@ class _HomeState extends State<Home> {
             //Splash(),
             //SplashScreen(),
 
-            Tyepscreen(dbList: dataList),
+
             FireBaseData(
               dbList: dataList,
             ),
+            Tyepscreen(dbList: dataList),
             ExpandableListView(),
 
             IntroScreen(
