@@ -1,4 +1,3 @@
-import 'package:bookhouse2/screens/NotUpdate.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +40,6 @@ class SearchScreen extends StatelessWidget {
     List<String> ListImagesTitles = [];
     List<String> ListImageUrl = [];
     List<String> images4 = [];
-    //  List<Widget> images4 = [];
 
     List myListing = doc['ImageUrl'] as List;
 

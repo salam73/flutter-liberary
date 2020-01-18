@@ -2,16 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ParsingData extends StatelessWidget {
-  final List mysetList;
+  final List mySetList;
 
-  ParsingData(this.mysetList);
+  ParsingData(this.mySetList);
 
   @override
   Widget build(BuildContext context) {
     List<ExpansionTile> myListTitle;
 
     myListTitle = this
-        .mysetList
+        .mySetList
         .map((data) => ExpansionTile(
             title: Text(data[0].toString()), children: listWidget(data: data)))
         .toList();

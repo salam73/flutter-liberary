@@ -12,16 +12,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Widget> images = List();
 
-  //Column myColumn = Column();
-
   List myListId = List();
 
   int _crossAxisCount = 2;
 
-  /* salam({String documentID}) {
-    debugPrint(documentID);
-  }
-*/
   Future _getData() async {
     Stream<QuerySnapshot> _mySnap = usersRef.snapshots();
 
@@ -29,15 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
       QuerySnapshot mySnapShot = m;
 
       mySnapShot.documents.forEach((myDocuments) {
-        // print(myDocuments.data);
-
-        // print(myDocuments.data["ImageUrl"]);
-
         var myListImageUrl = myDocuments.data["ImageUrl"];
         List myTitles = myDocuments.data["ImagesTitles"];
         List<Widget> listOfImage = List();
-
-        // print(myListImageUrl is List);
 
         if (myListImageUrl is List) {
           if (!mounted) return;
@@ -124,8 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     MaterialPageRoute(
                       builder: (context) => NewWidget(
                         myWidgets: myListImageUrl,
-                        myTitle: myTitles,
-                        mytitle: myDocuments.data["title"],
+                        myTitleList: myTitles,
+                        myTitle: myDocuments.data["title"],
                       ),
                     ));
               },

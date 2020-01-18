@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bookhouse2/screens/screentwo.dart';
 
-class Starsview extends StatelessWidget {
-  const Starsview({
+class StarsView extends StatelessWidget {
+  const StarsView({
     Key key,
     @required this.data,
     @required this.myList,

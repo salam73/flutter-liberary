@@ -1,5 +1,3 @@
-import 'package:bookhouse2/service/fetchdata.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -8,7 +6,6 @@ import 'screenmultibooks.dart';
 import 'package:bookhouse2/Helper/salebook.dart';
 import 'package:bookhouse2/Helper/newbooks.dart';
 import 'package:bookhouse2/Helper/popularbook.dart';
-import 'package:bookhouse2/Helper/gridview.dart';
 import 'package:bookhouse2/Helper/starsview.dart';
 
 class MyListview extends StatelessWidget {
@@ -129,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SeeAll(seeAllText: "كتب جديدةً"),
 
             //books
-            Newbook(data: data, myList: listOfTitle),
+            NewBook(data: data, myList: listOfTitle),
 
             //MyView(data: data, myList:listOfTitle),
 
@@ -137,15 +134,15 @@ class _MyHomePageState extends State<MyHomePage> {
             SeeAll(seeAllText: "الكتب الأكثر مبيعاً"),
 
             //booksΩ
-            Popluarbook(data: data, myList: listOfTitle),
+            PopularBook(data: data, myList: listOfTitle),
 
-            Starsview(data: data, myList: listOfTitle),
+            StarsView(data: data, myList: listOfTitle),
 
             //best seller
             SeeAll(seeAllText: "كتب مخفظة"),
 
             //books
-            Salebook(data: data, myList: listOfTitle),
+            SaleBook(data: data, myList: listOfTitle),
           ],
         ),
       ),

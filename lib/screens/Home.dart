@@ -1,11 +1,6 @@
-import 'package:bookhouse2/Helper/mydata.dart';
-import 'package:bookhouse2/screens/MyListView.dart';
 import 'package:bookhouse2/screens/NotUpdate.dart';
 import 'package:bookhouse2/screens/homescreen.dart';
-import 'package:bookhouse2/screens/parsingdata.dart';
-import 'package:bookhouse2/screens/screenimageone.dart';
 import 'package:bookhouse2/screens/searchscreen.dart';
-import 'package:bookhouse2/screens/slider.dart';
 import 'package:bookhouse2/service/fetchdata.dart';
 import 'package:bookhouse2/service/firebasedata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,8 +22,8 @@ class _HomeState extends State<Home> {
   List sortTypeArray = [];
   List typeItemArray = [];
   List widgetItemArray = [];
-  List mysetList = [];
-  List mysetListTitle = [];
+  List mySetList = [];
+  List mySetListTitle = [];
   List<Widget> myList;
 
   List<ExpansionTile> myListTitle;
@@ -81,12 +76,9 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-//if(mounted)
     getFirebaseData();
 
-    pageController = PageController(
-        //initialPage: pageIndex
-        );
+    pageController = PageController();
   }
 
   void dispose() {

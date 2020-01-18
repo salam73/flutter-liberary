@@ -6,12 +6,12 @@ class MyView extends StatelessWidget {
   final List myList;
   final List data;
 
-  final mynewList = List<Widget>();
+  final myNewList = List<Widget>();
 
   List<Widget> widgetList() {
     if (this.data != null)
       this.data.forEach((myl) {
-        mynewList.add(Column(
+        myNewList.add(Column(
           children: <Widget>[
             Image.network(
               myl['attachments']['data'][0]['media']['image']['src'],
@@ -21,24 +21,18 @@ class MyView extends StatelessWidget {
           ],
         ));
       });
-    return mynewList;
+    return myNewList;
   }
 
   @override
   Widget build(BuildContext context) {
-    //final title = 'Grid List';
-
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: 300),
       child: GridView.count(
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
         childAspectRatio: 1,
-
-        // Create a grid with 2 columns. If you change the scrollDirection to
-        // horizontal, this produces 2 rows.
         crossAxisCount: 2,
-        // Generate 100 widgets that display their index in the List.
         children: widgetList(),
       ),
     );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bookhouse2/screens/screentwo.dart';
 
-class Salebook extends StatelessWidget {
-  const Salebook({
+class SaleBook extends StatelessWidget {
+  const SaleBook({
     Key key,
     @required this.data,
     @required this.myList,

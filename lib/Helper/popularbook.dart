@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bookhouse2/screens/screentwo.dart';
 
-class Popluarbook extends StatelessWidget {
-  const Popluarbook({
+class PopularBook extends StatelessWidget {
+  const PopularBook({
     Key key,
     @required this.data,
     @required this.myList,

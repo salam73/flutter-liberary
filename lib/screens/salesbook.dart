@@ -4,15 +4,15 @@ import 'package:http/http.dart' as http;
 import 'screentwo.dart';
 
 class Salesbook extends StatefulWidget {
-  Salesbook({this.fontsize});
+  Salesbook({this.fontSize});
 
-  final int fontsize;
+  final int fontSize;
 
   @override
-  _SalesbookState createState() => _SalesbookState();
+  _SalesBookState createState() => _SalesBookState();
 }
 
-class _SalesbookState extends State<Salesbook> {
+class _SalesBookState extends State<Salesbook> {
   final String url = "http://caffena.dk/salam.json";
   List data;
 

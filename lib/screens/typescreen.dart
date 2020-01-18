@@ -1,8 +1,6 @@
 import 'package:bookhouse2/screens/screentwo.dart';
-import 'package:bookhouse2/screens/slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:incrementally_loading_listview/incrementally_loading_listview.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 

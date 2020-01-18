@@ -1,7 +1,3 @@
-// Copyright 2017 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 
 class ExpansionTileSample extends StatelessWidget {
@@ -72,8 +68,6 @@ final List<Entry> data = <Entry>[
   ),
 ];
 
-// Displays one Entry. If the entry has children then it's displayed
-// with an ExpansionTile.
 class EntryItem extends StatelessWidget {
   const EntryItem(this.entry);
 

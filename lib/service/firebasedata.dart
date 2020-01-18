@@ -18,7 +18,6 @@ class FireBaseData extends StatefulWidget {
 
 class _FireBaseDataState extends State<FireBaseData> {
   List<Widget> _dataListWidget = List<Widget>();
-  //List<Widget> _dataListWidget2 = List<Widget>();
 
   @override
   void initState() {

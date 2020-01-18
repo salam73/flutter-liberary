@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class NewWidget extends StatelessWidget {
   final List myWidgets;
-  final List myTitle;
-  final String mytitle;
+  final List myTitleList;
+  final String myTitle;
 
-  NewWidget({this.myWidgets, this.myTitle, this.mytitle});
+  NewWidget({this.myWidgets, this.myTitleList, this.myTitle});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(mytitle),
+          title: Text(myTitle),
         ),
         body: ListView.builder(
             scrollDirection: Axis.vertical,
@@ -26,7 +26,7 @@ class NewWidget extends StatelessWidget {
                       Expanded(
                         flex: 6,
                         child: Text(
-                          myTitle[index],
+                          myTitleList[index],
                           textAlign: TextAlign.center,
                         ),
                       ),
