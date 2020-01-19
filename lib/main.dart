@@ -1,4 +1,4 @@
-import 'package:bookhouse2/screens/Home.dart';
+import 'package:bookhouse2/screens/home.dart';
 import 'package:bookhouse2/screens/homescreen.dart';
 import 'package:bookhouse2/service/splashscreen.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
