@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bookhouse2/screens/home.dart';
-import 'package:bookhouse2/screens/introscreen.dart';
+import 'package:bookhouse2/screens/intro_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
