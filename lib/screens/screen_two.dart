@@ -27,12 +27,14 @@ class ScreenTwo extends StatelessWidget {
         body: Column(
           children: <Widget>[
             Text(dice),
-            Text(
-                'Salam, I removed the PinchZoomImage because it is not working for me')
+//            TODO: Salam, I removed the PinchZoomImage because it is not working for me')
+//            TODO: Salam, I removed the PinchZoomImage because it is not working for me')
+//            TODO: Salam, I removed the PinchZoomImage because it is not working for me')
 //            PinchZoomImage(
-//              image: CachedNetworkImage(
-//                imageUrl: src,
-//              ),
+//              image:
+            CachedNetworkImage(
+              imageUrl: src,
+            ),
 //              zoomedBackgroundColor: Color.fromRGBO(240, 240, 240, 1.0),
 //              hideStatusBarWhileZooming: true,
 //            ),
