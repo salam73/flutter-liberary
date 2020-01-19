@@ -1,4 +1,4 @@
-import 'package:bookhouse2/screens/newwidget.dart';
+import 'package:bookhouse2/screens/new_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
