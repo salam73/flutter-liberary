@@ -5,6 +5,8 @@ import 'package:bookhouse2/screens/intro_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// TODO: this does not seem to be used anywhere.... remove
+
 class SplashScreen extends StatefulWidget {
   @override
   SplashScreenState createState() => SplashScreenState();

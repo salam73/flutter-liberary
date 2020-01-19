@@ -153,7 +153,7 @@ class _FetchDataState extends State<FetchData> {
       });
   }
 
-  deletData() {
+  deleteData() {
     usersRef.getDocuments().then((snapshot) {
       for (DocumentSnapshot doc in snapshot.documents) {
         doc.reference.delete();
@@ -177,7 +177,7 @@ class _FetchDataState extends State<FetchData> {
           Container(
             alignment: Alignment.center,
             child: RaisedButton(
-              onPressed: deletData,
+              onPressed: deleteData,
               child: Text('deletData'),
             ),
           ),

@@ -40,9 +40,10 @@ class _HomeState extends State<Home> {
         .orderBy('Type')
         .getDocuments();
 
-    snapshot.documents.forEach((DocumentSnapshot doc) {
-      setState(() {
+    setState(() {
+      snapshot.documents.forEach((DocumentSnapshot doc) {
         dataList.add(doc.data);
+        print(doc.data);
       });
     });
 
@@ -175,7 +176,9 @@ class _HomeState extends State<Home> {
             //Search(),
             //Splash(),
             //SplashScreen(),
-            Tyepscreen(dbList: dataList),
+            TypeScreen(
+              dbList: dataList,
+            ),
             FireBaseData(
               dbList: dataList,
             ),
@@ -212,12 +215,21 @@ class _HomeState extends State<Home> {
         activeColor: Theme.of(context).primaryColor,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home), title: Text('رئيسية')),
+            icon: Icon(Icons.home),
+            title: Text('رئيسية'),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.line_style), title: Text('أقسام')),
+            icon: Icon(Icons.line_style),
+            title: Text('أقسام'),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.layers), title: Text('ترتيب')),
-          BottomNavigationBarItem(icon: Icon(Icons.search), title: Text('بحث')),
+            icon: Icon(Icons.layers),
+            title: Text('ترتيب'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            title: Text('بحث'),
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.attachment),
           ),

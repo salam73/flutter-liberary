@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Mysearch extends StatefulWidget {
+// TODO: isn't this a screen. It should move to the screen folder
+class MySearch extends StatefulWidget {
   @override
-  _MysearchState createState() => _MysearchState();
+  _MySearchState createState() => _MySearchState();
 }
 
-class _MysearchState extends State<Mysearch> {
+class _MySearchState extends State<MySearch> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +16,7 @@ class _MysearchState extends State<Mysearch> {
           color: Colors.grey,
           onPressed: () => {},
           child: Text(
-            "salam",
+            "salam", // TODO: remove
             style: GoogleFonts.cairo(
               textStyle: TextStyle(color: Colors.white),
             ),

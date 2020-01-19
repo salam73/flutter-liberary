@@ -183,10 +183,10 @@ class SearchScreen extends StatelessWidget {
   }
 
   bool _getQuery({List imageTitles, String profileTitles, String myQuery}) {
-    bool _queryResualt =
+    bool _queryResult =
         imageTitles.any((a) => a.toString().contains(myQuery)) ||
             profileTitles.contains(myQuery);
-    return _queryResualt;
+    return _queryResult;
   }
 
   List<Column> _getSearchData() {}
@@ -243,7 +243,7 @@ class SearchScreen extends StatelessWidget {
 }
 
 class SearchBook extends SearchDelegate<Widget> {
-  SearchScreen myClassRefrance = SearchScreen();
+  SearchScreen myClassReference = SearchScreen();
 
   @override
   ThemeData appBarTheme(BuildContext context) {
@@ -293,7 +293,7 @@ class SearchBook extends SearchDelegate<Widget> {
 
           final List<Column> children = snapshot.data.documents
               .where((a) => (a['ImagesTitles'].toList().length > 1)
-                  ? myClassRefrance._getQuery(
+                  ? myClassReference._getQuery(
                       imageTitles: a['ImagesTitles'],
                       profileTitles: a['profileName'],
                       myQuery: query)
@@ -301,7 +301,7 @@ class SearchBook extends SearchDelegate<Widget> {
                       a['profileName'].contains(query) ||
                       a['title'].contains(query))
               .map(
-                (doc) => myClassRefrance.listofColumn(doc),
+                (doc) => myClassReference.listofColumn(doc),
               )
               .toList();
 
@@ -324,7 +324,7 @@ class SearchBook extends SearchDelegate<Widget> {
           //final resualt= usersRef.snapshots().data.where((a) => a.title.toLowerCase().contains('f'));
           final List<Column> children = snapshot.data.documents
               .where((a) => (a['ImagesTitles'].toList().length > 1)
-                  ? myClassRefrance._getQuery(
+                  ? myClassReference._getQuery(
                       imageTitles: a['ImagesTitles'],
                       profileTitles: a['profileName'],
                       myQuery: query)
@@ -332,7 +332,7 @@ class SearchBook extends SearchDelegate<Widget> {
                       a['profileName'].contains(query) ||
                       a['title'].contains(query))
               .map(
-                (doc) => myClassRefrance.listofColumnWinthouImage(doc),
+                (doc) => myClassReference.listofColumnWinthouImage(doc),
               )
               .toList();
           if (query.length > 0)

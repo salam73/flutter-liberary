@@ -4,20 +4,18 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'slider.dart';
-
 final usersRef = Firestore.instance.collection('library');
 
-class Tyepscreen extends StatefulWidget {
+class TypeScreen extends StatefulWidget {
   final List dbList;
 
-  const Tyepscreen({Key key, this.dbList}) : super(key: key);
+  const TypeScreen({Key key, this.dbList}) : super(key: key);
 
   @override
-  _TyepscreenState createState() => _TyepscreenState();
+  _TypeScreenState createState() => _TypeScreenState();
 }
 
-class _TyepscreenState extends State<Tyepscreen> {
+class _TypeScreenState extends State<TypeScreen> {
   List textItem = [];
   List m = [];
 
@@ -27,7 +25,7 @@ class _TyepscreenState extends State<Tyepscreen> {
   List dataList = [];
   List sortTypeArray = [];
 
-  List mysetList = [];
+  List mySetList = [];
 
   getFirebaseData() async {
 //print(itemsTypeArray);
@@ -81,7 +79,7 @@ class _TyepscreenState extends State<Tyepscreen> {
     });
     // print(widgetItemArray.toSet());
 
-    mysetList = widgetItemArray.toSet().toList();
+    mySetList = widgetItemArray.toSet().toList();
   }
 
   @override
@@ -99,7 +97,6 @@ class _TyepscreenState extends State<Tyepscreen> {
 
   Color myColor({String myString}) {
     if (myString.contains('متنوع')) return Colors.brown;
-
     if (myString.contains('رواية')) return Colors.deepOrangeAccent;
     if (myString.contains('اطفال')) return Colors.amber;
     if (myString.contains('لغة')) return Colors.blue;
@@ -166,7 +163,7 @@ class _TyepscreenState extends State<Tyepscreen> {
   Widget build(BuildContext context) {
     myWidgetList = [];
     Center salam() {
-      return mysetList.length < 1
+      return mySetList.length < 1
           ? Center(
               child: Container(
                 child: Text('Waiting'),
@@ -176,7 +173,7 @@ class _TyepscreenState extends State<Tyepscreen> {
               child: ListView.builder(
                   itemCount: 1,
                   itemBuilder: (BuildContext ctxt, int index) {
-                    mysetList.asMap().forEach((index2, f) => {
+                    mySetList.asMap().forEach((index2, f) => {
                           m = f.toList(),
                           m.asMap().forEach((i, typeTitle) => {
                                 i == 0

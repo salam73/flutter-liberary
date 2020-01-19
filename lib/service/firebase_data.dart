@@ -34,16 +34,25 @@ class _FireBaseDataState extends State<FireBaseData> {
   Widget build(BuildContext context) {
     getFirebaseData(widget.dbList);
 
-    List<Widget> mylist = [Column(children: _dataListWidget)];
+    List<Widget> myList = [Column(children: _dataListWidget)];
 
     return ListView(
-      children: mylist,
+      children: myList,
     );
   }
 
   Color myColor({String myString}) {
-    if (myString.contains('متنوع')) return Colors.brown;
+    // TODO: this code is repeated in "type_screen"
+    // TODO: use map below
+    Map<String, Color> mapTitleToColor = {
+      'متنوع': Colors.brown,
+      'رواية': Colors.deepOrangeAccent,
+      'اطفال': Colors.amber,
+      'لغة': Colors.blue,
+      'اعلام': Colors.red,
+    };
 
+    if (myString.contains('متنوع')) return Colors.brown;
     if (myString.contains('رواية')) return Colors.deepOrangeAccent;
     if (myString.contains('اطفال')) return Colors.amber;
     if (myString.contains('لغة')) return Colors.blue;

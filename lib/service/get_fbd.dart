@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 final usersRef = Firestore.instance.collection('library');
 
-class GetFBD {
-  final List mylist;
+// TODO: not used anywhere ... remove
 
-  GetFBD(this.mylist);
+class GetFBD {
+  final List myList;
+
+  GetFBD(this.myList);
 }
