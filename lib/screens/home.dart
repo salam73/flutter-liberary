@@ -1,12 +1,12 @@
-import 'package:bookhouse2/screens/NotUpdate.dart';
-import 'package:bookhouse2/screens/homescreen.dart';
-import 'package:bookhouse2/screens/searchscreen.dart';
-import 'package:bookhouse2/service/fetchdata.dart';
-import 'package:bookhouse2/service/firebasedata.dart';
+import 'package:bookhouse2/screens/not_update.dart';
+import 'package:bookhouse2/screens/home_screen.dart';
+import 'package:bookhouse2/screens/search_screen.dart';
+import 'package:bookhouse2/service/fetch_data.dart';
+import 'package:bookhouse2/service/firebase_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'intro.dart';
-import 'typescreen.dart';
+import 'type_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -191,8 +191,9 @@ class _HomeState extends State<Home> {
             //Splash(),
             //SplashScreen(),
             Tyepscreen(dbList: dataList),
-            FireBaseData(dbList: dataList,),
-
+            FireBaseData(
+              dbList: dataList,
+            ),
 
             ExpandableListView(),
 
