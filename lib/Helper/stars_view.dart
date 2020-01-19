@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:bookhouse2/screens/screentwo.dart';
+import 'package:bookhouse2/screens/screen_two.dart';
 
-class SaleBook extends StatelessWidget {
-  const SaleBook({
+class StarsView extends StatelessWidget {
+  const StarsView({
     Key key,
     @required this.data,
     @required this.myList,
@@ -15,7 +15,7 @@ class SaleBook extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints:
-          BoxConstraints(maxHeight: 100), // **THIS is the important part**
+          BoxConstraints(maxHeight: 230), // **THIS is the important part**
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         reverse: true,
@@ -40,13 +40,22 @@ class SaleBook extends StatelessWidget {
                 child: Card(
               child: Row(
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(myList[index]),
-                  ),
-                  Image.network(
-                    data[index]['attachments']['data'][0]['media']['image']
-                        ['src'],
+                  Column(
+                    children: <Widget>[
+                      Image.network(
+                        data[index]['attachments']['data'][0]['media']['image']
+                            ['src'],
+                        height: 100,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text(
+                          data[index]['attachments']['data'][0]['description'],
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(fontSize: 13),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

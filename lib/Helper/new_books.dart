@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bookhouse2/screens/screentwo.dart';
+import 'package:bookhouse2/screens/screen_two.dart';
 
 class NewBook extends StatelessWidget {
   const NewBook({
