@@ -190,11 +190,9 @@ class _HomeState extends State<Home> {
             //Search(),
             //Splash(),
             //SplashScreen(),
-
-            FireBaseData(
-              dbList: dataList,
-            ),
             Tyepscreen(dbList: dataList),
+            FireBaseData(dbList: dataList,),
+
 
             ExpandableListView(),
 

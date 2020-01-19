@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'slider.dart';
+
 final usersRef = Firestore.instance.collection('library');
 
 class Tyepscreen extends StatefulWidget {
@@ -117,6 +119,7 @@ class _TyepscreenState extends State<Tyepscreen> {
         itemCount: doc['ImageUrl'].toList().length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
+            elevation: 7,
             //color: myColor(myString: doc['Type']),
 
             child: Row(
@@ -149,7 +152,8 @@ class _TyepscreenState extends State<Tyepscreen> {
                       placeholder: (context, url) =>
                           Image.asset('assets/loading.gif'),
                       errorWidget: (context, url, error) => Icon(Icons.error),
-                      width: 100,
+
+                      fit: BoxFit.fill,
                     )),
               ],
             ),
@@ -209,17 +213,11 @@ class _TyepscreenState extends State<Tyepscreen> {
                                                   .lightBlue[100 * (i % 9)],*/
                                             // color: Colors.grey,
                                             child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: typeTitle["ImageUrl"]
-                                                            .toList()
-                                                            .length >
-                                                        1
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: typeTitle["ImageUrl"] .toList() .length > 1
                                                     ? Column(children: <Widget>[
                                                         Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                           children: <Widget>[
                                                             Text('كتب'),
                                                             Text('أكثر')
@@ -236,33 +234,22 @@ class _TyepscreenState extends State<Tyepscreen> {
                                                       ])
                                                     : GestureDetector(
                                                         onTap: () {
-                                                          Navigator.push(
-                                                            context,
+                                                          Navigator.push( context,
                                                             MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      ScreenTwo(
-                                                                dice: typeTitle[
-                                                                    'ImagesTitles'][0],
+                                                              builder: (context) => ScreenTwo(
+                                                                dice: typeTitle['ImagesTitles'][0],
                                                                 myList: null,
                                                                 index: index,
-                                                                src: typeTitle[
-                                                                    'ImageUrl'][0],
+                                                                src: typeTitle['ImageUrl'][0],
                                                               ),
                                                             ),
                                                           );
                                                         },
                                                         child:
                                                             CachedNetworkImage(
-                                                          imageUrl: typeTitle[
-                                                              'ImageUrl'][0],
-                                                          placeholder: (context,
-                                                                  url) =>
-                                                              Image.asset(
-                                                                  'assets/loading.gif'),
-                                                          errorWidget: (context,
-                                                                  url, error) =>
-                                                              Icon(Icons.error),
+                                                          imageUrl: typeTitle['ImageUrl'][0],
+                                                          placeholder: (context,url) => Image.asset('assets/loading.gif'),
+                                                          errorWidget: (context, url, error) => Icon(Icons.error),
                                                           width: 120,
                                                         ))),
                                           ),
@@ -285,10 +272,10 @@ class _TyepscreenState extends State<Tyepscreen> {
 
     return Column(
       children: <Widget>[
-        /*  Expanded(
+         /* Expanded(
               flex:2,
-              child: SliderShow(),
-            ), */
+              child: SliderShow(dbList: widget.dbList,),
+            ),*/
         Expanded(
           flex: 3,
           child: salam(),
