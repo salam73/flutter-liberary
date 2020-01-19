@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:pinch_zoom_image/pinch_zoom_image.dart';
 
 class ScreenTwo extends StatelessWidget {
   // Declare a field that holds the Todo.
@@ -24,17 +25,18 @@ class ScreenTwo extends StatelessWidget {
           backgroundColor: Colors.deepPurpleAccent,
         ),
         body: Column(
+       //   mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Center(
-              child: CachedNetworkImage(
+
+            Text(dice),
+            PinchZoomImage(
+              image: CachedNetworkImage(
                 imageUrl: src,
-                placeholder: (context, url) =>
-                    Image.asset('assets/loading.gif'),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-                //  width: 100,
               ),
+              zoomedBackgroundColor: Color.fromRGBO(240, 240, 240, 1.0),
+              hideStatusBarWhileZooming: true,
             ),
-            Text(dice)
+            // ZoomableImage(AssetImage('assets/loading.gif'))
           ],
         ));
   }

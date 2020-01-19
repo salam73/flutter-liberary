@@ -25,6 +25,11 @@ dependencies:
   cached_network_image: ^2.0.0
   incrementally_loading_listview: ^0.2.0+2
   carousel_slider: ^1.4.1
+  pinch_zoom_image: "^0.2.5"
+
+
+
+
 
 
 
