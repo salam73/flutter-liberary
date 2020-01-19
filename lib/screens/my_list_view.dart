@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'screen_multi_books.dart';
+import 'package:bookhouse2/helper/sale_book.dart';
+import 'package:bookhouse2/helper/new_books.dart';
+import 'package:bookhouse2/helper/popular_book.dart';
+import 'package:bookhouse2/helper/stars_view.dart';
 
-import 'package:bookhouse2/Helper/sale_book.dart';
-import 'package:bookhouse2/Helper/new_books.dart';
-import 'package:bookhouse2/Helper/popular_book.dart';
-import 'package:bookhouse2/Helper/stars_view.dart';
-
-class MyListview extends StatelessWidget {
-  // This widget is the root of your application.
+class MyListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyHomePage();
   }
 }
-
-//Maha
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -38,26 +34,19 @@ class _MyHomePageState extends State<MyHomePage> {
       data = resBody["feed"]["data"];
     });
 
-    //  String myData=resBody=["feed"]["data"][0]['attachments']['data'][0]['description'].toString();
-
     data.forEach((n) {
-      //print('Hello Mr. ${n['attachments']['data'][0]['description'].split('\n')}');∫∫√¶
-
       if (data != null) {
         for (String line
             in n['attachments']['data'][0]['description'].split('\n')) {
           var parts = line.split(':');
           if (parts.length == 1) {
-            //  print('invalid: $line');
             {
               listOfTitle.add("invalid: $line");
             }
           } else {
-            String fieldName = (parts[0]);
-            String fieldValue = (parts[1]);
-            if (parts[0].contains("عنوان")) listOfTitle.add(parts[1]);
-
-            // print('$fieldName ------- $fieldValue');
+            if (parts[0].contains("عنوان")) {
+              listOfTitle.add(parts[1]);
+            }
           }
         }
       }
@@ -121,27 +110,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            // FetchData(),
-            //best seller
             SeeAll(seeAllText: "كتب جديدةً"),
-
-            //books
             NewBook(data: data, myList: listOfTitle),
-
-            //MyView(data: data, myList:listOfTitle),
-
-            //best seller
             SeeAll(seeAllText: "الكتب الأكثر مبيعاً"),
-
-            //booksΩ
             PopularBook(data: data, myList: listOfTitle),
-
             StarsView(data: data, myList: listOfTitle),
-
-            //best seller
             SeeAll(seeAllText: "كتب مخفظة"),
-
-            //books
             SaleBook(data: data, myList: listOfTitle),
           ],
         ),

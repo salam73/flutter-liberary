@@ -25,9 +25,7 @@ class ScreenTwo extends StatelessWidget {
           backgroundColor: Colors.deepPurpleAccent,
         ),
         body: Column(
-       //   mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-
             Text(dice),
             PinchZoomImage(
               image: CachedNetworkImage(
@@ -36,7 +34,6 @@ class ScreenTwo extends StatelessWidget {
               zoomedBackgroundColor: Color.fromRGBO(240, 240, 240, 1.0),
               hideStatusBarWhileZooming: true,
             ),
-            // ZoomableImage(AssetImage('assets/loading.gif'))
           ],
         ));
   }

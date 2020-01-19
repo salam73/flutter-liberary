@@ -6,7 +6,4 @@ class GetFBD {
   final List mylist;
 
   GetFBD(this.mylist);
-
-  //return   FB_dataList;
-
 }

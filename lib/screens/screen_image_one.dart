@@ -17,8 +17,6 @@ class _ScreenImageOneState extends State<ScreenImageOne> {
         placeholder: (context, url) => Image.asset('assets/loading.gif'),
         errorWidget: (context, url, error) => Icon(Icons.error),
       ),
-
-      //  Image.network('https://wallpaperaccess.com//full/155603.jpg'),
     );
   }
 }

@@ -37,21 +37,21 @@ class SearchScreen extends StatelessWidget {
     List<Widget> images = [];
     List<Widget> images2 = [];
     List<Widget> images3 = [];
-    List<String> ListImagesTitles = [];
-    List<String> ListImageUrl = [];
+    List<String> listImagesTitles = [];
+    List<String> listImageUrl = [];
     List<String> images4 = [];
 
     List myListing = doc['ImageUrl'] as List;
 
-    doc.data.forEach((index, value) {
-      //   print (value);
-
-      if (value is List) {
-        // print(doc['title']);
-      }
-
-      //  print (doc['ImagesTitles'][index])
-    });
+//    doc.data.forEach((index, value) {
+//      //   print (value);
+//
+//      if (value is List) {
+//        // print(doc['title']);
+//      }
+//
+//      //  print (doc['ImagesTitles'][index])
+//    });
 
     for (String url in doc['ImageUrl']) {
       Widget img = Flexible(
@@ -67,26 +67,23 @@ class SearchScreen extends StatelessWidget {
           )),
         ),
       );
-      // Widget img2 = Text(url , );
 
       images.add(img);
-      ListImagesTitles.add(url);
+      listImagesTitles.add(url);
     }
     for (String url in doc['ImagesTitles']) {
-      //  Widget img = Image.network(url , width: 100, height: 100,);
       Widget img2 = RotatedBox(
         quarterTurns: -1,
         child: Text(
           url, //(url)  مهم تذكر هذا الشيء واستخدام ما بين القوسين
-          // textAlign: TextAlign.center,
           textDirection: TextDirection.rtl,
         ),
       );
       images2.add(img2);
-      ListImageUrl.add(url);
+      listImageUrl.add(url);
     }
     images3 = merge(images, images2).toList();
-    images4 = merge(ListImagesTitles, ListImageUrl).toList();
+    images4 = merge(listImagesTitles, listImageUrl).toList();
 /*
     Map<int, Widget> map = images3.asMap();
 
@@ -199,19 +196,12 @@ class SearchScreen extends StatelessWidget {
 
     _mySnap.forEach((mySnapShot) {
       mySnapShot.documents.forEach((myDocuments) {
-        // print(myDocuments['ImagesTitles'].toString());
-        // print(myDocuments['ImageUrl'].toString());
-
         List myList = myDocuments['ImagesTitles'] as List;
 
         myList.asMap().forEach((index, value) => {
-              //  print(myDocuments['ImagesTitles'][index].toString()),
-              //  print(myDocuments['ImageUrl'][index].toString()),
-
               MyList.add(myDocuments['ImagesTitles'][index].toString()),
               MyList.add(myDocuments['ImageUrl'][index].toString()),
             });
-        // print(MyList);
       });
     });
 
@@ -247,9 +237,7 @@ class SearchScreen extends StatelessWidget {
                   )
                 ],
               ),
-              body: Text('salam')
-              // ExpandableListView()
-              );
+              body: Text('salam'));
         });
   }
 }
