@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:pinch_zoom_image/pinch_zoom_image.dart';
+// import 'package:pinch_zoom_image/pinch_zoom_image.dart';
 
 class ScreenTwo extends StatelessWidget {
   // Declare a field that holds the Todo.
@@ -27,13 +27,15 @@ class ScreenTwo extends StatelessWidget {
         body: Column(
           children: <Widget>[
             Text(dice),
-            PinchZoomImage(
-              image: CachedNetworkImage(
-                imageUrl: src,
-              ),
-              zoomedBackgroundColor: Color.fromRGBO(240, 240, 240, 1.0),
-              hideStatusBarWhileZooming: true,
-            ),
+            Text(
+                'Salam, I removed the PinchZoomImage because it is not working for me')
+//            PinchZoomImage(
+//              image: CachedNetworkImage(
+//                imageUrl: src,
+//              ),
+//              zoomedBackgroundColor: Color.fromRGBO(240, 240, 240, 1.0),
+//              hideStatusBarWhileZooming: true,
+//            ),
           ],
         ));
   }
