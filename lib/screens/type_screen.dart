@@ -1,8 +1,10 @@
 import 'package:bookhouse2/screens/screen_two.dart';
+import 'package:bookhouse2/screens/slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final usersRef = Firestore.instance.collection('library');
 
@@ -146,8 +148,7 @@ class _TypeScreenState extends State<TypeScreen> {
                     },
                     child: CachedNetworkImage(
                       imageUrl: doc['ImageUrl'][index],
-                      placeholder: (context, url) =>
-                          Image.asset('assets/loading.gif'),
+                      placeholder: (context, url) =>Image.asset('assets/loading.gif'),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                       fit: BoxFit.fill,
                     )),
@@ -190,12 +191,7 @@ class _TypeScreenState extends State<TypeScreen> {
                                               children: <Widget>[
                                                 Text(
                                                   typeTitle.toString(),
-                                                  style: TextStyle(
-                                                      fontSize: 30,
-                                                      color: Colors.black
-
-                                                      // color: Colors.grey[100 * (index2 % 9)],
-                                                      ),
+                                                  style: GoogleFonts.almarai(fontSize: 25),
                                                 ),
                                               ],
                                             ),
@@ -221,8 +217,8 @@ class _TypeScreenState extends State<TypeScreen> {
                                                               MainAxisAlignment
                                                                   .spaceBetween,
                                                           children: <Widget>[
-                                                            Text('كتب'),
-                                                            Text('أكثر')
+                                                           Text('كتب', style: GoogleFonts.almarai(fontSize: 15),),
+                                                            Text('المزيد-->', style: GoogleFonts.almarai(fontSize: 15),)
                                                           ],
                                                         ),
                                                         /* Text('سلسلة كتب عدد: ' +
@@ -253,18 +249,25 @@ class _TypeScreenState extends State<TypeScreen> {
                                                           );
                                                         },
                                                         child:
-                                                            CachedNetworkImage(
+                                                            Column(
+                                                              children: <Widget>[
+
+                                                                CachedNetworkImage(
                                                           imageUrl: typeTitle[
-                                                              'ImageUrl'][0],
+                                                                  'ImageUrl'][0],
                                                           placeholder: (context,
-                                                                  url) =>
-                                                              Image.asset(
-                                                                  'assets/loading.gif'),
+                                                                      url) =>
+                                                                  Image.asset(
+                                                                      'assets/loading.gif'),
                                                           errorWidget: (context,
-                                                                  url, error) =>
-                                                              Icon(Icons.error),
+                                                                      url, error) =>
+                                                                  Icon(Icons.error),
                                                           width: 120,
-                                                        ))),
+                                                        ),
+                                                                Text(typeTitle[
+                                                                'ImagesTitles'][0],style: GoogleFonts.almarai(fontSize: 15),),
+                                                              ],
+                                                            ),),),
                                           ),
                                         )
                                       }
@@ -285,10 +288,12 @@ class _TypeScreenState extends State<TypeScreen> {
 
     return Column(
       children: <Widget>[
-        /* Expanded(
-              flex:2,
+
+
+       /*  Expanded(
+              flex:1,
               child: SliderShow(dbList: widget.dbList,),
-            ),*/
+            ), */
         Expanded(
           flex: 3,
           child: salam(),
@@ -297,3 +302,5 @@ class _TypeScreenState extends State<TypeScreen> {
     );
   }
 }
+
+
