@@ -28,6 +28,10 @@ List<T> map<T>(List list, Function handler) {
 }
 
 class ExpandableListView extends StatefulWidget {
+final List dbList;
+
+  const ExpandableListView({Key key, this.dbList}) : super(key: key);
+
   @override
   _ExpandableListViewState createState() => _ExpandableListViewState();
 }
@@ -43,10 +47,10 @@ class _ExpandableListViewState extends State<ExpandableListView> {
 
   List<ExpansionTile> _WidgetExpansionTile;
 
-  loadingData() async {
+  loadingData()  {
 //print(itemsTypeArray);
 
-    final QuerySnapshot snapshot = await usersRef
+   /*  final QuerySnapshot snapshot = await usersRef
         //  .where("Type", isEqualTo: "اطفال")
         .orderBy('Type')
         .getDocuments();
@@ -56,8 +60,10 @@ class _ExpandableListViewState extends State<ExpandableListView> {
         FB_dataList.add(doc.data);
       });
     });
+ */
 
-    FB_dataList.forEach((m) => {sortTypeArray.add(m['Type'])});
+setState(() {
+  widget.dbList.forEach((m) => {sortTypeArray.add(m['Type'])});
 
     sortTypeArray =
         sortTypeArray.toSet().toList(); //remove duplicate items of list
@@ -66,7 +72,7 @@ class _ExpandableListViewState extends State<ExpandableListView> {
     sortTypeArray.forEach((m) {
       typeItemArray.add(m.toString());
 
-      FB_dataList.forEach((f) {
+      widget.dbList.forEach((f) {
         if (f['Type'] == m) {
           typeItemArray.add(f);
         } else {
@@ -79,6 +85,8 @@ class _ExpandableListViewState extends State<ExpandableListView> {
     // print(widgetItemArray.toSet());
 
     setList = widgetItemArray.toSet().toList();
+});
+    
   }
 
   @override

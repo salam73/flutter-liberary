@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 final usersRef = Firestore.instance.collection('library');
 
-class HomeScreen extends StatefulWidget {
+class UrlScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _UrlScreenState createState() => _UrlScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _UrlScreenState extends State<UrlScreen> {
   List<Widget> images = List();
 
   List myListId = List();

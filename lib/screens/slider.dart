@@ -111,10 +111,20 @@ class _SliderShowState extends State<SliderShow> {
 
     return CarouselSlider(
       items: child2,
-      autoPlay: true,
-      //enlargeCenterPage: true,
+      height: 200,
+      aspectRatio: 16/9,
       viewportFraction: 0.5,
-      aspectRatio: 2,
+      initialPage: 0,
+      enableInfiniteScroll: true,
+      reverse: false,
+      autoPlay: true,
+      autoPlayInterval: Duration(seconds: 5),
+      autoPlayAnimationDuration: Duration(milliseconds: 800),
+      autoPlayCurve: Curves.fastOutSlowIn,
+      pauseAutoPlayOnTouch: Duration(seconds: 10),
+      enlargeCenterPage: true,
+     // onPageChanged: callbackFunction,
+      scrollDirection: Axis.horizontal,
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:bookhouse2/screens/screen_two.dart';
-import 'package:bookhouse2/screens/slider.dart';
+//import 'package:bookhouse2/screens/slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -15,11 +15,14 @@ class TypeScreen extends StatefulWidget {
 
   @override
   _TypeScreenState createState() => _TypeScreenState();
+
 }
 
 class _TypeScreenState extends State<TypeScreen> {
   List textItem = [];
   List m = [];
+
+  List dbList2=[];
 
   List<Widget> myWidgetList = [];
   List<Widget> myMaha = [];
@@ -29,12 +32,12 @@ class _TypeScreenState extends State<TypeScreen> {
 
   List mySetList = [];
 
-  getFirebaseData() async {
+  getFirebaseData()  {
 //print(itemsTypeArray);
     List typeItemArray = [];
     List widgetItemArray = [];
 
-    final QuerySnapshot snapshot = await usersRef
+    /* final QuerySnapshot snapshot = await usersRef
         //  .where("Type", isEqualTo: "اطفال")
         .orderBy('Type')
         .getDocuments();
@@ -43,19 +46,18 @@ class _TypeScreenState extends State<TypeScreen> {
       setState(() {
         dataList.add(doc.data);
       });
-    });
+    }); */
 
-    widget.dbList.forEach((m) => {sortTypeArray.add(m['Type'])});
+setState(() {
+dbList2=widget.dbList;
 
-    sortTypeArray = sortTypeArray.toSet().toList();
+   dbList2.forEach((m) => {sortTypeArray.add(m['Type'])});
 
-    //remove duplicate items of list
-    //print(sortTypeArray);
-
-    sortTypeArray.forEach((m) {
+    sortTypeArray = sortTypeArray.toSet().toList();// remove duplicate Type title
+ sortTypeArray.forEach((m) {
       typeItemArray.add(m.toString());
 
-      dataList.forEach((f) {
+      widget.dbList.forEach((f) {
         if (f['Type'] == m) {
           //  print(   mysalamList.every((f)=>f['Type'] == m));
 
@@ -79,9 +81,16 @@ class _TypeScreenState extends State<TypeScreen> {
       });
       typeItemArray = [];
     });
+    mySetList = widgetItemArray.toSet().toList();// get All items of current Type
+
+});
+
+   
+
+
+   
     // print(widgetItemArray.toSet());
 
-    mySetList = widgetItemArray.toSet().toList();
   }
 
   @override
@@ -94,6 +103,8 @@ class _TypeScreenState extends State<TypeScreen> {
   @override
   void dispose() {
     // myWidgetList = [];
+    //widget.dbList=[];
+    dbList2=[];
     super.dispose();
   }
 
@@ -148,7 +159,8 @@ class _TypeScreenState extends State<TypeScreen> {
                     },
                     child: CachedNetworkImage(
                       imageUrl: doc['ImageUrl'][index],
-                      placeholder: (context, url) =>Image.asset('assets/loading.gif'),
+                      placeholder: (context, url) =>
+                          Image.asset('assets/loading.gif'),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                       fit: BoxFit.fill,
                     )),
@@ -160,147 +172,162 @@ class _TypeScreenState extends State<TypeScreen> {
     );
   }
 
+
+  allWidget() {
+    return mySetList.length < 1
+        ? Center(
+      child: Container(
+        child: Text('Waiting'),
+      ),
+    )
+        : ListView.builder(
+      itemCount: 1,
+      itemBuilder: (BuildContext ctxt, int index) {
+
+
+        mySetList.asMap().forEach((index2, f) => {
+          m = f.toList(),
+          m.asMap().forEach((i, typeTitle) => {
+            i == 0// get the titleName Index form the List
+                ? {
+              myWidgetList.add(
+                Container(
+                  padding: EdgeInsets.all(10),
+                  /*color: Colors.lightBlue[
+                                              100 * (index2 % 9)],*/
+                  // color:Colors.lightGreen,
+                  child: Text(
+                    typeTitle.toString(),
+                    style: GoogleFonts.almarai(
+                        fontSize: 25),
+                  ),
+                ),
+              )
+            }
+                : {
+              myMaha.add(
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: typeTitle["ImageUrl"]
+                      .toList()
+                      .length >
+                      1
+                      ? Column(children: <Widget>[
+                    Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment
+                          .spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          'كتب',
+                          style:
+                          GoogleFonts.almarai(
+                              fontSize: 15),
+                        ),
+                        Text(
+                          'المزيد-->',
+                          style:
+                          GoogleFonts.almarai(
+                              fontSize: 15),
+                        )
+                      ],
+                    ),
+                    /* Text('سلسلة كتب عدد: ' +
+                                                            x["ImageUrl"]
+                                                                .toList()
+                                                                .length
+                                                                .toString()),*/
+
+                    rowWidget(doc: typeTitle)
+                  ])
+                      : Container(
+                    //width: 200,
+
+                    alignment: Alignment.center,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ScreenTwo(
+                                  dice: typeTitle[
+                                  'ImagesTitles'][0],
+                                  myList: null,
+                                  index: index,
+                                  src: typeTitle[
+                                  'ImageUrl'][0],
+                                ),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: <Widget>[
+                          CachedNetworkImage(
+                            imageUrl: typeTitle[
+                            'ImageUrl'][0],
+                            placeholder: (context,
+                                url) =>
+                                Image.asset(
+                                    'assets/loading.gif'),
+                            fit: BoxFit.fill,
+                            errorWidget: (context,
+                                url, error) =>
+                                Icon(Icons.error),
+                            width: 120,
+                          ),
+                          Text(
+                            typeTitle[
+                            'ImagesTitles'][0],
+                            style: GoogleFonts
+                                .almarai(
+                                fontSize: 15),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            }
+          }),
+          myWidgetList.add(
+            Card(
+              elevation: 5,
+
+              child: Wrap(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                  children: myMaha),
+            ),
+          ),
+          myMaha = []
+        });
+
+        return Column(children: <Widget>[
+          Container(
+            child: Text('book store', style: GoogleFonts.almarai(fontSize: 15),),
+          ),
+
+        /*  SliderShow(
+            dbList: dbList2,
+          ),*/
+
+
+          Column(children: myWidgetList)
+        ],);
+      },
+    );
+
+
+  }
+
   @override
   Widget build(BuildContext context) {
+   // myWidgetList = [];
+
+
+
     myWidgetList = [];
-    Center salam() {
-      return mySetList.length < 1
-          ? Center(
-              child: Container(
-                child: Text('Waiting'),
-              ),
-            )
-          : Center(
-              child: ListView.builder(
-                  itemCount: 1,
-                  itemBuilder: (BuildContext ctxt, int index) {
-                    mySetList.asMap().forEach((index2, f) => {
-                          m = f.toList(),
-                          m.asMap().forEach((i, typeTitle) => {
-                                i == 0
-                                    ? {
-                                        myWidgetList.add(
-                                          Container(
-                                            padding: EdgeInsets.all(10),
-                                            /*color: Colors.lightBlue[
-                                                  100 * (index2 % 9)],*/
-                                            // color:Colors.lightGreen,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: <Widget>[
-                                                Text(
-                                                  typeTitle.toString(),
-                                                  style: GoogleFonts.almarai(fontSize: 25),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        )
-                                      }
-                                    : {
-                                        myMaha.add(
-                                          Container(
-                                            /*  color: Colors
-                                                  .lightBlue[100 * (i % 9)],*/
-                                            // color: Colors.grey,
-                                            child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: typeTitle["ImageUrl"]
-                                                            .toList()
-                                                            .length >
-                                                        1
-                                                    ? Column(children: <Widget>[
-                                                        Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: <Widget>[
-                                                           Text('كتب', style: GoogleFonts.almarai(fontSize: 15),),
-                                                            Text('المزيد-->', style: GoogleFonts.almarai(fontSize: 15),)
-                                                          ],
-                                                        ),
-                                                        /* Text('سلسلة كتب عدد: ' +
-                                                                  x["ImageUrl"]
-                                                                      .toList()
-                                                                      .length
-                                                                      .toString()),*/
-
-                                                        rowWidget(
-                                                            doc: typeTitle)
-                                                      ])
-                                                    : GestureDetector(
-                                                        onTap: () {
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      ScreenTwo(
-                                                                dice: typeTitle[
-                                                                    'ImagesTitles'][0],
-                                                                myList: null,
-                                                                index: index,
-                                                                src: typeTitle[
-                                                                    'ImageUrl'][0],
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                        child:
-                                                            Column(
-                                                              children: <Widget>[
-
-                                                                CachedNetworkImage(
-                                                          imageUrl: typeTitle[
-                                                                  'ImageUrl'][0],
-                                                          placeholder: (context,
-                                                                      url) =>
-                                                                  Image.asset(
-                                                                      'assets/loading.gif'),
-                                                          errorWidget: (context,
-                                                                      url, error) =>
-                                                                  Icon(Icons.error),
-                                                          width: 120,
-                                                        ),
-                                                                Text(typeTitle[
-                                                                'ImagesTitles'][0],style: GoogleFonts.almarai(fontSize: 15),),
-                                                              ],
-                                                            ),),),
-                                          ),
-                                        )
-                                      }
-                              }),
-                          myWidgetList.add(
-                            Container(
-                              child: Wrap(
-                                  // mainAxisAlignment: MainAxisAlignment.start,
-                                  children: myMaha),
-                            ),
-                          ),
-                          myMaha = []
-                        });
-
-                    return Column(children: myWidgetList);
-                  }));
-    }
-
-    return Column(
-      children: <Widget>[
-
-
-       /*  Expanded(
-              flex:1,
-              child: SliderShow(dbList: widget.dbList,),
-            ), */
-        Expanded(
-          flex: 3,
-          child: salam(),
-        ),
-      ],
-    );
+    return  allWidget();
   }
 }
-
-

@@ -1,17 +1,22 @@
-import 'package:bookhouse2/screens/not_update.dart';
+import 'package:bookhouse2/screens/grid_type_screen.dart';
 import 'package:bookhouse2/screens/home_screen.dart';
+import 'package:bookhouse2/screens/not_update.dart';
+import 'package:bookhouse2/screens/url_screen.dart';
 import 'package:bookhouse2/screens/search_screen.dart';
 import 'package:bookhouse2/service/fetch_data.dart';
 import 'package:bookhouse2/service/firebase_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'url_screen.dart';
 import 'intro.dart';
 import 'type_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 final usersRef = Firestore.instance.collection('library');
+
+List dataList = [];
 
 class Home extends StatefulWidget {
   @override
@@ -79,20 +84,17 @@ class Home extends StatefulWidget {
           listImagesTitles.add(url);
         });
       }
-
-
-      
     });
 
     for (String url in doc['ImagesTitles']) {
       Widget imgTitle = RotatedBox(
         quarterTurns: -1,
         child: Container(
-          width:130,
+          width: 130,
           child: Text(
             url, //(url)  مهم تذكر هذا الشيء واستخدام ما بين القوسين
-           // textDirection: TextDirection.rtl,
-           textAlign: TextAlign.center,
+            // textDirection: TextDirection.rtl,
+            textAlign: TextAlign.center,
           ),
         ),
       );
@@ -116,8 +118,8 @@ class Home extends StatefulWidget {
               alignment: Alignment.centerRight,
               padding: EdgeInsets.only(right: 10),
               child: Text(
-              //  'العنوان:${doc['title']}',
-              doc['title'],
+                //  'العنوان:${doc['title']}',
+                doc['title'],
                 textAlign: TextAlign.right,
                 textDirection: TextDirection.rtl,
               ),
@@ -126,8 +128,8 @@ class Home extends StatefulWidget {
               alignment: Alignment.centerRight,
               padding: EdgeInsets.only(right: 10),
               child: Text(
-               // 'الكاتب :${doc['profileName']}',
-               doc['profileName'],
+                // 'الكاتب :${doc['profileName']}',
+                doc['profileName'],
                 textAlign: TextAlign.right,
                 textDirection: TextDirection.rtl,
               ),
@@ -135,25 +137,24 @@ class Home extends StatefulWidget {
           ],
         ),
         Container(
-          //  color: Colors.black12,
+            //  color: Colors.black12,
             // alignment: Alignment.topLeft,
 
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom:8.0),
-                    child: Text('الكتاب يوجد في سلسلة'),
-                  ),
-                 
-                  Wrap(
-                    // mainAxisAlignment: MainAxisAlignment.end,
-                    children: listToImags(doc),
-                  ),
-                ],
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Text('الكتاب يوجد في'),
               ),
-            ))
+              Wrap(
+                // mainAxisAlignment: MainAxisAlignment.end,
+                children: listToImags(doc),
+              ),
+            ],
+          ),
+        ))
       ],
     );
   }
@@ -209,7 +210,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List dataList = [];
   List sortTypeArray = [];
   List typeItemArray = [];
   List widgetItemArray = [];
@@ -234,7 +234,7 @@ class _HomeState extends State<Home> {
     setState(() {
       snapshot.documents.forEach((DocumentSnapshot doc) {
         dataList.add(doc.data);
-        print(doc.data);
+        //  print(doc.data);
       });
     });
 
@@ -371,19 +371,17 @@ class _HomeState extends State<Home> {
             //Search(),
             //Splash(),
             //SplashScreen(),
+            // HomeScreen(),
+            HomeScreen(),
 
-            TypeScreen(
-              dbList: dataList,
-            ),
-            FireBaseData(
-              dbList: dataList,
-            ),
+            ExpandableListView( dbList: dataList, ),
 
-            ExpandableListView(),
+            TypeScreen( dbList: dataList, ),
+            GridTypeScreen( dbList: dataList, ),
 
-            IntroScreen(
-              dbList: dataList,
-            ),
+            FireBaseData( dbList: dataList, ),
+
+            IntroScreen( dbList: dataList, ),
             //SliderShow(dbList: dataList,),
 
             SearchScreen(),
@@ -395,7 +393,7 @@ class _HomeState extends State<Home> {
 
             // Headerbar(),
 
-            HomeScreen(),
+            UrlScreen(),
 
             // MyListview(),
 
@@ -411,20 +409,16 @@ class _HomeState extends State<Home> {
         activeColor: Theme.of(context).primaryColor,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('رئيسية'),
+            icon: Icon(Icons.home), title: Text('رئيسية'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.line_style),
-            title: Text('أقسام'),
+            icon: Icon(Icons.line_style), title: Text('أقسام'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.layers),
-            title: Text('ترتيب'),
+            icon: Icon(Icons.layers), title: Text('ترتيب'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            title: Text('بحث'),
+            icon: Icon(Icons.search), title: Text('بحث'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.attachment),
